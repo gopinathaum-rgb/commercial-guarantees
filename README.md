@@ -1,7 +1,7 @@
 # Commercial Guarantees
 
 ![Commercial Guarantees](images/logo.svg)
-cat > /tmp/readme-nav.md <<'EOF'
+
 ## Documentation
 
 | Start Here | Products | Examples |
@@ -15,7 +15,6 @@ cat > /tmp/readme-nav.md <<'EOF'
 - ❓ [FAQ](docs/FAQ.md)
 
 ---
-EOF
 
 Evidence-first commercial guarantees for modern commercial transactions.
 
