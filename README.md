@@ -87,3 +87,89 @@ Implementation continues in a separate engineering repository.
 License
 
 MIT
+
+---
+
+# Why would a software agency use Commercial Guarantees?
+
+Imagine a ₹50 lakh software project.
+
+The client asks:
+
+> "What happens if delivery is delayed?"
+
+Today, most agencies answer with promises.
+
+Commercial Guarantees let agencies answer with documented commercial commitments.
+
+Before development begins, the project is assessed, underwriting rules are defined, delivery obligations are documented, and trigger conditions are agreed by both parties.
+
+If delivery succeeds, the guarantee simply expires.
+
+If predefined obligations are not met, claims and settlement follow an agreed commercial process.
+
+The guarantee becomes a structured trust layer between client and supplier.
+
+---
+
+# Example
+
+## Traditional software delivery
+
+Agency
+
+> Trust us.
+
+Client
+
+> We'll think about it.
+
+---
+
+## Software delivery backed by a Commercial Guarantee
+
+Agency
+
+> This project is supported by an independently documented Software Delivery Guarantee.
+
+Client
+
+> What does it include?
+
+Agency
+
+- Delivery obligations
+- Milestone definitions
+- Trigger conditions
+- Claim procedure
+- Settlement process
+
+Everything is agreed before work starts.
+
+---
+
+# What changes for the agency?
+
+| Traditional delivery | Commercial Guarantees |
+|----------------------|-----------------------|
+| Trust-based | Evidence-based |
+| Payment disputes | Defined commercial process |
+| Procurement friction | Clear commercial commitments |
+| Enterprise hesitation | Increased confidence |
+| Undefined escalation | Structured claims process |
+
+---
+
+# Who is this for?
+
+Commercial Guarantees are intended for organizations delivering high-value work where commercial trust influences purchasing decisions.
+
+Examples include:
+
+- Software development agencies
+- AI consulting firms
+- Digital transformation companies
+- Manufacturing suppliers
+- Construction contractors
+- Engineering firms
+
