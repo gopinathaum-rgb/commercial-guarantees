@@ -1,100 +1,75 @@
 # Commercial Guarantees
 
-Evidence-first commercial guarantees for modern businesses.
+![Commercial Guarantees](images/logo.svg)
 
-Commercial Guarantees is an open architecture for documenting, monitoring, and verifying commercial guarantees using structured operational evidence.
-
-Rather than treating a guarantee as a single document, the project models the complete lifecycle of a business commitment.
+Evidence-first commercial guarantees for modern commercial transactions.
 
 ---
 
-## Why
+## Platform Overview
 
-Commercial guarantees are used every day.
-
-- Software delivery
-- Construction
-- Manufacturing
-- Infrastructure
-- Professional services
-
-Yet most guarantees stop at issuing a document.
-
-Commercial Guarantees focuses on everything that happens afterwards.
+![Platform Overview](images/platform-overview.svg)
 
 ---
 
-## Lifecycle
+## Why Commercial Guarantees?
 
-Obligation
-
-↓
-
-Assessment
-
-↓
-
-Guarantee
-
-↓
-
-Evidence
-
-↓
-
-Monitoring
-
-↓
-
-Claim
-
-↓
-
-Settlement
-
-↓
-
-Verification
+Commercial guarantees reduce trust friction between buyers and suppliers by
+providing structured assessment, underwriting, monitoring, trigger evaluation,
+claim handling, settlement, and verification.
 
 ---
 
-## Principles
+## Guarantee Lifecycle
 
-- Evidence first
-- Deterministic history
-- Transparent execution
-- Independent verification
-- Product-agnostic architecture
+![Guarantee Lifecycle](images/lifecycle.svg)
 
 ---
 
-## Current Products
+## Products
 
 - Software Delivery Guarantee
 - Milestone Completion Guarantee
 - Advance Payment Guarantee
 
+See:
+
+- `products/software-delivery-guarantee.md`
+- `products/milestone-completion-guarantee.md`
+- `products/advance-payment-guarantee.md`
+
+---
+
+## Documentation
+
+- docs/PROBLEM.md
+- docs/HOW_IT_WORKS.md
+- docs/ARCHITECTURE.md
+- docs/FAQ.md
+- docs/ROADMAP.md
+
+---
+
+## Examples
+
+- Software Agency
+- Manufacturing
+- Construction
+
 ---
 
 ## Repository Structure
 
-```
+```text
 docs/
 products/
 examples/
-images/
-```
+images/                                                                                                             Status
 
----
+This repository documents the public product architecture.
 
-## Status
+Implementation continues in a separate engineering repository.
 
-This repository documents the architecture.
-
-The implementation continues in a separate development repository.
-
----
-
-## License
+License
 
 MIT
