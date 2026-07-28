@@ -16,4 +16,6 @@ The guarantee focuses on milestone completion rather than final project completi
 
 Current Status
 
-Concept documentation.
+Product definition phase.
+
+The guarantee model is being validated through customer discovery and pilot research.

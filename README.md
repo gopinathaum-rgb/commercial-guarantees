@@ -12,6 +12,8 @@
 
 - 📖 [Full Documentation](docs/README.md)
 - 🗺️ [Roadmap](docs/ROADMAP.md)
+- 📊 [Validation Status](docs/status/VALIDATION_STATUS.md)
+- 🚀 [Pilot Program](pilots/README.md)
 - ❓ [FAQ](docs/FAQ.md)
 
 ---

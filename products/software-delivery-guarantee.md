@@ -62,6 +62,8 @@ For Delivery Teams
 
 ## Current Status
 
-Concept documentation.
+Product definition phase.
+
+The guarantee model is being validated through customer discovery and pilot research.
 
 Not yet offered as a commercial service.
