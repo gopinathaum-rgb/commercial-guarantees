@@ -1,6 +1,6 @@
 # Pilot Program
 
-Commercial Guarantees is currently exploring pilot opportunities.
+Commercial Guarantees is exploring pilot opportunities.
 
 ## Purpose
 
@@ -25,7 +25,7 @@ Potential pilot areas:
 - supplier commitments
 - advance payment protection
 
-## Pilot Evaluation
+## Evaluation
 
 Each pilot is evaluated on:
 

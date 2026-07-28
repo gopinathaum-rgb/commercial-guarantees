@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-Industry Validation
+Industry Validation.
 
 Commercial Guarantees is validating whether organizations value bounded commitments for high-value commercial work.
 
