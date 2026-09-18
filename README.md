@@ -2,75 +2,141 @@
 
 ![Commercial Guarantees](images/logo.svg)
 
-## Documentation
+> **Bounded commercial certainty for commitments that can be defined, evidenced, and independently reconstructed.**
 
-| Start Here | Products | Examples |
-|------------|----------|----------|
-| [Problem](docs/PROBLEM.md) | [Software Delivery](products/software-delivery-guarantee.md) | [Software Agency](examples/software-agency.md) |
-| [How It Works](docs/HOW_IT_WORKS.md) | [Milestone Completion](products/milestone-completion-guarantee.md) | [Manufacturing](examples/manufacturing.md) |
-| [Architecture](docs/ARCHITECTURE.md) | [Advance Payment](products/advance-payment-guarantee.md) | [Construction](examples/construction.md) |
+## Start Here
 
-- 📖 [Full Documentation](docs/README.md)
-- 🗺️ [Roadmap](docs/ROADMAP.md)
-- 📊 [Validation Status](docs/status/VALIDATION_STATUS.md)
-- 🚀 [Pilot Program](pilots/README.md)
-- ❓ [FAQ](docs/FAQ.md)
-
----
-
-Evidence-first commercial guarantees for modern commercial transactions.
+| Commercial question | Reference |
+|---|---|
+| What problem are we solving? | [Problem](docs/PROBLEM.md) |
+| How does the lifecycle work? | [How It Works](docs/HOW_IT_WORKS.md) |
+| What are we validating now? | [Commercial Validation](docs/VALIDATION.md) |
+| What does the current reference case look like? | [Enterprise Software Implementation](examples/enterprise-software-implementation.md) |
+| What is technically defined? | [Architecture](docs/ARCHITECTURE.md) |
+| What is the current status? | [Validation Status](docs/status/VALIDATION_STATUS.md) |
+| How could a pilot work? | [Pilot Program](pilots/README.md) |
+| Common questions | [FAQ](docs/FAQ.md) |
 
 ---
 
-## Platform Overview
+## The Current Wedge
 
-![Platform Overview](images/platform-overview.svg)
+The first commercial research case is **enterprise software production deployment**.
+
+A customer hires an implementation vendor to deploy agreed software configuration into production.
+
+The commitment is deliberately narrow:
+
+> **Production deployment completed by a fixed deadline, with all mandatory acceptance tests passing and the agreed evidence available.**
+
+The guarantee does **not** cover the entire project or promise that the software will create a particular business outcome.
+
+See the complete [enterprise software implementation reference case](examples/enterprise-software-implementation.md).
 
 ---
 
 ## Why Commercial Guarantees?
 
-Commercial guarantees reduce trust friction between buyers and suppliers by
-providing structured assessment, underwriting, monitoring, trigger evaluation,
-claim handling, settlement, and verification.
+Commercial transactions often contain commitments whose failure has economic consequences, while completion can be difficult to establish consistently.
+
+A Commercial Guarantee makes one bounded commitment explicit:
+
+`What is promised → What counts as completion → What evidence proves it → What happens if it cannot be demonstrated`
+
+The lifecycle is:
+
+`Obligation → Assessment → Commitment → Guarantee → Evidence → Trigger → Claim → Settlement → Verification`
+
+The objective is not to replace commercial judgment. It is to make a defined commitment easier to evaluate, reconstruct, and act on.
 
 ---
 
-## Guarantee Lifecycle
+## Reference Example
 
-![Guarantee Lifecycle](images/lifecycle.svg)
+**Enterprise software implementation**
+
+- Milestone: production deployment completed
+- Deadline: 31 October 2026, 18:00 UTC
+- Maximum guarantee response: ₹1,00,000
+- Acceptance: all mandatory tests pass
+- Evidence: deployment record + production verification + test results
+- Trigger: milestone cannot be demonstrated against agreed conditions
+- Settlement: bounded and separately recorded
+- Verification: lifecycle can be reconstructed from recorded facts
+
+This is a **reference product definition**, not a live customer guarantee.
+
+---
+
+## What Makes the Boundary Important?
+
+A guarantee should not quietly become a promise about everything.
+
+The reference case therefore excludes:
+
+- complete project success
+- subjective customer satisfaction
+- every defect after go-live
+- business outcomes after deployment
+- unlimited delay damages
+- evidence that cannot be reconstructed
+
+A narrower commitment is easier to specify, evidence, monitor, and settle.
 
 ---
 
 ## Products
 
+The repository contains broader product concepts for:
+
 - Software Delivery Guarantee
 - Milestone Completion Guarantee
 - Advance Payment Guarantee
 
+These are product definitions under validation, not claims of existing market adoption.
+
 See:
 
-- `products/software-delivery-guarantee.md`
-- `products/milestone-completion-guarantee.md`
-- `products/advance-payment-guarantee.md`
+- [Software Delivery Guarantee](products/software-delivery-guarantee.md)
+- [Milestone Completion Guarantee](products/milestone-completion-guarantee.md)
+- [Advance Payment Guarantee](products/advance-payment-guarantee.md)
 
 ---
 
-## Documentation
+## Commercial Validation
 
-- docs/PROBLEM.md
-- docs/HOW_IT_WORKS.md
-- docs/ARCHITECTURE.md
-- docs/FAQ.md
-- docs/ROADMAP.md
+**Technical rigor is not commercial validation.**
+
+The reference lifecycle has been exercised in the private implementation repository. The current public work is testing whether the underlying commercial problem is real, economically meaningful, and suitable for a pilot.
+
+Current research sequence:
+
+`Problem → Frequency → Commercial consequence → Evidence → Buyer → Value → Price → Pilot`
+
+Open questions include:
+
+- Is delayed or disputed go-live completion a recurring problem?
+- Who bears the economic consequence?
+- How is completion evidenced today?
+- Can the evidence be independently reconstructed?
+- Would a bounded guarantee change a real transaction?
+- Who would pay for it?
+- What fee and settlement mechanism would be acceptable?
+- Can a named real deployment serve as a pilot?
+
+See [Commercial Validation](docs/VALIDATION.md) for the current evidence boundary.
 
 ---
 
-## Examples
+## What We Do Not Claim Yet
 
-- Software Agency
-- Manufacturing
-- Construction
+- No commercial guarantees have been issued.
+- No paid pilot has been secured.
+- Pricing has not been validated.
+- Product-market fit has not been established.
+- The reference case is not evidence that customers will adopt the mechanism.
+
+The project is intentionally explicit about these limits.
 
 ---
 
@@ -78,100 +144,35 @@ See:
 
 ```text
 docs/
+  PROBLEM.md
+  HOW_IT_WORKS.md
+  ARCHITECTURE.md
+  VALIDATION.md
+  status/VALIDATION_STATUS.md
 products/
 examples/
-images/                                                                                                             Status
+pilots/
+images/
+```
 
-This repository documents the public product architecture.
+The public repository documents the commercial model, product boundaries, examples, and validation status.
 
 Implementation continues in a separate engineering repository.
 
-License
+---
+
+## Guiding Principle
+
+> **Build evidence before expansion.**
+
+No new guarantee category or major technical abstraction should be added merely because it is possible.
+
+The useful question is:
+
+> **What real-world claim would this allow a customer to make more safely?**
+
+---
+
+## License
 
 MIT
-
----
-
-# Why would a software agency use Commercial Guarantees?
-
-Imagine a ₹50 lakh software project.
-
-The client asks:
-
-> "What happens if delivery is delayed?"
-
-Today, most agencies answer with promises.
-
-Commercial Guarantees let agencies answer with documented commercial commitments.
-
-Before development begins, the project is assessed, underwriting rules are defined, delivery obligations are documented, and trigger conditions are agreed by both parties.
-
-If delivery succeeds, the guarantee simply expires.
-
-If predefined obligations are not met, claims and settlement follow an agreed commercial process.
-
-The guarantee becomes a structured trust layer between client and supplier.
-
----
-
-# Example
-
-## Traditional software delivery
-
-Agency
-
-> Trust us.
-
-Client
-
-> We'll think about it.
-
----
-
-## Software delivery backed by a Commercial Guarantee
-
-Agency
-
-> This project is supported by an independently documented Software Delivery Guarantee.
-
-Client
-
-> What does it include?
-
-Agency
-
-- Delivery obligations
-- Milestone definitions
-- Trigger conditions
-- Claim procedure
-- Settlement process
-
-Everything is agreed before work starts.
-
----
-
-# What changes for the agency?
-
-| Traditional delivery | Commercial Guarantees |
-|----------------------|-----------------------|
-| Trust-based | Evidence-based |
-| Payment disputes | Defined commercial process |
-| Procurement friction | Clear commercial commitments |
-| Enterprise hesitation | Increased confidence |
-| Undefined escalation | Structured claims process |
-
----
-
-# Who is this for?
-
-Commercial Guarantees are intended for organizations delivering high-value work where commercial trust influences purchasing decisions.
-
-Examples include:
-
-- Software development agencies
-- AI consulting firms
-- Digital transformation companies
-- Manufacturing suppliers
-- Construction contractors
-- Engineering firms
-
