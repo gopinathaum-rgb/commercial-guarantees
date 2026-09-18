@@ -39,7 +39,7 @@ Completion requires all of the following:
 |---|---|
 | Customer / beneficiary | Enterprise software customer |
 | Provider | Implementation vendor |
-| Guarantee provider | Commercial Guarantees mechanism |
+| Guarantee mechanism | The proposed Commercial Guarantees model |
 | Evidence sources | Deployment system, acceptance-test records, production verification |
 
 These names are illustrative. They are not current customers or counterparties.
@@ -122,7 +122,7 @@ The narrower boundary is intentional: a guarantee should stand behind a claim th
 
 ## Why This Is the Current Research Wedge
 
-Enterprise implementation work commonly contains milestones around validation, UAT, production deployment, and go-live.
+Enterprise implementation workflows can contain milestones around validation, UAT, production deployment, and go-live.
 
 The commercial research question is not whether such milestones exist. It is whether customers and implementation vendors place enough economic value on **bounded certainty around one milestone** to adopt and pay for a guarantee mechanism.
 
