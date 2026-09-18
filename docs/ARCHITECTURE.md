@@ -2,7 +2,7 @@
 
 Commercial Guarantees is organized as a lifecycle rather than a collection of isolated documents.
 
-Each guarantee progresses through a sequence of well-defined stages.
+The reference model organizes a guarantee into a sequence of defined lifecycle stages.
 Obligation
 │
 ▼
@@ -96,4 +96,4 @@ Settlement becomes part of the guarantee history.
 
 Verification reconstructs the guarantee lifecycle using recorded facts.
 
-The objective is independent review rather than manual reconstruction.
+The objective is to make the guarantee history reconstructable under defined verification rules, reducing reliance on ad hoc manual reconstruction.
