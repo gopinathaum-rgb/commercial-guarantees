@@ -2,7 +2,7 @@
 
 ![Commercial Guarantees](images/logo.svg)
 
-> **Bounded commercial certainty for commitments that can be defined, evidenced, and independently reconstructed.**
+> **A framework for bounded commercial commitments that can be defined, evidenced, and reconstructed under agreed verification rules.**
 
 ## Start Here
 
@@ -37,7 +37,7 @@ See the complete [enterprise software implementation reference case](examples/en
 
 ## Why Commercial Guarantees?
 
-Commercial transactions often contain commitments whose failure has economic consequences, while completion can be difficult to establish consistently.
+Many commercial transactions contain commitments whose failure may have economic consequences. The current research question is whether specific commitments are sufficiently difficult or costly to establish consistently that buyers and providers value a bounded guarantee mechanism.
 
 A Commercial Guarantee makes one bounded commitment explicit:
 
@@ -62,7 +62,7 @@ The objective is not to replace commercial judgment. It is to make a defined com
 - Evidence: deployment record + production verification + test results
 - Trigger: milestone cannot be demonstrated against agreed conditions
 - Settlement: bounded and separately recorded
-- Verification: lifecycle can be reconstructed from recorded facts
+- Verification: the reference lifecycle is designed so recorded facts can be used to reconstruct the guarantee history
 
 This is a **reference product definition**, not a live customer guarantee.
 
