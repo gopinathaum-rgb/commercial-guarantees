@@ -44,19 +44,19 @@ The objective is to improve transparency between clients and delivery teams by o
 
 ---
 
-## Benefits
+## Intended Benefits
 
 For Clients
 
-- Better visibility
-- Structured project evidence
-- Improved dispute resolution
+- Potentially clearer visibility into execution evidence
+- A structured record of project evidence
+- A defined basis for reviewing milestone disputes
 
 For Delivery Teams
 
-- Clear execution history
-- Reduced ambiguity
-- Consistent documentation
+- A structured execution history
+- Explicit completion conditions
+- More consistent documentation of evidence
 
 ---
 
