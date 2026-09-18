@@ -4,7 +4,7 @@
 
 **Phase 2 — Commercial validation**
 
-Commercial Guarantees is testing whether organizations value bounded commitments for high-value commercial work.
+Commercial Guarantees is testing whether organizations value bounded commitments for specific high-consequence commercial milestones, beginning with enterprise software production deployments.
 
 ## Current Wedge
 
@@ -50,7 +50,7 @@ No paid pilot has been secured.
 - Is delayed or disputed go-live completion a recurring commercial problem?
 - Who bears the economic consequence?
 - How is completion evidenced today?
-- Can the evidence be collected and independently reconstructed?
+- Can the evidence be collected in a real deployment and independently reconstructed under agreed verification rules?
 - Would a bounded guarantee change a real transaction?
 - Who would pay for it?
 - What fee and settlement mechanism would be acceptable?
