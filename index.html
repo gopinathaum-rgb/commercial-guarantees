@@ -10,7 +10,7 @@ body{margin:0;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-
 nav{padding:24px 0;display:flex;justify-content:space-between;align-items:center;font-size:14px}.brand{font-weight:700;letter-spacing:-.02em}.navlink{color:var(--muted);text-decoration:none}
 .hero{padding:90px 0 76px;border-bottom:1px solid var(--line)}.eyebrow{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:22px}
 h1{font-size:clamp(48px,8vw,86px);line-height:.98;letter-spacing:-.065em;max-width:900px;margin:0 0 28px}.hero p{font-size:22px;line-height:1.45;color:#475467;max-width:720px;margin:0 0 34px}
-.cta{display:inline-flex;align-items:center;gap:10px;background:#111827;color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:700}.secondary{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600}
+.cta{display:inline-flex;align-items:center;gap:10px;background:#111827;color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:700}.form-field{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600}
 section{padding:72px 0;border-bottom:1px solid var(--line)}h2{font-size:38px;line-height:1.1;letter-spacing:-.04em;margin:0 0 18px}h3{font-size:20px;margin:0 0 8px}.lead{font-size:19px;color:#475467;max-width:760px}
 .questions{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:32px}.card{padding:22px;border:1px solid var(--line);border-radius:10px;background:var(--soft)}
 .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:36px}.step{padding:22px 18px;border:1px solid var(--line);border-radius:10px;font-weight:700}.step span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
@@ -41,11 +41,27 @@ section{padding:72px 0;border-bottom:1px solid var(--line)}h2{font-size:38px;lin
 <p><strong>Do not publish confidential commitment text in a public GitHub discussion.</strong></p>
 <p class="note">If you do not already have a private channel with Sahil, use the public research discussion only to say that you have a commitment you would like audited. We will arrange a private submission channel before you share the artifact.</p>
 <a class="cta" href="#request">Request an audit →</a></div></div></section>
-<section id="submit"><div class="wrap">
-<h2>Free while we research the problem.</h2><p class="lead">No account. No product demo. No obligation. The first ten audits are part of the research experiment.</p>
-<ol class="lead"><li>Tell us briefly what commitment you want tested.</li><li>We will contact you privately with instructions for the redacted artifact.</li><li>Receive the one-page analysis.</li><li>Decide whether the analysis would have changed anything that actually happened.</li></ol>
-<a class="cta" href="#request">Request an audit →</a>
-<p class="note" style="margin-top:20px">Please do not paste or upload confidential commitment text into a public GitHub discussion. This is a research service from Syzygy Dynamics, not legal advice, contract review, or a guarantee that a commitment will be satisfied.</p></div></section>
+<section id="submit"><div class="wrap"><h2>Free while we research the problem.</h2><p class="lead">No account. No product demo. No obligation. The first ten audits are part of the research experiment.</p><ol class="lead"><li>Submit a short context and redacted commitment.</li><li>We receive it privately.</li><li>We return the one-page analysis.</li><li>You decide whether the analysis would have changed anything that actually happened.</li></ol><a class="cta" href="#request">Request an audit →</a><p class="note" style="margin-top:20px">Do not submit passwords, credentials, secrets, or material you are not authorized to share. This is a research service, not legal advice.</p></div></section><section id="request"><div class="wrap audit-grid">
+<div><h2>Request an audit</h2><p class="lead">Send the context and a <strong>redacted commitment</strong> privately. Nothing you submit here is published to GitHub.</p>
+<p class="note">Please remove names, customer information, credentials, secrets and anything you are not authorized to share. We only need the commitment language and enough context to understand what completion was supposed to mean.</p></div>
+<div class="submit">
+<form action="https://formsubmit.co/gopinathaum@gmail.com" method="POST">
+<input type="hidden" name="_subject" value="Can You Prove It? — new commitment audit request">
+<input type="hidden" name="_captcha" value="true">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_next" value="https://gopinathaum-rgb.github.io/commercial-guarantees/?submitted=1#request">
+<label for="name"><strong>Name</strong></label><br><input id="name" name="Name" required style="width:100%;padding:12px;margin:7px 0 16px">
+<label for="email"><strong>Work email</strong></label><br><input id="email" name="email" type="email" required style="width:100%;padding:12px;margin:7px 0 16px">
+<label for="company"><strong>Company</strong></label><br><input id="company" name="Company" style="width:100%;padding:12px;margin:7px 0 16px">
+<label for="type"><strong>Commitment type</strong></label><br><select id="type" name="Commitment type" style="width:100%;padding:12px;margin:7px 0 16px"><option>Enterprise software go-live</option><option>Implementation acceptance</option><option>Supplier delivery</option><option>Construction milestone</option><option>Manufacturing acceptance</option><option>Outsourced service commitment</option><option>Other</option></select>
+<label for="history"><strong>Did it become commercially difficult?</strong></label><br><select id="history" name="Commercial difficulty" style="width:100%;padding:12px;margin:7px 0 16px"><option>Yes</option><option>No</option><option>Not sure</option></select>
+<label for="context"><strong>Brief context</strong></label><br><textarea id="context" name="Context" rows="4" style="width:100%;padding:12px;margin:7px 0 16px" placeholder="What happened, in a few sentences?"></textarea>
+<label for="commitment"><strong>Redacted commitment</strong></label><br><textarea id="commitment" name="Redacted commitment" rows="9" required style="width:100%;padding:12px;margin:7px 0 16px" placeholder="Paste only the redacted commitment / milestone / acceptance language here."></textarea>
+<label style="font-size:14px"><input type="checkbox" required> I confirm this text is redacted and I am authorized to submit it.</label><br><br>
+<button class="cta" type="submit" style="border:0;cursor:pointer">Send privately →</button>
+</form>
+<p class="note" style="margin-top:16px">Your submission is sent to the designated Syzygy Dynamics inbox by the form service; it is not posted to GitHub or displayed on this page.</p>
+</div></div></section>
 <section id="request"><div class="wrap audit-grid"><div><h2>Request an audit</h2><p class="lead">Start with context only. <strong>Do not send the commitment itself through this form.</strong> We will arrange the private artifact submission separately.</p></div>
 <div class="submit"><form action="mailto:gopinathaum@gmail.com" method="post" enctype="text/plain">
 <label for="name"><strong>Name</strong></label><br><input id="name" name="Name" required style="width:100%;padding:12px;margin:7px 0 16px">
