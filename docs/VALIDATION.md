@@ -22,7 +22,7 @@ The private implementation repository has exercised the lifecycle:
 
 `Obligation → Assessment → Commitment → Issued Guarantee → Evidence → Trigger → Claim → Settlement → Final Verification → Replay rejection`
 
-The reference case also exercises structured deployment evidence, acceptance-test results, production verification, and provenance-aware realization.
+The private implementation exercises structured deployment evidence, acceptance-test results, production verification, and provenance-aware realization. The public reference case describes these elements as a proposed commercial workflow, not as evidence from a live customer deployment.
 
 Technical validation is not commercial validation.
 
@@ -41,7 +41,7 @@ The following remain open:
 
 ## Customer Discovery
 
-Initial outreach is focused on enterprise software implementation vendors, especially organizations with recurring deployments and contractual milestones.
+Initial outreach is focused on enterprise software implementation vendors that appear to have recurring deployments and contractual milestones. This describes the current target population, not a validated market characteristic.
 
 The interview sequence is:
 
