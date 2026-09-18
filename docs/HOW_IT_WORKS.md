@@ -2,7 +2,7 @@
 
 A commercial guarantee progresses through a defined lifecycle.
 
-Every stage records structured information that contributes to the overall execution history.
+The reference model treats each stage as a structured part of the overall execution history.
 
 ## 1. Obligation
 
@@ -32,7 +32,7 @@ Assessment may consider:
 
 ## 3. Guarantee
 
-A guarantee is created.
+In the reference model, a guarantee is created.
 
 It defines:
 
@@ -55,7 +55,7 @@ Examples:
 - inspection reports
 - delivery confirmations
 
-Evidence is accumulated rather than reconstructed later.
+The model is designed to accumulate evidence throughout execution rather than rely solely on reconstruction after the fact.
 
 ---
 
@@ -77,7 +77,7 @@ Claims become part of the guarantee history.
 
 ## 7. Settlement
 
-Approved claims produce settlement records.
+In the reference model, approved claims produce settlement records.
 
 Settlement records document the outcome without replacing the original evidence.
 

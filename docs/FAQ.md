@@ -44,7 +44,7 @@ This project focuses on what happens next:
 
 No.
 
-Commercial Guarantees complements existing contracts by organizing operational evidence throughout execution.
+The proposed model is intended to complement existing contracts by organizing operational evidence throughout execution.
 
 ---
 
@@ -60,7 +60,7 @@ The public repository documents the architecture, concepts, and example products
 
 Yes.
 
-The architecture is designed to be adaptable across industries with different guarantee workflows.
+The model is intended to be adaptable across industries with different guarantee workflows. Whether that adaptation is commercially useful is part of the validation work.
 
 ---
 

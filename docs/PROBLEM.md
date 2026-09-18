@@ -4,7 +4,7 @@ Commercial relationships depend on trust.
 
 Yet when obligations are disputed, organizations often reconstruct events manually using emails, spreadsheets, contracts, chat histories, and human interpretation.
 
-This process is slow, inconsistent, and expensive.
+This process can be slow, inconsistent, and costly, particularly when evidence is fragmented across systems.
 
 As organizations grow, guarantees become harder to audit because evidence is fragmented across multiple systems.
 
@@ -17,7 +17,7 @@ Typical guarantee workflows rely on:
 - Unstructured documentation
 - Lengthy dispute resolution
 
-Different reviewers can reach different conclusions using the same information.
+Fragmented evidence and differing interpretations can make consistent review difficult.
 
 ## A Different Approach
 

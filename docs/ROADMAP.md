@@ -20,7 +20,7 @@ Objectives:
 - Speak with manufacturers
 - Speak with construction firms
 - Collect operational feedback
-- Validate product-market fit
+- Validate the problem, economic consequence, buyer, value proposition, and pilot suitability
 
 ---
 
