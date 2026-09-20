@@ -8,6 +8,10 @@
 
 | Commercial question | Reference |
 |---|---|
+| **Can You Prove It?** — audit one real commitment | [Private Commitment Audit](docs/research/can-you-prove-it.md) |
+| When is an ERP implementation actually complete? | [ERP Implementation Acceptance](docs/research/erp-implementation-acceptance.md) |
+| What evidence establishes go-live acceptance? | [Go-Live Acceptance](docs/research/go-live-acceptance.md) |
+| What proves a milestone that triggers payment? | [Milestone Payment Disputes](docs/research/milestone-payment-disputes.md) |
 | What problem are we solving? | [Problem](docs/PROBLEM.md) |
 | How does the lifecycle work? | [How It Works](docs/HOW_IT_WORKS.md) |
 | What are we validating now? | [Commercial Validation](docs/VALIDATION.md) |
@@ -16,6 +20,24 @@
 | What is the current status? | [Validation Status](docs/status/VALIDATION_STATUS.md) |
 | How could a pilot work? | [Pilot Program](pilots/README.md) |
 | Common questions | [FAQ](docs/FAQ.md) |
+
+---
+
+## Can You Prove It?
+
+A contract can say:
+
+> **"Production deployment will be completed by October 31."**
+
+The practical question is what evidence would allow both sides to establish that the commitment was actually satisfied.
+
+The current research workflow is deliberately small:
+
+**Commitment → Completion condition → Evidence → Verification → Commercial consequence → Reconstruction**
+
+If you have a real implementation milestone, acceptance condition, delivery commitment, or similar commercial obligation, the most useful next step is a **redacted real artifact**.
+
+[Read the Commitment Audit](docs/research/can-you-prove-it.md)
 
 ---
 
@@ -148,6 +170,11 @@ docs/
   HOW_IT_WORKS.md
   ARCHITECTURE.md
   VALIDATION.md
+  research/
+    can-you-prove-it.md
+    erp-implementation-acceptance.md
+    go-live-acceptance.md
+    milestone-payment-disputes.md
   status/VALIDATION_STATUS.md
 products/
 examples/
@@ -155,7 +182,7 @@ pilots/
 images/
 ```
 
-The public repository documents the commercial model, product boundaries, examples, and validation status.
+The public repository documents the commercial model, practitioner-facing research questions, product boundaries, examples, and validation status.
 
 Implementation continues in a separate engineering repository.
 
