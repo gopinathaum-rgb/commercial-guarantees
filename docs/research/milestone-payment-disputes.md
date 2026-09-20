@@ -1,4 +1,8 @@
-# When a Milestone Triggers Payment, What Proves Completion?
+---
+title: "ERP Milestone Payment Disputes: What Proves Completion?"
+description: "Why do ERP milestone payments become disputed? Explore acceptance criteria, completion evidence, verification, and payment-trigger conditions."
+---
+
 
 A milestone becomes commercially interesting when something depends on it.
 
