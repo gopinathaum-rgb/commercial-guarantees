@@ -1,4 +1,8 @@
-# Can You Prove It?
+---
+title: "Can You Prove It? Commercial Commitment Audit"
+description: "Submit a redacted commercial commitment for a private audit of completion conditions, evidence, verification, consequences, and reconstruction."
+---
+
 
 ## Commercial Commitment Audit
 
