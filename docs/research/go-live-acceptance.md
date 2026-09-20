@@ -1,4 +1,8 @@
-# Go-Live Acceptance: What Counts as Evidence?
+---
+title: "ERP Go-Live Acceptance: What Evidence Proves Completion?"
+description: "What proves an ERP go-live is complete? Examine deployment records, UAT results, production verification, acceptance criteria, and sign-off evidence."
+---
+
 
 "Go-live" sounds like a binary event.
 
