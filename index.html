@@ -15,7 +15,7 @@ section{padding:72px 0;border-bottom:1px solid var(--line)}h2{font-size:38px;lin
 .questions{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:32px}.card{padding:22px;border:1px solid var(--line);border-radius:10px;background:var(--soft)}
 .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:36px}.step{padding:22px 18px;border:1px solid var(--line);border-radius:10px;font-weight:700}.step span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
 .audit{background:#f9fafb}.audit-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:start}ul{padding-left:20px}.checklist li{margin:9px 0}.submit{border:2px solid #111827;border-radius:12px;padding:28px;background:#fff}.submit p{color:#475467}
-.note{font-size:14px;color:var(--muted)}.example{font-size:20px;padding:28px 30px;border-left:4px solid #111827;background:var(--soft);margin-top:28px}footer{padding:34px 0;color:var(--muted);font-size:14px}
+.note{font-size:14px;color:var(--muted)}.example{font-size:20px;padding:28px 30px;border-left:4px solid #111827;background:var(--soft);margin-top:28px}.entry-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:34px}.entry-card{padding:28px;border:1px solid var(--line);border-radius:12px;background:#fff}.entry-card h3{font-size:24px}.entry-card p{color:#475467}.entry-link{font-weight:700;text-decoration:none}.teardown{margin-top:28px}.teardown strong{display:block;font-size:18px;margin-bottom:6px}footer{padding:34px 0;color:var(--muted);font-size:14px}
 @media(max-width:800px){.hero{padding-top:55px}.questions,.audit-grid,.flow{grid-template-columns:1fr}.secondary{display:block;margin:18px 0 0}}
 </style></head>
 <body>
@@ -25,6 +25,7 @@ section{padding:72px 0;border-bottom:1px solid var(--line)}h2{font-size:38px;lin
 <h1>Your contract says the milestone is complete.<br>Can you actually prove it?</h1>
 <p>Send one real, redacted commercial commitment. We will test whether its completion can be established from observable evidence under agreed verification rules.</p>
 <a class="cta" href="#submit">Start an audit →</a><a class="secondary" href="#how">See how it works</a></div></header>
+<section id="choose"><div class="wrap"><h2>There are two useful reasons to bring us a commitment.</h2><p class="lead">You do not need to believe in a new system. Bring us something that is already real.</p><div class="entry-grid"><div class="entry-card"><h3>Had a dispute?</h3><p>If a go-live, acceptance milestone, or payment-triggering commitment became disputed, send the redacted commitment. We will reconstruct what it actually required and what evidence could have settled the question.</p><a class="entry-link" href="#request">Bring a disputed commitment →</a></div><div class="entry-card"><h3>Have one coming up?</h3><p>If an important implementation milestone is approaching, send the redacted commitment before execution. We will identify what needs to be observable and verifiable before the date arrives.</p><a class="entry-link" href="#request">Test an upcoming commitment →</a></div></div><div class="teardown"><strong>Want to see the method first?</strong><a class="entry-link" href="docs/research/commitment-teardown.md">Read a public commitment teardown →</a></div></div></section>
 <section id="how"><div class="wrap"><h2>One real commitment. One short audit.</h2>
 <p class="lead">We are researching a simple problem: consequential commitments often have a deadline and a consequence, but the parties may not have agreed clearly enough on what evidence establishes completion.</p>
 <div class="example">“Production deployment will be completed by October 31.”</div>
@@ -54,6 +55,7 @@ section{padding:72px 0;border-bottom:1px solid var(--line)}h2{font-size:38px;lin
 <label for="email"><strong>Work email</strong></label><br><input id="email" name="email" type="email" required style="width:100%;padding:12px;margin:7px 0 16px">
 <label for="company"><strong>Company</strong></label><br><input id="company" name="Company" style="width:100%;padding:12px;margin:7px 0 16px">
 <label for="type"><strong>Commitment type</strong></label><br><select id="type" name="Commitment type" style="width:100%;padding:12px;margin:7px 0 16px"><option>Enterprise software go-live</option><option>Implementation acceptance</option><option>Supplier delivery</option><option>Construction milestone</option><option>Manufacturing acceptance</option><option>Outsourced service commitment</option><option>Other</option></select>
+<label for="status"><strong>Commitment status</strong></label><br><select id="status" name="Commitment status" style="width:100%;padding:12px;margin:7px 0 16px"><option>Past</option><option>Current</option><option>Upcoming</option></select>
 <label for="history"><strong>Did it become commercially difficult?</strong></label><br><select id="history" name="Commercial difficulty" style="width:100%;padding:12px;margin:7px 0 16px"><option>Yes</option><option>No</option><option>Not sure</option></select>
 <label for="context"><strong>Brief context</strong></label><br><textarea id="context" name="Context" rows="4" style="width:100%;padding:12px;margin:7px 0 16px" placeholder="What happened, in a few sentences?"></textarea>
 <label for="commitment"><strong>Redacted commitment</strong></label><br><textarea id="commitment" name="Redacted commitment" rows="9" required style="width:100%;padding:12px;margin:7px 0 16px" placeholder="Paste only the redacted commitment / milestone / acceptance language here."></textarea>
@@ -62,16 +64,6 @@ section{padding:72px 0;border-bottom:1px solid var(--line)}h2{font-size:38px;lin
 </form>
 <p class="note" style="margin-top:16px">Your submission is sent to the designated Syzygy Dynamics inbox by the form service; it is not posted to GitHub or displayed on this page.</p>
 </div></div></section>
-<section id="request"><div class="wrap audit-grid"><div><h2>Request an audit</h2><p class="lead">Start with context only. <strong>Do not send the commitment itself through this form.</strong> We will arrange the private artifact submission separately.</p></div>
-<div class="submit"><form action="mailto:gopinathaum@gmail.com" method="post" enctype="text/plain">
-<label for="name"><strong>Name</strong></label><br><input id="name" name="Name" required style="width:100%;padding:12px;margin:7px 0 16px">
-<label for="email"><strong>Work email</strong></label><br><input id="email" name="Email" type="email" required style="width:100%;padding:12px;margin:7px 0 16px">
-<label for="company"><strong>Company</strong></label><br><input id="company" name="Company" style="width:100%;padding:12px;margin:7px 0 16px">
-<label for="type"><strong>Commitment type</strong></label><br><select id="type" name="Commitment type" style="width:100%;padding:12px;margin:7px 0 16px"><option>Enterprise software go-live</option><option>Implementation acceptance</option><option>Supplier delivery</option><option>Construction milestone</option><option>Manufacturing acceptance</option><option>Outsourced service commitment</option><option>Other</option></select>
-<label for="history"><strong>Did it become commercially difficult?</strong></label><br><select id="history" name="Commercial difficulty" style="width:100%;padding:12px;margin:7px 0 16px"><option>Yes</option><option>No</option><option>Not sure</option></select>
-<label for="context"><strong>Brief context (no confidential text)</strong></label><br><textarea id="context" name="Context" rows="5" style="width:100%;padding:12px;margin:7px 0 16px" placeholder="For example: a go-live milestone was disputed and payment was delayed."></textarea>
-<label style="font-size:14px"><input type="checkbox" required> I understand I should not submit confidential, personal, or commercially sensitive commitment text through this form.</label><br><br>
-<button class="cta" type="submit" style="border:0;cursor:pointer">Request privately →</button></form>
-<p class="note" style="margin-top:16px">This opens your email client and sends only the short intake details. The commitment artifact is requested separately and privately.</p></div></div></section>
+
 </main><div class="wrap"><footer>© 2026 Syzygy Dynamics · Can You Prove It?</footer></div>
 </body></html>
