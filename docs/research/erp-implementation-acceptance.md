@@ -1,4 +1,8 @@
-# When Is an ERP Implementation Actually Complete?
+---
+title: "ERP Implementation Acceptance Criteria: What Defines Complete?"
+description: "Learn how ERP implementation acceptance criteria can define completion using agreed conditions, evidence, verification, and milestone consequences."
+---
+
 
 A recurring commercial question in enterprise software implementation is deceptively simple:
 
