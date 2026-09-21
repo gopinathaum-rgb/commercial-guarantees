@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="250" viewBox="0 0 1200 250" role="img" aria-labelledby="title desc">
+  <title id="title">Commercial commitment verification flow</title>
+  <desc id="desc">A commitment is translated into completion conditions, evidence, verification, consequence and reconstruction.</desc>
+  <rect width="1200" height="250" rx="18" fill="#f8fafc"/>
+  <text x="50" y="48" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#667085">THE VERIFICATION QUESTION</text>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#111827">
+    <rect x="50" y="86" width="155" height="92" rx="12" fill="#fff" stroke="#d0d5dd"/>
+    <text x="72" y="124" font-size="17" font-weight="700">Commitment</text>
+    <text x="72" y="151" font-size="13" fill="#667085">What was promised?</text>
+    <text x="224" y="140" font-size="25" fill="#98a2b3">→</text>
+    <rect x="255" y="86" width="175" height="92" rx="12" fill="#fff" stroke="#d0d5dd"/>
+    <text x="277" y="118" font-size="17" font-weight="700">Completion</text>
+    <text x="277" y="143" font-size="13" fill="#667085">What had to be true?</text>
+    <text x="449" y="140" font-size="25" fill="#98a2b3">→</text>
+    <rect x="480" y="86" width="155" height="92" rx="12" fill="#fff" stroke="#d0d5dd"/>
+    <text x="502" y="124" font-size="17" font-weight="700">Evidence</text>
+    <text x="502" y="151" font-size="13" fill="#667085">What can be observed?</text>
+    <text x="654" y="140" font-size="25" fill="#98a2b3">→</text>
+    <rect x="685" y="86" width="155" height="92" rx="12" fill="#fff" stroke="#d0d5dd"/>
+    <text x="707" y="124" font-size="17" font-weight="700">Verification</text>
+    <text x="707" y="151" font-size="13" fill="#667085">Who determines it?</text>
+    <text x="859" y="140" font-size="25" fill="#98a2b3">→</text>
+    <rect x="890" y="86" width="155" height="92" rx="12" fill="#fff" stroke="#d0d5dd"/>
+    <text x="912" y="124" font-size="17" font-weight="700">Consequence</text>
+    <text x="912" y="151" font-size="13" fill="#667085">What depends on it?</text>
+    <rect x="1070" y="86" width="80" height="92" rx="12" fill="#111827"/>
+    <text x="1088" y="118" font-size="15" font-weight="700" fill="#fff">Rebuild</text>
+    <text x="1084" y="143" font-size="12" fill="#d0d5dd">Can we</text>
+    <text x="1084" y="160" font-size="12" fill="#d0d5dd">reconstruct?</text>
+  </g>
+</svg>
