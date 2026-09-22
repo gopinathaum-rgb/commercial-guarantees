@@ -1,0 +1,19 @@
+name: Recon Verification
+
+on:
+  push:
+    branches: [main, recon-v0-1]
+  pull_request:
+
+jobs:
+  recon:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run Recon tests
+        run: python -m pytest tests/test_recon.py -q
+      - name: Smoke test
+        run: python -m recon scan --input recon/sources/demo.jsonl --subject DemoCo
