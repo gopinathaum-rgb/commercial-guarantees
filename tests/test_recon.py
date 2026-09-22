@@ -283,3 +283,63 @@ def test_velocis_concor_replay_can_represent_guarantee_consequence_without_merit
     assert "resolves obs-0006" in report
     assert "not a prediction" in report.lower()
     assert "does not independently authenticate" in report
+
+
+def test_videocon_ibm_replay_can_represent_project_specific_milestone_resolution():
+    records = load_sources(Path("recon/sources/videocon_ibm.jsonl"))
+    observations = normalize(records)
+    changes = detect_changes(observations)
+    trajectory = assess_trajectory("VIDEOCON-IBM", observations, changes)
+
+    condition = Claim(
+        "claim-videocon-milestones",
+        "VIDEOCON-IBM",
+        "Project Service Charges were linked to five project milestones, including UAT and Built to Operate.",
+        "contractual_condition",
+        "procedural_fact",
+        "asserted",
+        (observations[1].observation_id,),
+    )
+    dispute = Claim(
+        "claim-videocon-payment-dispute",
+        "VIDEOCON-IBM",
+        "The parties disputed whether IBM had completed enough project milestones to support the invoiced Project Service Charges.",
+        "counter_claim",
+        "party_response",
+        "disputed",
+        (observations[2].observation_id,),
+    )
+    finding = Claim(
+        "finding-videocon-project-specific",
+        "VIDEOCON-IBM",
+        "The tribunal applied the milestone condition project-by-project, allowing completed projects while rejecting claims where later milestones were not completed or other billing/completion defects were established.",
+        "adjudicated_finding",
+        "procedural_fact",
+        "adjudicated",
+        (observations[3].observation_id, observations[4].observation_id),
+    )
+
+    links = (
+        EvidenceLink(condition.claim_id, observations[1].observation_id, "supports"),
+        EvidenceLink(dispute.claim_id, observations[2].observation_id, "supports"),
+        EvidenceLink(finding.claim_id, observations[3].observation_id, "supports"),
+        EvidenceLink(finding.claim_id, observations[4].observation_id, "resolves"),
+    )
+
+    report = render_report(
+        records,
+        observations,
+        changes,
+        trajectory,
+        (condition, dispute, finding),
+        links,
+    )
+
+    assert len(records) == 6
+    assert len(observations) == 6
+    assert "project-by-project" in report
+    assert "adjudicated" in report.lower()
+    assert "resolves obs-0005" in report
+    assert "UAT" in report
+    assert "not a prediction" in report.lower()
+    assert "Claim status is operator-supplied" in report
