@@ -153,3 +153,63 @@ def test_claim_evidence_relationships_render_in_report():
     assert "contradicts obs-0003" in report
     assert "Claim status is operator-supplied" in report
 
+
+
+def test_ntro_replay_can_represent_waiver_and_adjudicated_completion():
+    records = load_sources(Path("recon/sources/ntro_corporate_infotech.jsonl"))
+    observations = normalize(records)
+    changes = detect_changes(observations)
+    trajectory = assess_trajectory("NTRO-CORPORATE-INFOTECH", observations, changes)
+
+    condition = Claim(
+        "claim-ntro-osat-condition",
+        "NTRO-CORPORATE-INFOTECH",
+        "Successful OSAT is a contractual condition for the relevant payment, warranty, and PBG consequences.",
+        "contractual_condition",
+        "procedural_fact",
+        "asserted",
+        (observations[0].observation_id,),
+    )
+    dispute = Claim(
+        "claim-ntro-osat-disputed",
+        "NTRO-CORPORATE-INFOTECH",
+        "OSAT remained incomplete and the balance payment was not due.",
+        "performance_claim",
+        "party_allegation",
+        "disputed",
+        (observations[2].observation_id,),
+    )
+    finding = Claim(
+        "finding-ntro-osat-complete",
+        "NTRO-CORPORATE-INFOTECH",
+        "OSAT was deemed completed on 17 March 2020 for contractual consequences.",
+        "adjudicated_finding",
+        "procedural_fact",
+        "adjudicated",
+        (observations[1].observation_id, observations[4].observation_id),
+    )
+
+    links = (
+        EvidenceLink(condition.claim_id, observations[0].observation_id, "supports"),
+        EvidenceLink(dispute.claim_id, observations[2].observation_id, "supports"),
+        EvidenceLink(finding.claim_id, observations[1].observation_id, "supports"),
+        EvidenceLink(finding.claim_id, observations[4].observation_id, "resolves"),
+    )
+
+    report = render_report(
+        records,
+        observations,
+        changes,
+        trajectory,
+        (condition, dispute, finding),
+        links,
+    )
+
+    assert len(records) == 5
+    assert trajectory.observation_ids
+    assert condition.status == "asserted"
+    assert dispute.status == "disputed"
+    assert finding.status == "adjudicated"
+    assert "claim-ntro-osat-disputed" in report
+    assert "resolves obs-0005" in report
+    assert "deemed OSAT completed" in report
