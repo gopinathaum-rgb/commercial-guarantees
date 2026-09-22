@@ -3,7 +3,7 @@ from collections import defaultdict
 from datetime import datetime
 import json
 from pathlib import Path
-from .model import Change, Observation, SourceRecord, State, Trajectory
+from .model import Change, Claim, EvidenceLink, Observation, SourceRecord, State, Trajectory
 
 NEGATIVE = {"delay","delayed","dispute","disputed","termination","terminated","escalation","escalated","incident","failure","failed","blocked","blacklisting","arbitration","claim","withheld","critical defects"}
 POSITIVE = {"signed off","accepted","acceptance","completed","completion","go-live","production","stabilized","resolved","successful"}
@@ -81,15 +81,25 @@ def assess_trajectory(subject_id: str, observations: list[Observation], changes:
         confidence = min(0.8, 0.4 + 0.1 * max(0, len(subject_obs) - 1) + 0.05 * min(len(subject_changes), 3))
     return Trajectory(f"traj-{subject_id.lower().replace(' ', '-')}", subject_id, direction, tuple(c.change_id for c in subject_changes), tuple(o.observation_id for o in subject_obs), round(confidence, 2), rationale)
 
-def render_report(records, observations, changes, trajectory) -> str:
+def render_report(records, observations, changes, trajectory, claims=(), evidence_links=()) -> str:
     sources = {r.source_id: r for r in records}
+    observation_map = {o.observation_id: o for o in observations}
     lines = [f"SITUATION — {trajectory.subject_id}", "", f"Trajectory: {trajectory.direction.upper()} (confidence {trajectory.confidence:.2f})", f"Rationale: {trajectory.rationale}", "", "Observed changes:"]
     subject_changes = [c for c in changes if c.subject_id == trajectory.subject_id]
     lines += [f"- {c.detected_at.isoformat()}: +{', '.join(c.added_labels) or 'none'} / -{', '.join(c.removed_labels) or 'none'}" for c in subject_changes] or ["- None detected from the supplied records"]
+    subject_claims = [c for c in claims if c.subject_id == trajectory.subject_id]
+    if subject_claims:
+        lines += ["", "Claims:"]
+        for claim in subject_claims:
+            lines.append(f"- {claim.claim_id} | {claim.claim_type} | {claim.stance} | {claim.status} | {claim.statement}")
+            for link in evidence_links:
+                if link.claim_id == claim.claim_id:
+                    observation = observation_map[link.observation_id]
+                    lines.append(f"  - {link.relation} {observation.observation_id} ({observation.observed_at.date()})")
     lines += ["", "Evidence:"]
     for o in observations:
         if o.subject_id == trajectory.subject_id:
             s = sources[o.source_id]
             lines.append(f"- {o.observed_at.date()} | {o.stance.upper()} | {s.publisher} | {o.statement} | {s.url}")
-    lines += ["", "Uncertainty:", "- This report reflects source statements and normalized signals; it does not independently authenticate the underlying claims.", "- Repeated reporting is not treated as independent verification.", "- Trajectory is an observed-direction assessment, not a prediction."]
+    lines += ["", "Uncertainty:", "- This report reflects source statements and normalized signals; it does not independently authenticate the underlying claims.", "- Repeated reporting is not treated as independent verification.", "- Claim status is operator-supplied in this version; Recon does not infer it.", "- Trajectory is an observed-direction assessment, not a prediction."]
     return "\n".join(lines) + "\n"
