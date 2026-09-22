@@ -234,6 +234,8 @@ Permitted directions:
 - transitioning;
 - uncertain.
 
+The current implementation is heuristic. Its confidence value is **not** a calibrated probability, reliability score, or forecast.
+
 Trajectory is not:
 
 - probability of failure;
@@ -277,19 +279,49 @@ A case is **not** a successful replay merely because the generated report looks 
 
 ---
 
-## Validation sequence
+## Five-case replay baseline
 
-The current target is 3–5 materially different real cases.
-
-Already replayed:
+The v0.1 replay baseline now contains five materially different cases:
 
 1. **WAPCOS × CYFUTURE** — disputed implementation / court intervention / merits reserved.
 2. **Sage Technologies × Shree Baidyanath** — milestone conditions / operational dispute / judicial adjudication.
 3. **NTRO × Corporate Infotech** — testing condition / control takeover / adjudicated treatment of completion.
+4. **Velocis × CONCOR** — implementation milestones / termination / performance-guarantee consequence without merits finality.
+5. **Videocon × IBM** — multiple project outcomes within one commercial relationship / project-specific milestone adjudication.
 
-The next cases should be selected for a new evidence pattern, not merely another example of the same dispute.
+The fifth case did not require a new primitive.
 
-Do not add new Recon primitives unless a new case demonstrates that the current model cannot faithfully represent a material fact.
+Videocon × IBM did expose a possible future need for explicit project or subcase identity. That is deliberately **deferred**: one case is insufficient evidence for changing the v0.1 schema.
+
+---
+
+## Independent replay gate
+
+The next validation step is no longer “add another case.”
+
+It is:
+
+> **Can a second operator reproduce the reconstruction from the recorded source material?**
+
+For each case, compare:
+
+- subject identity;
+- chronology;
+- material contractual conditions;
+- claims;
+- claim status;
+- evidence links;
+- contradictions;
+- missing evidence;
+- resolution treatment;
+- uncertainty;
+- trajectory characterization.
+
+Record disagreements rather than silently reconciling them.
+
+If disagreement repeatedly occurs at the same conceptual boundary, that boundary becomes a candidate for v0.2 design.
+
+If disagreements are primarily source-selection or interpretation differences, improve the operator protocol rather than the schema.
 
 ---
 
