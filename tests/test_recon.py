@@ -135,3 +135,21 @@ def test_sage_replay_can_represent_contract_condition_and_adjudication():
     assert {link.relation for link in success_links} == {"supports", "contradicts"}
     assert finding.status == "adjudicated"
     assert finding_link.relation == "resolves"
+
+def test_claim_evidence_relationships_render_in_report():
+    records = load_sources(Path("recon/sources/sage_baidyanath.jsonl"))
+    observations = normalize(records)
+    changes = detect_changes(observations)
+    trajectory = assess_trajectory("SAGE-BAIDYANATH", observations, changes)
+    claim = Claim("claim-sage-go-live", "SAGE-BAIDYANATH", "Successful Go-Live was achieved.", "contractual_condition", "party_allegation", "disputed", (observations[1].observation_id, observations[2].observation_id))
+    links = (
+        EvidenceLink(claim.claim_id, observations[1].observation_id, "supports"),
+        EvidenceLink(claim.claim_id, observations[2].observation_id, "contradicts"),
+    )
+    report = render_report(records, observations, changes, trajectory, (claim,), links)
+    assert "CLAIMS:" in report
+    assert "claim-sage-go-live" in report
+    assert "supports obs-0002" in report
+    assert "contradicts obs-0003" in report
+    assert "Claim status is operator-supplied" in report
+
