@@ -32,7 +32,10 @@ def test_wapcos_cyfuture_replay_preserves_manual_investigation_boundary():
     assert "COURT_DIRECTION" in report
     assert "COURT_RESERVATION" in report
     assert "not a prediction" in report.lower()
-    assert "does not independently authenticate" in report.lower()
+    assert "does not independently authenticate" in report
+    assert trajectory.confidence == 0.55
+    assert "contested" in trajectory.rationale.lower()
+.lower()
 
 def test_wapcos_replay_retains_source_traceability():
     records=load_sources(Path("recon/sources/wapcos_cyfuture.jsonl"))
