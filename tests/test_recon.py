@@ -35,7 +35,6 @@ def test_wapcos_cyfuture_replay_preserves_manual_investigation_boundary():
     assert "does not independently authenticate" in report
     assert trajectory.confidence == 0.55
     assert "contested" in trajectory.rationale.lower()
-.lower()
 
 def test_wapcos_replay_retains_source_traceability():
     records=load_sources(Path("recon/sources/wapcos_cyfuture.jsonl"))
