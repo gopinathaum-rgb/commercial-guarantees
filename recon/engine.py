@@ -73,7 +73,12 @@ def assess_trajectory(subject_id: str, observations: list[Observation], changes:
         direction, rationale = "transitioning", "Observed sources indicate an active implementation or delivery transition without enough evidence to call the direction positive or negative."
     else:
         direction, rationale = "uncertain", "Available observations do not support a directional assessment."
-    confidence = min(0.9, 0.4 + 0.15 * max(0, len(subject_obs) - 1) + 0.1 * min(len(subject_changes), 3))
+    contested = any(o.stance in {"party_allegation", "party_response", "court_reservation"} for o in subject_obs)
+    if contested:
+        confidence = 0.55
+        rationale += " Evidence is contested or merits remain reserved in the supplied record."
+    else:
+        confidence = min(0.8, 0.4 + 0.1 * max(0, len(subject_obs) - 1) + 0.05 * min(len(subject_changes), 3))
     return Trajectory(f"traj-{subject_id.lower().replace(' ', '-')}", subject_id, direction, tuple(c.change_id for c in subject_changes), tuple(o.observation_id for o in subject_obs), round(confidence, 2), rationale)
 
 def render_report(records, observations, changes, trajectory) -> str:
