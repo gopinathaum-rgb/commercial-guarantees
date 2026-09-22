@@ -1,5 +1,5 @@
 from pathlib import Path
-from recon.engine import assess_trajectory, detect_changes, load_sources, normalize
+from recon.engine import assess_trajectory, detect_changes, load_sources, normalize, render_report
 
 def test_demo_records_produce_changes_and_deteriorating_trajectory():
     records=load_sources(Path("recon/sources/demo.jsonl")); observations=normalize(records); changes=detect_changes(observations); trajectory=assess_trajectory("DemoCo",observations,changes)
@@ -17,7 +17,7 @@ def test_wapcos_cyfuture_replay_preserves_manual_investigation_boundary():
     records=load_sources(Path("recon/sources/wapcos_cyfuture.jsonl"))
     observations=normalize(records)
     changes=detect_changes(observations)
-    trajectory=assess_trajectory("WAPCOS",observations,changes)
+    trajectory=assess_trajectory("WAPCOS-CYFUTURE",observations,changes)
     report=render_report(records,observations,changes,trajectory)
     assert len(records)==7
     assert len(observations)==7
@@ -35,7 +35,7 @@ def test_wapcos_replay_retains_source_traceability():
     records=load_sources(Path("recon/sources/wapcos_cyfuture.jsonl"))
     observations=normalize(records)
     changes=detect_changes(observations)
-    trajectory=assess_trajectory("WAPCOS",observations,changes)
+    trajectory=assess_trajectory("WAPCOS-CYFUTURE",observations,changes)
     report=render_report(records,observations,changes,trajectory)
     observation_sources={o.source_id for o in observations}
     for record in records:
