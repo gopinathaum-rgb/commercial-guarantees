@@ -13,6 +13,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Install test runner
+        run: python -m pip install pytest
       - name: Run Recon tests
         run: python -m pytest tests/test_recon.py -q
       - name: Smoke test
