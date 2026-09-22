@@ -89,7 +89,7 @@ def render_report(records, observations, changes, trajectory, claims=(), evidenc
     lines += [f"- {c.detected_at.isoformat()}: +{', '.join(c.added_labels) or 'none'} / -{', '.join(c.removed_labels) or 'none'}" for c in subject_changes] or ["- None detected from the supplied records"]
     subject_claims = [c for c in claims if c.subject_id == trajectory.subject_id]
     if subject_claims:
-        lines += ["", "Claims:"]
+        lines += ["", "CLAIMS:"]
         for claim in subject_claims:
             lines.append(f"- {claim.claim_id} | {claim.claim_type} | {claim.stance} | {claim.status} | {claim.statement}")
             for link in evidence_links:
