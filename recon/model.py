@@ -24,6 +24,7 @@ class Observation:
     observed_at: datetime
     statement: str
     signal_types: tuple[str, ...] = field(default_factory=tuple)
+    stance: EvidenceStance = "procedural_fact"
 
 @dataclass(frozen=True)
 class State:
