@@ -4,7 +4,24 @@ from datetime import datetime
 from typing import Literal
 
 TrajectoryDirection = Literal["stable", "improving", "deteriorating", "transitioning", "uncertain"]
-EvidenceStance = Literal["party_allegation", "party_response", "court_direction", "court_reservation", "procedural_fact", "practitioner_trace"]
+EvidenceStance = Literal[
+    "party_allegation",
+    "party_response",
+    "court_direction",
+    "court_reservation",
+    "procedural_fact",
+    "practitioner_trace",
+]
+ClaimType = Literal[
+    "contractual_condition",
+    "performance_claim",
+    "counter_claim",
+    "procedural_claim",
+    "adjudicated_finding",
+]
+ClaimStatus = Literal["asserted", "disputed", "adjudicated", "unresolved"]
+EvidenceRelation = Literal["supports", "contradicts", "resolves"]
+
 
 @dataclass(frozen=True)
 class SourceRecord:
@@ -17,6 +34,7 @@ class SourceRecord:
     signal_types: tuple[str, ...] = field(default_factory=tuple)
     stance: EvidenceStance = "procedural_fact"
 
+
 @dataclass(frozen=True)
 class Observation:
     observation_id: str
@@ -27,6 +45,29 @@ class Observation:
     signal_types: tuple[str, ...] = field(default_factory=tuple)
     stance: EvidenceStance = "procedural_fact"
 
+
+@dataclass(frozen=True)
+class Claim:
+    claim_id: str
+    subject_id: str
+    statement: str
+    claim_type: ClaimType
+    stance: EvidenceStance
+    status: ClaimStatus
+    observation_ids: tuple[str, ...] = field(default_factory=tuple)
+
+    def __post_init__(self) -> None:
+        if not self.observation_ids:
+            raise ValueError("claim requires supporting or contesting observations")
+
+
+@dataclass(frozen=True)
+class EvidenceLink:
+    claim_id: str
+    observation_id: str
+    relation: EvidenceRelation
+
+
 @dataclass(frozen=True)
 class State:
     state_id: str
@@ -34,6 +75,7 @@ class State:
     observed_at: datetime
     labels: tuple[str, ...]
     observation_ids: tuple[str, ...]
+
 
 @dataclass(frozen=True)
 class Change:
@@ -45,6 +87,7 @@ class Change:
     observation_ids: tuple[str, ...]
     added_labels: tuple[str, ...]
     removed_labels: tuple[str, ...]
+
 
 @dataclass(frozen=True)
 class Trajectory:
