@@ -28,6 +28,9 @@ def test_wapcos_cyfuture_replay_preserves_manual_investigation_boundary():
     assert "2026-04-22" in report
     assert "2026-05-22" in report
     assert "arbitration" in report.lower()
+    assert "PARTY_ALLEGATION" in report
+    assert "COURT_DIRECTION" in report
+    assert "COURT_RESERVATION" in report
     assert "not a prediction" in report.lower()
     assert "does not independently authenticate" in report.lower()
 
@@ -42,3 +45,12 @@ def test_wapcos_replay_retains_source_traceability():
         assert record.source_id in observation_sources
         assert record.url in report
     assert "merits open" in records[-1].statement.lower()
+
+
+def test_wapcos_replay_preserves_evidence_stance():
+    records=load_sources(Path("recon/sources/wapcos_cyfuture.jsonl"))
+    observations=normalize(records)
+    assert [o.stance for o in observations] == [r.stance for r in records]
+    assert observations[3].stance == "party_allegation"
+    assert observations[5].stance == "court_direction"
+    assert observations[6].stance == "court_reservation"
