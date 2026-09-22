@@ -4,6 +4,7 @@ from datetime import datetime
 from typing import Literal
 
 TrajectoryDirection = Literal["stable", "improving", "deteriorating", "transitioning", "uncertain"]
+EvidenceStance = Literal["party_allegation", "party_response", "court_direction", "court_reservation", "procedural_fact", "practitioner_trace"]
 
 @dataclass(frozen=True)
 class SourceRecord:
