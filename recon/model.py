@@ -15,6 +15,7 @@ class SourceRecord:
     statement: str
     entities: tuple[str, ...] = field(default_factory=tuple)
     signal_types: tuple[str, ...] = field(default_factory=tuple)
+    stance: EvidenceStance = "procedural_fact"
 
 @dataclass(frozen=True)
 class Observation:
