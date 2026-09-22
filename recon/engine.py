@@ -18,7 +18,7 @@ def load_sources(path: Path) -> list[SourceRecord]:
         if not line.strip():
             continue
         raw = json.loads(line)
-        records.append(SourceRecord(raw["source_id"], raw["url"], parse_dt(raw["observed_at"]), raw["publisher"], raw["statement"], tuple(raw.get("entities", [])), tuple(raw.get("signal_types", []))))
+        records.append(SourceRecord(raw["source_id"], raw["url"], parse_dt(raw["observed_at"]), raw["publisher"], raw["statement"], tuple(raw.get("entities", [])), tuple(raw.get("signal_types", [])), raw.get("stance", "procedural_fact")))
     return sorted(records, key=lambda x: x.observed_at)
 
 def normalize(records: list[SourceRecord]) -> list[Observation]:
@@ -27,7 +27,7 @@ def normalize(records: list[SourceRecord]) -> list[Observation]:
     for source in records:
         for subject in source.entities or ("unknown",):
             n += 1
-            out.append(Observation(f"obs-{n:04d}", source.source_id, subject, source.observed_at, source.statement, source.signal_types))
+            out.append(Observation(f"obs-{n:04d}", source.source_id, subject, source.observed_at, source.statement, source.signal_types, source.stance))
     return out
 
 def state_for(observation: Observation) -> State:
@@ -85,6 +85,6 @@ def render_report(records, observations, changes, trajectory) -> str:
     for o in observations:
         if o.subject_id == trajectory.subject_id:
             s = sources[o.source_id]
-            lines.append(f"- {o.observed_at.date()} | {s.publisher} | {o.statement} | {s.url}")
+            lines.append(f"- {o.observed_at.date()} | {o.stance.upper()} | {s.publisher} | {o.statement} | {s.url}")
     lines += ["", "Uncertainty:", "- This report reflects source statements and normalized signals; it does not independently authenticate the underlying claims.", "- Repeated reporting is not treated as independent verification.", "- Trajectory is an observed-direction assessment, not a prediction."]
     return "\n".join(lines) + "\n"
