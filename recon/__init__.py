@@ -5,6 +5,7 @@ from .situation import (
     EconomicState,
     ObservationSurface,
     Organization,
+    ResolutionDecision,
     SituationRecord,
     SituationUpdate,
 )
@@ -14,6 +15,7 @@ __all__ = [
     "EconomicState",
     "ObservationSurface",
     "Organization",
+    "ResolutionDecision",
     "SituationRecord",
     "SituationUpdate",
 ]
