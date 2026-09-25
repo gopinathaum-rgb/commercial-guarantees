@@ -11,6 +11,7 @@ from recon.situation import (
     EconomicState,
     ObservationSurface,
     Organization,
+    ResolutionDecision,
     SituationRecord,
     SituationUpdate,
 )
@@ -164,3 +165,52 @@ def test_four_real_cases_fit_same_situation_boundary(filename):
     assert record.unresolved_questions
     assert all(observation_id in record.observation_ids for observation_id in record.observation_ids)
     assert expected_phrase.lower() in " ".join(o.statement.lower() for o in observations)
+
+
+def test_resolution_decision_preserves_provenance_without_confidence():
+    decision = ResolutionDecision(
+        decision_id="resolve-himanshu-jangid",
+        subject_type="actor",
+        subject_id="himanshu-jangid",
+        status="resolved",
+        basis="Public practitioner profile connects the actor to CYFUTURE implementation work.",
+        source_ids=("wapcos-003",),
+    )
+    assert decision.status == "resolved"
+    assert decision.source_ids == ("wapcos-003",)
+    assert not hasattr(decision, "confidence")
+
+
+def test_resolution_decision_can_remain_unresolved():
+    decision = ResolutionDecision(
+        decision_id="resolve-himanshu-authority",
+        subject_type="actor_role",
+        subject_id="himanshu-jangid",
+        status="unresolved",
+        basis="Public practitioner evidence does not establish contractual decision authority.",
+        source_ids=("wapcos-003",),
+    )
+    assert decision.status == "unresolved"
+    assert "authority" in decision.basis.lower()
+
+
+def test_resolution_decision_rejects_unknown_source():
+    records = load_sources(Path("recon/sources/wapcos_cyfuture.jsonl"))
+    observations = normalize(records)
+    decision = ResolutionDecision(
+        decision_id="bad-resolution",
+        subject_type="actor",
+        subject_id="someone",
+        status="resolved",
+        basis="Unsupported source reference.",
+        source_ids=("does-not-exist",),
+    )
+    with pytest.raises(ValueError, match="resolution decision references unknown source"):
+        build_situation_record(
+            "WAPCOS-CYFUTURE",
+            "WAPCOS × CYFUTURE ERP dispute",
+            "What can actually be established?",
+            records,
+            observations,
+            resolution_decisions=(decision,),
+        )
