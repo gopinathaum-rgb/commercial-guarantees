@@ -2,6 +2,10 @@ from datetime import datetime, timezone
 
 import pytest
 
+from pathlib import Path
+
+from recon.engine import build_situation_record, load_sources, normalize
+from recon.model import Claim
 from recon.situation import (
     Actor,
     EconomicState,
@@ -74,3 +78,43 @@ def test_unresolved_questions_cannot_be_empty_strings():
             question="Question",
             unresolved_questions=("",),
         )
+
+
+def test_wapcos_sources_load_into_situation_without_duplicate_evidence():
+    records = load_sources(Path("recon/sources/wapcos_cyfuture.jsonl"))
+    observations = normalize(records)
+    claim = Claim(
+        claim_id="claim-wapcos-performance",
+        subject_id="WAPCOS-CYFUTURE",
+        statement="WAPCOS alleged stipulated implementation terms and timelines were not fulfilled.",
+        claim_type="performance_claim",
+        stance="party_allegation",
+        status="disputed",
+        observation_ids=("obs-0004",),
+    )
+    record = build_situation_record(
+        "WAPCOS-CYFUTURE",
+        "WAPCOS × CYFUTURE ERP dispute",
+        "What implementation and economic consequences can actually be established?",
+        records,
+        observations,
+        organizations=(
+            Organization("wapcos", "WAPCOS Limited", "customer", ("wapcos-001",)),
+            Organization("cyfuture", "CYFUTURE India Private Limited", "provider", ("wapcos-002",)),
+        ),
+        actors=(
+            Actor("arun-arora", "Arun Arora", "wapcos", "GM, IT", ("wapcos-006",)),
+        ),
+        observation_surfaces=(
+            ObservationSurface("court-22-may", "legal_record", "wapcos-001", "Delhi High Court record"),
+            ObservationSurface("practitioner-trace", "professional_profile", "wapcos-003", "Practitioner trace"),
+        ),
+        claims=(claim,),
+        unresolved_questions=("Which contractual milestones were satisfied?",),
+    )
+    assert len(record.observation_ids) == len(observations) == 7
+    assert record.claim_ids == ("claim-wapcos-performance",)
+    assert record.organization_ids == ("wapcos", "cyfuture")
+    assert record.actor_ids == ("arun-arora",)
+    assert record.observation_surface_ids == ("court-22-may", "practitioner-trace")
+    assert record.observation_ids[0] == "obs-0001"
