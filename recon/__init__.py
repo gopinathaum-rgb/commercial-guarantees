@@ -17,3 +17,11 @@ __all__ = [
     "SituationRecord",
     "SituationUpdate",
 ]
+
+from .engine import build_situation_record
+from .model import Change, Claim, EvidenceLink, Observation, SourceRecord, State, Trajectory
+
+__all__ += [
+    "Change", "Claim", "EvidenceLink", "Observation", "SourceRecord", "State", "Trajectory",
+    "build_situation_record",
+]
