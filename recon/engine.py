@@ -105,7 +105,7 @@ def render_report(records, observations, changes, trajectory, claims=(), evidenc
     return "\n".join(lines) + "\n"
 
 
-from .situation import Actor, EconomicState, Organization, SituationRecord, SituationUpdate
+from .situation import Actor, EconomicState, ObservationSurface, Organization, SituationRecord, SituationUpdate
 
 
 def build_situation_record(
@@ -116,6 +116,7 @@ def build_situation_record(
     observations: list[Observation],
     organizations: tuple[Organization, ...] = (),
     actors: tuple[Actor, ...] = (),
+    observation_surfaces: tuple[ObservationSurface, ...] = (),
     claims: tuple[Claim, ...] = (),
     economic_states: tuple[EconomicState, ...] = (),
     unresolved_questions: tuple[str, ...] = (),
@@ -125,6 +126,9 @@ def build_situation_record(
     source_ids = {r.source_id for r in records}
     observation_ids = {o.observation_id for o in observations}
     organization_ids = {o.organization_id for o in organizations}
+    for surface in observation_surfaces:
+        if surface.source_id not in source_ids:
+            raise ValueError("observation surface references unknown source")
     for organization in organizations:
         if not set(organization.source_ids) <= source_ids:
             raise ValueError("organization references unknown source")
@@ -148,7 +152,7 @@ def build_situation_record(
         question=question,
         organization_ids=tuple(o.organization_id for o in organizations),
         actor_ids=tuple(a.actor_id for a in actors),
-        observation_surface_ids=tuple(r.source_id for r in records),
+        observation_surface_ids=tuple(s.surface_id for s in observation_surfaces),
         observation_ids=tuple(o.observation_id for o in observations),
         claim_ids=tuple(c.claim_id for c in claims),
         unresolved_questions=unresolved_questions,
