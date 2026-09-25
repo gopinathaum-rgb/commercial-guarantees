@@ -35,6 +35,16 @@ class ObservationSurface:
 
 
 @dataclass(frozen=True)
+class ResolutionDecision:
+    decision_id: str
+    subject_type: Literal["organization", "actor", "actor_role", "surface"]
+    subject_id: str
+    status: Literal["resolved", "ambiguous", "unresolved"]
+    basis: str
+    source_ids: tuple[str, ...] = field(default_factory=tuple)
+
+
+@dataclass(frozen=True)
 class EconomicState:
     object_id: str
     amount: str | None
@@ -60,6 +70,7 @@ class SituationRecord:
     organization_ids: tuple[str, ...] = field(default_factory=tuple)
     actor_ids: tuple[str, ...] = field(default_factory=tuple)
     observation_surface_ids: tuple[str, ...] = field(default_factory=tuple)
+    resolution_decisions: tuple[ResolutionDecision, ...] = field(default_factory=tuple)
     observation_ids: tuple[str, ...] = field(default_factory=tuple)
     claim_ids: tuple[str, ...] = field(default_factory=tuple)
     unresolved_questions: tuple[str, ...] = field(default_factory=tuple)
