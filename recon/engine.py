@@ -103,3 +103,56 @@ def render_report(records, observations, changes, trajectory, claims=(), evidenc
             lines.append(f"- {o.observed_at.date()} | {o.stance.upper()} | {s.publisher} | {o.statement} | {s.url}")
     lines += ["", "Uncertainty:", "- This report reflects source statements and normalized signals; it does not independently authenticate the underlying claims.", "- Repeated reporting is not treated as independent verification.", "- Claim status is operator-supplied in this version; Recon does not infer it.", "- Trajectory is an observed-direction assessment, not a prediction."]
     return "\n".join(lines) + "\n"
+
+
+from .situation import Actor, EconomicState, Organization, SituationRecord, SituationUpdate
+
+
+def build_situation_record(
+    situation_id: str,
+    title: str,
+    question: str,
+    records: list[SourceRecord],
+    observations: list[Observation],
+    organizations: tuple[Organization, ...] = (),
+    actors: tuple[Actor, ...] = (),
+    claims: tuple[Claim, ...] = (),
+    economic_states: tuple[EconomicState, ...] = (),
+    unresolved_questions: tuple[str, ...] = (),
+    updates: tuple[SituationUpdate, ...] = (),
+) -> SituationRecord:
+    """Attach existing Recon evidence to thin situation context without duplication."""
+    source_ids = {r.source_id for r in records}
+    observation_ids = {o.observation_id for o in observations}
+    organization_ids = {o.organization_id for o in organizations}
+    for organization in organizations:
+        if not set(organization.source_ids) <= source_ids:
+            raise ValueError("organization references unknown source")
+    for actor in actors:
+        if actor.organization_id not in organization_ids:
+            raise ValueError("actor references unknown organization")
+        if not set(actor.source_ids) <= source_ids:
+            raise ValueError("actor references unknown source")
+    for claim in claims:
+        if not set(claim.observation_ids) <= observation_ids:
+            raise ValueError("claim references unknown observation")
+    for state in economic_states:
+        if not set(state.observation_ids) <= observation_ids:
+            raise ValueError("economic state references unknown observation")
+    for update in updates:
+        if not set(update.observation_ids) <= observation_ids:
+            raise ValueError("update references unknown observation")
+    return SituationRecord(
+        situation_id=situation_id,
+        title=title,
+        question=question,
+        organization_ids=tuple(o.organization_id for o in organizations),
+        actor_ids=tuple(a.actor_id for a in actors),
+        observation_surface_ids=tuple(r.source_id for r in records),
+        observation_ids=tuple(o.observation_id for o in observations),
+        claim_ids=tuple(c.claim_id for c in claims),
+        unresolved_questions=unresolved_questions,
+        economic_states=economic_states,
+        updates=updates,
+        created_at=records[0].observed_at if records else None,
+    )
