@@ -63,6 +63,8 @@ The SituationRecord itself does not authenticate claims.
 
 ## Next implementation boundary
 
-The next step is to connect the SituationRecord to the existing Recon engine so a real source set can be loaded into a situation without duplicating observations or claims.
+The SituationRecord is now connected to the existing Recon execution path. The next boundary is context resolution: recording operator decisions about whether organizations, actors, roles, and observation surfaces are resolved, ambiguous, or unresolved without converting inference into unsupported fact.
 
-Only after that integration works should broader discovery/actor-resolution automation be considered.
+See `docs/research/recon-v0-2-context-resolution.md`.
+
+Do not add automated identity resolution or a new identity ontology until this boundary has been tested against real cases.
