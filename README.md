@@ -8,6 +8,11 @@
 
 ## Start here
 
+| Company direction | [Canonical Company State](docs/COMPANY_STATE.md) |
+|---|---|
+| Recon evolution | [Recon v0.2](docs/research/recon-v0-2.md) |
+
+
 | If you want to... | Read |
 |---|---|
 | **Audit one real commitment** | [Can You Prove It? — Private Commitment Audit](docs/research/can-you-prove-it.md) |
