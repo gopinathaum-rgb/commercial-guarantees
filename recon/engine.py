@@ -105,7 +105,7 @@ def render_report(records, observations, changes, trajectory, claims=(), evidenc
     return "\n".join(lines) + "\n"
 
 
-from .situation import Actor, EconomicState, ObservationSurface, Organization, SituationRecord, SituationUpdate
+from .situation import Actor, EconomicState, ObservationSurface, Organization, ResolutionDecision, SituationRecord, SituationUpdate
 
 
 def build_situation_record(
@@ -117,6 +117,7 @@ def build_situation_record(
     organizations: tuple[Organization, ...] = (),
     actors: tuple[Actor, ...] = (),
     observation_surfaces: tuple[ObservationSurface, ...] = (),
+    resolution_decisions: tuple[ResolutionDecision, ...] = (),
     claims: tuple[Claim, ...] = (),
     economic_states: tuple[EconomicState, ...] = (),
     unresolved_questions: tuple[str, ...] = (),
@@ -129,6 +130,9 @@ def build_situation_record(
     for surface in observation_surfaces:
         if surface.source_id not in source_ids:
             raise ValueError("observation surface references unknown source")
+    for decision in resolution_decisions:
+        if not set(decision.source_ids) <= source_ids:
+            raise ValueError("resolution decision references unknown source")
     for organization in organizations:
         if not set(organization.source_ids) <= source_ids:
             raise ValueError("organization references unknown source")
