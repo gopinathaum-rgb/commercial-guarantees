@@ -2,9 +2,11 @@
 
 This is the practitioner-facing research surface for **Can You Prove It?**
 
-The work is intentionally narrow. We are not trying to publish a general theory of contracts or enterprise delivery. We are examining a recurring factual question:
+The work is intentionally narrow. We are investigating a recurring commercial question:
 
-> **When a consequential commercial commitment is disputed, can the parties establish what happened from evidence that was clear enough in advance?**
+> **When a consequential commercial commitment is supposed to change an economic state, can the parties establish the condition, evidence, recognition boundary, and consequence clearly enough to act?**
+
+The public vocabulary is deliberately practical: milestone, acceptance, evidence, sign-off, payment, handover, dispute, and economic consequence.
 
 ## Current topics
 
@@ -34,7 +36,7 @@ The work is intentionally narrow. We are not trying to publish a general theory 
 
 ### 4. Commitment audit
 
-**Question:** Can one real commitment survive a structured test of completion, evidence, verification, consequence, and reconstruction?
+**Question:** Can one real commitment survive a structured reconstruction of completion, evidence, recognition, consequence, and later replay?
 
 [Read the audit method →](can-you-prove-it.md)
 
@@ -67,10 +69,10 @@ If you have something real, start with the [private commitment audit](can-you-pr
 
 ## Research boundary
 
-This repository is currently testing the commercial problem. It is not claiming that the mechanism is commercially validated.
+This repository is currently testing the commercial problem and the manual service mechanism. It is not claiming that AUM, guarantees, pricing, or product-market fit have been commercially validated.
 
 The rule is simple:
 
 > **Build evidence before expansion.**
 
-A new topic or feature should earn its place through observed practitioner evidence.
+A new topic, primitive, or feature should earn its place through observed practitioner evidence.
