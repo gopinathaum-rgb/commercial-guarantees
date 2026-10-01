@@ -123,7 +123,7 @@ def test_wapcos_sources_load_into_situation_without_duplicate_evidence():
 
 CASE_EXPECTATIONS = {
     "sage_baidyanath.jsonl": ("SAGE-BAIDYANATH", "successful Go-Live was not established"),
-    "ntro_corporate_infotech.jsonl": ("NTRO-CORPORATE-INFOTECH", "OSAT completion was deemed"),
+    "ntro_corporate_infotech.jsonl": ("NTRO-CORPORATE-INFOTECH", "deemed OSAT completed"),
     "velocis_concor.jsonl": ("VELOCIS-CONCOR", "performance bank guarantee"),
     "videocon_ibm.jsonl": ("VIDEOCON-IBM", "project-by-project"),
 }
