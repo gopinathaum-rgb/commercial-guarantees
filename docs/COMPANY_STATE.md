@@ -1,177 +1,179 @@
 # Company State & Operating Model
 
-Date: 2026-09-25
+Date: 2026-09-23  
 Status: Active founder-level state
 
 ## What the company is
 
-Syzygy Dynamics is investigating infrastructure for bounded commercial commitments.
+Syzygy Dynamics investigates how consequential commercial commitments move through observable evidence and economic state.
 
 Working thesis:
 
 > **AUM is infrastructure for bounded commitments.**
 
-The company is not currently a guarantee company in the narrow sense. A guarantee is the first economic application and commercial wedge through which the broader problem can be tested.
+That is the long-term infrastructure thesis. It is **not** the language we need customers to understand before the underlying commercial mechanism is proven.
 
-The underlying problem is:
+The current company question is:
 
-> **Can a consequential commercial commitment be made sufficiently bounded, evidenced, and reconstructable that its realization and economic consequence can be determined without relying on an unbounded argument?**
+> **When a consequential commercial commitment changes the economic state of a transaction, can we reconstruct the condition, evidence, recognition boundary, and consequence clearly enough for the parties to act?**
+
+## Public vocabulary
+
+Lead with the language already used by the market:
+
+- commercial commitment;
+- milestone;
+- completion condition;
+- evidence;
+- acceptance;
+- sign-off / recognition;
+- payment;
+- handover;
+- dispute;
+- economic consequence.
+
+Keep these primarily as internal architecture terms until earned through repeated evidence:
+
+- AUM;
+- bounded commitment infrastructure;
+- economic ontology;
+- realization;
+- settlement machinery.
+
+The guarantee is the **first economic wedge**, not the definition of the company.
 
 ## Company layers
 
-### 1. Recon — world-facing sensing and reconstruction
+### 1. Recon — commercial situation reconstruction
 
-Recon discovers and reconstructs commercially consequential situations.
+Recon reconstructs commercially consequential situations from observable evidence.
 
-It is responsible for:
+Its job is:
 
-- discovering consequential commercial situations;
-- identifying organizations connected to those situations;
-- resolving relevant people and roles;
-- locating legitimate public evidence and conversation surfaces;
-- observing changes and disagreements;
-- reconstructing what can actually be known;
-- preserving uncertainty rather than manufacturing certainty.
+**source → observation → situation → actors → event/state change → uncertainty → economic consequence**
 
-Recon is not currently an autonomous crawler, prospect scorer, outreach agent, predictor, or CRM.
+Recon is not currently a prospect scorer, lead-ranking engine, autonomous outreach system, predictor, or CRM.
 
-### 2. Evidence OS — epistemic and organizational substrate
+### 2. Evidence OS — evidence discipline
 
-Evidence OS preserves, relates, and accumulates evidence and knowledge without rewriting history.
+Evidence OS preserves observations, provenance, relationships, decisions, execution, realization, memory, and knowledge without rewriting history.
 
-It provides the discipline for:
+It provides the epistemic discipline underneath Recon and future commercial mechanisms.
 
-- observations;
-- provenance;
-- relationships between claims and evidence;
-- decisions and experiments;
-- change and trajectory;
-- memory and knowledge;
-- reproducible reasoning.
-
-Evidence OS should not be redirected by commercial urgency. The narrow experiment gets to falsify the broad idea.
+Existing data classes remain canonical. Commercial urgency does not justify creating a parallel ad-hoc schema.
 
 ### 3. Economic state
 
-The company must distinguish commercial assertions from economic reality.
-
-At minimum:
+The company must distinguish:
 
 **CLAIMED ≠ CONTRACTUAL ≠ EARNED ≠ DUE ≠ SETTLED**
 
-Economic state must remain explainable over time, including amount, currency, basis, effective time, observed time, predecessor state/event, scope, and uncertainty.
+Economic state must remain explainable over time, including amount, currency, basis, effective time, observed time, predecessor event/state, scope, and uncertainty.
 
-### 4. AUM — bounded commitment mechanism
+### 4. AUM — future bounded commitment infrastructure
 
-AUM turns sufficiently evidenced commercial reality into bounded commitments.
+AUM formalizes a sufficiently evidenced commitment:
 
-It should formalize:
+- what is committed;
+- conditions;
+- evidence;
+- determination;
+- consequence;
+- realization;
+- settlement.
 
-- what is being committed;
-- under what conditions;
-- what evidence establishes realization;
-- what consequence follows;
-- how realization and settlement are verified.
+AUM should expand only when repeated commercial transactions demonstrate the need.
 
 ### 5. Guarantee — first economic application
 
-Commercial Guarantees is the first narrow commercial wedge:
+The guarantee is one narrow application of the broader mechanism, initially around enterprise implementation/deployment/acceptance milestones.
 
-> enterprise implementation / deployment / acceptance milestones where completion has a contractual or monetary consequence.
-
-This wedge is an experiment, not the definition of the whole company.
-
-### 6. Public commercial surface
-
-The public repository, private audit, LinkedIn, practitioner conversations, and other legitimate surfaces are access and validation channels.
-
-They are not the company itself.
+It is an experiment, not the company's identity.
 
 ## Canonical operating loop
 
-1. **DISCOVER** — find a consequential commercial situation.
-2. **RECONSTRUCT** — establish what can actually be known.
-3. **RESOLVE ACTORS** — identify organizations, roles, and people connected to the evidence.
-4. **ENGAGE** — enter legitimate existing conversation surfaces.
-5. **OBSERVE** — capture what the world tells us.
-6. **UPDATE** — preserve the observation and update the situation model.
-7. **IDENTIFY ECONOMIC STATE** — determine what money, obligation, entitlement, or consequence changed.
-8. **BOUND** — determine what would make the commitment objectively determinable.
-9. **AUM** — formalize the bounded commitment.
-10. **VERIFY / SETTLE** — observe realization and economic consequence.
-11. **LEARN** — feed evidence back into the system.
+**DISCOVER → RECONSTRUCT → RESOLVE → ENGAGE → OBSERVE → UPDATE → IDENTIFY ECONOMIC STATE → BOUND → VERIFY / SETTLE → LEARN**
 
-The loop is the company operating model. Outreach is only one action inside it.
+The internet is an observation surface. It is not the market itself.
 
-## Current engineering/research posture
+Outreach is one action inside the loop, not the company strategy.
 
-### Recon v0.1
+## Commercial operating loop
 
-Recon v0.1 is a validated research instrument, not the final company architecture.
+**real situation → conversation → scope → fee → paid work → measurable outcome → repetition**
 
-Its useful contribution is the disciplined reconstruction chain:
+The intelligence loop and commercial loop run together:
 
-**source → observation → claim/state → change/trajectory → uncertainty → traceability**
+**observe → reconstruct → preserve data classes → compare → update understanding**
 
-The independent replay exposed interpretation/reconstruction difficulty. That is evidence about the operating problem, not a reason to inflate the schema.
+They must not block each other.
 
-PR #9 is therefore not to be merged unchanged.
+## What deserves standardization
 
-### Recon v0.2
+- one occurrence → observe;
+- two → compare;
+- repeated → understand the mechanism;
+- repeated + consequential → standardize;
+- repeated + measurable value → build;
+- repeated network dependency → investigate network position.
 
-The next boundary is:
+No major product abstraction should be added merely because it is technically possible.
 
-**situation discovery → organization resolution → actor/role resolution → public evidence/conversation surfaces → observation → situation update**
-
-The purpose is to test whether the company can continuously discover and reconstruct commercially consequential reality well enough to know where human attention should go.
-
-v0.2 must remain human-operated where uncertainty is material.
-
-Explicitly out of scope for now:
-
-- autonomous broad web crawling;
-- prospect ranking/scoring;
-- automated outreach;
-- customer-intent inference;
-- prediction;
-- restricted people-search as a product dependency;
-- a giant economic ontology;
-- CRM/dashboard/marketplace construction;
-- new AUM primitives before the evidence requires them.
-
-## Current commercial validation status
+## Current commercial state
 
 Known:
 
-- technical reference lifecycle exists;
-- public commercial wedge exists;
+- recurring milestone/acceptance/evidence/payment mechanisms appear across real commercial material;
 - multiple real-world implementation disputes have been reconstructed;
-- practitioner research is active;
-- a private commitment-audit entry point exists.
+- the public commercial audit surface is live;
+- a live outbound commercial experiment has begun.
 
-Not yet established:
+Not established:
 
-- first real customer commitment;
-- paid pilot;
-- issued guarantee;
+- first paid pilot;
 - validated pricing;
 - repeatable acquisition;
+- issued guarantee;
 - product-market fit.
 
-The correct next evidence is a real commercial situation, not another synthetic feature.
+The next truth comes from a transaction, not another design session.
 
-## Founder guardrail
+## Founder guardrails
+
+> **Reality first. Economics second. Technology third.**
 
 > **Do not automate uncertainty. Instrument it first.**
 
-And:
-
 > **Do not make money appear stable. Make its changing state explainable.**
 
-The company should prefer one more correctly reconstructed real-world situation over a larger amount of surface activity or architecture.
+> **Do not monetize the architecture. Monetize the economic consequence of uncertainty.**
+
+## Company-state visualization rule
+
+Every **meaningful company-state change** should update a compact public visual record.
+
+The visual record has two separate dimensions:
+
+### Economic reality
+
+Show documented economic amounts only when they illuminate the commercial mechanism.
+
+Label them explicitly as **third-party economic context**, not company revenue, TAM, or company success.
+
+### Company evidence
+
+Show only evidence actually established:
+
+**Observed → Reconstructed → Engaged → Paid → Outcome → Repeated**
+
+No vanity metrics.
+
+This distinction prevents a large project value from being mistaken for company traction.
 
 ## State synchronization rule
 
-Every meaningful Recon observation that changes the company's understanding should leave an explicit trace in the relevant Evidence OS state/research record.
+Every meaningful Recon observation that changes company understanding should leave an explicit trace in the relevant Evidence OS/research record.
+
+Every meaningful commercial event that changes company state should update the company-state visual and validation boundary.
 
 Repository state must not become a lagging substitute for company state.
