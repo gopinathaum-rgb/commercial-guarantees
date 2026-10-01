@@ -2,75 +2,80 @@
 
 ![Syzygy Dynamics — Can You Prove It?](images/logo.svg)
 
-> **Research into consequential commercial commitments: what was promised, what counts as complete, what evidence proves it, and what happens when the answer matters.**
+> **Research into consequential commercial commitments: what was promised, what counts as complete, what evidence establishes it, and what economic consequence follows.**
 
-**Syzygy Dynamics** is investigating infrastructure for bounded commercial commitments. This repository is the public research surface; implementation work continues separately.
+**Syzygy Dynamics** investigates how commercial commitments move from **obligation → evidence → recognition → economic consequence**.
+
+The repository is the public research surface. Implementation work continues separately.
 
 ## Start here
 
 | Company direction | [Canonical Company State](docs/COMPANY_STATE.md) |
 |---|---|
 | Recon evolution | [Recon v0.2](docs/research/recon-v0-2.md) |
-
+| How we visualize company progress | [Company State Visuals](docs/COMPANY_STATE_VISUALS.md) |
 
 | If you want to... | Read |
 |---|---|
-| **Audit one real commitment** | [Can You Prove It? — Private Commitment Audit](docs/research/can-you-prove-it.md) |
-| Understand the central question | [Problem](docs/PROBLEM.md) |
+| **Audit one real commitment** | [Can You Prove It? — Commercial Commitment Audit](docs/research/can-you-prove-it.md) |
+| Understand the problem | [Problem](docs/PROBLEM.md) |
 | See the method on a concrete example | [Commitment Teardown](docs/research/commitment-teardown.md) |
-| Explore the current implementation wedge | [Enterprise Software Implementation](examples/enterprise-software-implementation.md) |
-| See the current research questions | [Research Topics](docs/research/README.md) |
-| Understand what is and is not validated | [Commercial Validation](docs/VALIDATION.md) |
-| See current status | [Validation Status](docs/status/VALIDATION_STATUS.md) |
+| Explore the implementation wedge | [Enterprise Software Implementation](examples/enterprise-software-implementation.md) |
+| See current research | [Research Topics](docs/research/README.md) |
+| See what is and is not validated | [Commercial Validation](docs/VALIDATION.md) |
 
 ---
 
-## The question
+## The problem
 
-A contract can say:
+Commercial milestones often connect work to an economic consequence:
 
-> **“Production deployment will be completed by October 31.”**
+**delivery → acceptance → payment / handover / release / other obligation**
 
-The difficult question often comes later:
+The difficulty is not always knowing what was supposed to happen. It is establishing **what actually happened from evidence that the relevant parties can inspect and recognize**.
 
-> **What observable evidence would allow both sides to establish that the commitment was actually satisfied?**
+Evidence may be distributed across contracts, project records, test results, acceptance certificates, correspondence, operational systems, invoices, and payment records.
 
-A consequential commitment becomes easier to reason about when its factual boundary is explicit:
+When those records do not line up, the economic state becomes difficult to determine.
 
-**Commitment → Completion condition → Evidence → Verification → Consequence → Reconstruction**
+So we investigate:
 
-### See the method
+> **When a consequential commercial commitment changes the economic state of a transaction, can the parties reconstruct the condition, evidence, recognition boundary, and consequence clearly enough to act?**
 
-[![Commitment verification flow](images/commitment-verification-flow.svg)](docs/research/commitment-teardown.md)
+This is a research question, not a claim that the problem has already been solved.
 
-This is not a proposal to eliminate commercial judgment. It is a research question about whether the factual basis for a consequential decision can be made sufficiently clear that different parties can reach the same conclusion from the available evidence.
+## The method
 
----
+For one real commercial situation, we reconstruct:
+
+**Commitment → Completion condition → Evidence → Recognition → Economic consequence**
+
+Then we preserve:
+
+- what is established;
+- what is uncertain or conflicting;
+- what evidence is missing;
+- who or what has authority to recognize the condition;
+- what economic state should follow;
+- whether the determination can later be reconstructed.
+
+The method is manual today. Software comes later only if repeated work creates measurable value.
 
 ## Current research surface
 
-The first commercial research wedge is **enterprise software production deployment**.
+The first commercial research wedge is **enterprise software implementation and acceptance**.
 
-We are looking at situations where a milestone may involve:
+We are studying situations involving:
 
-- production deployment
-- acceptance testing
-- production verification
-- milestone payment
-- disputed completion
-- evidence scattered across operational records
+- implementation milestones;
+- UAT and acceptance;
+- production deployment and go-live;
+- payment triggers;
+- disputed completion;
+- distributed evidence;
+- dependencies that delay recognition or payment.
 
-The current research topics are deliberately narrow:
-
-- **[ERP Implementation Acceptance](docs/research/erp-implementation-acceptance.md)** — what actually defines “complete”?
-- **[Go-Live Acceptance](docs/research/go-live-acceptance.md)** — what evidence establishes that a go-live milestone was satisfied?
-- **[Milestone Payment Disputes](docs/research/milestone-payment-disputes.md)** — what happens when payment depends on a disputed completion?
-- **[Can You Prove It?](docs/research/can-you-prove-it.md)** — can one real commitment survive the audit?
-- **[Commitment Teardown](docs/research/commitment-teardown.md)** — a worked example of the method.
-
-[Explore the research topics →](docs/research/README.md)
-
----
+The wedge is an investigation surface, **not the definition of the whole company**.
 
 ## Bring a real case
 
@@ -80,113 +85,74 @@ It is a real commitment.
 
 If you have:
 
-- a disputed milestone from a completed project;
+- a disputed milestone;
 - an important commitment currently being executed; or
 - an upcoming milestone whose completion needs to be unambiguous,
 
-you can submit a **redacted** commitment for a private manual audit.
+you can request a **private manual Commercial Commitment Audit**.
 
-We look at:
+Do not publish confidential commitment text in a public GitHub discussion.
 
-1. what was promised;
-2. what had to be true for it to count as complete;
-3. what evidence establishes those conditions;
-4. who or what verifies the evidence;
-5. what commercial consequence depends on the determination; and
-6. whether the determination could later be reconstructed.
+[Request a pilot audit →](docs/research/can-you-prove-it.md)
 
-[Submit a redacted commitment →](docs/research/can-you-prove-it.md)
+## What we visualize
 
-**Do not publish confidential commitment text in a public GitHub discussion.**
+We track company change through two things:
 
----
+### 1. Economic reality
 
-## Current reference case
+What money, obligation, entitlement, or exposure is actually moving?
 
-**Enterprise software production deployment**
+We do **not** turn third-party transaction values into company revenue, TAM, or “success.” A documented project value is evidence about the economic environment, not our revenue.
 
-- **Milestone:** production deployment completed
-- **Deadline:** 31 October 2026, 18:00 UTC
-- **Acceptance:** all mandatory tests pass
-- **Evidence:** deployment record + production verification + test results
-- **Trigger:** milestone cannot be demonstrated against agreed conditions
-- **Maximum reference guarantee response:** ₹1,00,000
+### 2. Evidence of company progress
 
-This is a **reference product definition**, not a live customer guarantee.
+What have we actually established?
 
-The guarantee deliberately does not cover complete project success, general customer satisfaction, every post-go-live defect, business outcomes, or unlimited damages.
+**Observed problem → real situation → customer conversation → paid work → measurable outcome → repetition**
 
-[Read the complete reference case →](examples/enterprise-software-implementation.md)
+This prevents GitHub activity, documentation volume, or architecture from being mistaken for commercial progress.
 
----
+[See the current visual state →](docs/COMPANY_STATE_VISUALS.md)
 
-## What is actually validated?
+## Current validation boundary
 
-**Not much commercially yet—and that is intentional.**
-
-Technical validation and commercial validation are separate.
-
-Current sequence:
-
-**Problem → Frequency → Commercial consequence → Evidence → Buyer → Value → Price → Pilot**
-
-Current status:
+**The problem is increasingly evidenced. The commercial mechanism is not yet proven.**
 
 | Signal | Status |
 |---|---|
-| Technical reference lifecycle | Demonstrated |
-| Public product definition | Documented |
-| Practitioner research | In progress |
-| Real customer commitment | None yet |
-| Paid pilot | None |
-| Guarantee issued | None |
-| Pricing validated | No |
+| Recurring commercial mechanism observed | **Yes — research evidence** |
+| Real-world implementation/acceptance cases reconstructed | **Yes** |
+| Public commercial audit surface | **Live** |
+| First live customer conversation | **In progress** |
+| Paid pilot | **Not yet established** |
+| Pricing validated | **No** |
+| Guarantee issued | **No** |
+| Repeatable acquisition | **No** |
+| Product-market fit | **No** |
 
-The project will not treat more documentation or more engineering as a substitute for market evidence.
-
-[Read the current validation boundary →](docs/VALIDATION.md)
-
----
+The project will not treat more documentation or engineering as a substitute for market evidence.
 
 ## What we do not claim
 
-- No commercial guarantees have been issued.
-- No paid pilot has been secured.
-- Pricing has not been validated.
-- Product-market fit has not been established.
-- The reference case is not evidence that customers will adopt the mechanism.
+- We have not established product-market fit.
+- We have not validated pricing.
+- We have not issued a commercial guarantee.
+- Third-party project values are not Syzygy revenue.
+- A reconstructed dispute does not prove that a customer would have bought our mechanism before the dispute.
+- A technically demonstrated lifecycle is not evidence of market demand.
 
-This repository is a research and validation surface, not a claim of existing market adoption.
+The useful question remains:
 
----
-
-## Collaboration
-
-This is intentionally lightweight.
-
-Useful contributions are not more abstractions. They are **real observations**:
-
-- a disputed milestone;
-- a redacted acceptance condition;
-- evidence that settled a disagreement;
-- a case where evidence failed to settle it;
-- a failure mode we have not considered.
-
-If you have a real case, start with the [research topics](docs/research/README.md) or contact us privately through the [Can You Prove It? audit](docs/research/can-you-prove-it.md).
-
----
+> **What real-world economic transition would this allow a customer to make more safely, more quickly, or with less unresolved exposure?**
 
 ## Repository boundary
 
-The public repository documents the commercial model, practitioner research, examples, product boundaries, and validation status.
+The public repository documents the problem, research, commercial validation, examples, and current company state.
 
 Implementation continues in separate engineering repositories.
 
 > **Build evidence before expansion.**
-
-The useful question remains:
-
-> **What real-world claim would this allow a customer to make more safely?**
 
 ---
 
