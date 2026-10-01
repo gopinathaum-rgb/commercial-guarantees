@@ -13,6 +13,7 @@ The repository is the public research surface. Implementation work continues sep
 | Company direction | [Canonical Company State](docs/COMPANY_STATE.md) |
 |---|---|
 | Recon evolution | [Recon v0.2](docs/research/recon-v0-2.md) |
+| Recon Now vs Destination | [Recon — Now and Destination](docs/research/recon-now-and-destination.md) |
 | How we visualize company progress | [Company State Visuals](docs/COMPANY_STATE_VISUALS.md) |
 
 | If you want to... | Read |
