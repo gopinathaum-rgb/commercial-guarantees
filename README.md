@@ -2,11 +2,23 @@
 
 ![Syzygy Dynamics — Can You Prove It?](images/logo.svg)
 
-> **Research into consequential commercial commitments: what was promised, what counts as complete, what evidence establishes it, and what economic consequence follows.**
+> **Research into consequential commercial state transitions: what must be true, what evidence establishes it, who can recognize it, and what economic consequence follows when the state changes.**
 
-**Syzygy Dynamics** investigates how commercial commitments move from **obligation → evidence → recognition → economic consequence**.
+**Syzygy Dynamics investigates and enables consequential commercial state transitions.**
 
-The repository is the public research surface. Implementation work continues separately.
+The repository is the public commercial research surface. Implementation work continues separately.
+
+## The company direction
+
+Our central question is:
+
+> **What must be true, what must be evidenced, who must act, and what must be recognized for a consequential commercial state to change?**
+
+The operating chain is:
+
+**REALITY → EVIDENCE → RECONSTRUCTION → DECISION → ACTION → RECOGNITION → STATE CHANGE → ECONOMIC CONSEQUENCE → LEARNING**
+
+Evidence, uncertainty, decision, and recognition are not the destination. They are the instruments that help us locate the point where a commercial state can actually change.
 
 ## Start here
 
@@ -25,23 +37,21 @@ The repository is the public research surface. Implementation work continues sep
 | See current research | [Research Topics](docs/research/README.md) |
 | See what is and is not validated | [Commercial Validation](docs/VALIDATION.md) |
 
----
-
 ## The problem
 
 Commercial milestones often connect work to an economic consequence:
 
 **delivery → acceptance → payment / handover / release / other obligation**
 
-The difficulty is not always knowing what was supposed to happen. It is establishing **what actually happened from evidence that the relevant parties can inspect and recognize**.
+The difficulty is not always knowing what was supposed to happen. It is establishing **what state the transaction is actually in, what prevents the next state, and what evidence and authority are required to change it**.
 
 Evidence may be distributed across contracts, project records, test results, acceptance certificates, correspondence, operational systems, invoices, and payment records.
 
-When those records do not line up, the economic state becomes difficult to determine.
+When those records do not line up, the commercial state becomes difficult to determine or recognize.
 
 So we investigate:
 
-> **When a consequential commercial commitment changes the economic state of a transaction, can the parties reconstruct the condition, evidence, recognition boundary, and consequence clearly enough to act?**
+> **When a consequential commercial commitment reaches a potential state transition, can the parties reconstruct the condition, evidence, recognition boundary, accountable actor, and consequence clearly enough to act?**
 
 This is a research question, not a claim that the problem has already been solved.
 
@@ -49,7 +59,7 @@ This is a research question, not a claim that the problem has already been solve
 
 For one real commercial situation, we reconstruct:
 
-**Commitment → Completion condition → Evidence → Recognition → Economic consequence**
+**Reality → Evidence → Reconstruction → Decision → Action → Recognition → State change → Economic consequence**
 
 Then we preserve:
 
@@ -57,7 +67,9 @@ Then we preserve:
 - what is uncertain or conflicting;
 - what evidence is missing;
 - who or what has authority to recognize the condition;
+- who can actually perform the state-changing action;
 - what economic state should follow;
+- whether the state actually changed;
 - whether the determination can later be reconstructed.
 
 The method is manual today. Software comes later only if repeated work creates measurable value.
@@ -74,7 +86,8 @@ We are studying situations involving:
 - payment triggers;
 - disputed completion;
 - distributed evidence;
-- dependencies that delay recognition or payment.
+- dependencies that delay recognition or payment;
+- actors whose evidence, authority, or intervention can move the transaction into its next state.
 
 The wedge is an investigation surface, **not the definition of the whole company**.
 
@@ -82,7 +95,7 @@ The wedge is an investigation surface, **not the definition of the whole company
 
 The strongest evidence is not another hypothetical discussion.
 
-It is a real commitment.
+It is a real commitment and a real state transition.
 
 If you have:
 
@@ -102,15 +115,15 @@ We track company change through two things:
 
 ### 1. Economic reality
 
-What money, obligation, entitlement, or exposure is actually moving?
+What money, obligation, entitlement, exposure, or control is actually moving?
 
 We do **not** turn third-party transaction values into company revenue, TAM, or “success.” A documented project value is evidence about the economic environment, not our revenue.
 
 ### 2. Evidence of company progress
 
-What have we actually established?
+What have we actually established, and have we caused a real state transition?
 
-**Observed problem → real situation → customer conversation → paid work → measurable outcome → repetition**
+**Observed problem → real situation → reconstruction → intervention → state change → paid work → measurable outcome → repetition**
 
 This prevents GitHub activity, documentation volume, or architecture from being mistaken for commercial progress.
 
@@ -118,21 +131,21 @@ This prevents GitHub activity, documentation volume, or architecture from being 
 
 ## Current validation boundary
 
-**The problem is increasingly evidenced. The commercial mechanism is not yet proven.**
+**The problem and recurring mechanism are increasingly evidenced. The economic mechanism and repeatable intervention are not yet proven.**
 
 | Signal | Status |
 |---|---|
 | Recurring commercial mechanism observed | **Yes — research evidence** |
 | Real-world implementation/acceptance cases reconstructed | **Yes** |
 | Public commercial audit surface | **Live** |
-| First live customer conversation | **In progress** |
+| Live implementation operators contacted | **In progress** |
 | Paid pilot | **Not yet established** |
 | Pricing validated | **No** |
 | Guarantee issued | **No** |
 | Repeatable acquisition | **No** |
 | Product-market fit | **No** |
 
-The project will not treat more documentation or engineering as a substitute for market evidence.
+The project will not treat more documentation or engineering as a substitute for market evidence or an observed state change.
 
 ## What we do not claim
 
@@ -142,10 +155,11 @@ The project will not treat more documentation or engineering as a substitute for
 - Third-party project values are not Syzygy revenue.
 - A reconstructed dispute does not prove that a customer would have bought our mechanism before the dispute.
 - A technically demonstrated lifecycle is not evidence of market demand.
+- An inferred commercial state is not the same as an authorized recognition event.
 
 The useful question remains:
 
-> **What real-world economic transition would this allow a customer to make more safely, more quickly, or with less unresolved exposure?**
+> **What real-world commercial state can our intervention help a customer change more safely, more quickly, or with less unresolved exposure?**
 
 ## Repository boundary
 
