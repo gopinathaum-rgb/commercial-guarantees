@@ -246,6 +246,39 @@ Trajectory is not:
 
 If the evidence is materially contested, preserve that uncertainty.
 
+
+
+### 11.5. Reconstruct state drift
+
+After the chronological timeline and material claims are established, explicitly compare the **required next state** with the **observed current state**.
+
+Record these separately:
+
+- `required_state` — the condition that must become true for the next meaningful commercial outcome;
+- `observed_state` — what the evidence currently establishes;
+- `state_gap` — the material difference between required and observed state;
+- `blocker` — the evidence-supported condition preventing or delaying the next state;
+- `actor` — the person, organization, or role with demonstrated authority or responsibility to change the state;
+- `economic_consequence` — the commercial consequence supported by evidence if the gap persists;
+- `lead_time` — only when the evidence permits: the earliest point at which the state gap was observable.
+
+Do not infer any of these merely because a later failure occurred.
+
+A state gap may be:
+
+- **aligned** — required and observed state are materially consistent;
+- **drifting** — evidence shows divergence from the required next state;
+- **blocked** — a specific unresolved condition prevents transition;
+- **unknown** — the available evidence is insufficient.
+
+State drift is an observed reconstruction, not a prediction of failure.
+
+The operator must be able to answer:
+
+> **What needed to become true next, what had actually become true, what was preventing the transition, and when that difference first became observable?**
+
+This is the bridge between Recon's descriptive evidence timeline and later economic interpretation. It does not authorize Recon to predict outcomes, assign financial risk, or recommend intervention autonomously.
+
 ### 12. Produce the Commercial Reality Record
 
 The final report should answer:
