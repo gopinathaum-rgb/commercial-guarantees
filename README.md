@@ -12,6 +12,7 @@
 |---|---|
 | **Audit one real commitment** | [Can You Prove It? — Private Commitment Audit](docs/research/can-you-prove-it.md) |
 | Understand the central question | [Problem](docs/PROBLEM.md) |
+| **Understand Recon’s purpose and boundaries** | [Recon Scope and Purpose](docs/research/recon-scope.md) |
 | **Run a Recon investigation consistently** | [Recon Operator Protocol](docs/research/recon-operator-protocol.md) |
 | See the method on a concrete example | [Commitment Teardown](docs/research/commitment-teardown.md) |
 | Explore the current implementation wedge | [Enterprise Software Implementation](examples/enterprise-software-implementation.md) |
