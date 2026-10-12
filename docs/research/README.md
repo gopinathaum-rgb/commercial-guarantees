@@ -6,6 +6,8 @@ The work is intentionally narrow. We are not trying to publish a general theory 
 
 > **When a consequential commercial commitment is disputed, can the parties establish what happened from evidence that was clear enough in advance?**
 
+This repository is currently testing a commercial entry point for Recon. That entry point is not the definition of Recon: see [Recon Scope and Purpose](recon-scope.md) for the broader reconstruction capability and its boundaries.
+
 ## Current topics
 
 ### 1. ERP implementation acceptance
