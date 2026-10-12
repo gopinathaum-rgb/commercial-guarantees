@@ -2,11 +2,13 @@
 
 ## Purpose
 
-Recon v0.1 is a disciplined research instrument, not an autonomous researcher.
+Recon v0.1 is a disciplined reconstruction instrument, not an autonomous researcher. Its purpose is broader than any single industry or commercial use case; see [Recon Scope and Purpose](recon-scope.md).
 
-The operator uses it to turn a messy commercial situation into a traceable reconstruction of:
+In this repository, the current research focus is commercial situations, including enterprise implementation and bounded commitments. This is a concrete validation environment, not a boundary on what Recon is for.
 
-**commitment → conditions → claims → evidence → contradiction → change → resolution → uncertainty**
+The operator uses it to turn a messy real-world situation into a traceable reconstruction of:
+
+**required state → observed evidence → changes → state gaps → contradictions → unresolved matters → uncertainty**
 
 The immediate validation question is:
 
