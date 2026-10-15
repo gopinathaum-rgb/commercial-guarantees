@@ -2,174 +2,138 @@
 
 ![Syzygy Dynamics — Can You Prove It?](images/logo.svg)
 
-> **Research into consequential commercial state transitions: what must be true, what evidence establishes it, who can recognize it, and what economic consequence follows when the state changes.**
+> **We reconstruct consequential commercial commitments from evidence—so people can see what is established, what remains unresolved, and what decision or economic outcome depends on it.**
 
-**Syzygy Dynamics investigates and enables consequential commercial state transitions.**
+**Company:** Syzygy Dynamics  
+**Public research and first customer entry point:** Can You Prove It?  
+**Core capability under development:** Recon — reconstruction of real-world situations and changes from evidence.  
+**Long-term thesis:** AUM is infrastructure for bounded commitments.
 
-The repository is the public commercial research surface. Implementation work continues separately.
-
-## The company direction
-
-Our central question is:
-
-> **What must be true, what must be evidenced, who must act, and what must be recognized for a consequential commercial state to change?**
-
-The operating chain is:
-
-**REALITY → EVIDENCE → RECONSTRUCTION → DECISION → ACTION → RECOGNITION → STATE CHANGE → ECONOMIC CONSEQUENCE → LEARNING**
-
-Evidence, uncertainty, decision, and recognition are not the destination. They are the instruments that help us locate the point where a commercial state can actually change.
+These names describe different layers of one effort—not four separate products. We are testing the work manually before claiming it is a repeatable product.
 
 ## Start here
 
-| Company direction | [Canonical Company State](docs/COMPANY_STATE.md) |
+- **Have a real commitment to examine?** [Request a private Commercial Commitment Audit](docs/research/can-you-prove-it.md).
+- **Want to see the method applied to a real dispute?** Read [NTRO Evidence Audit 001](docs/research/ntro-evidence-audit-001.md).
+- **Want the concrete method and example?** Read the [Commitment Audit method](docs/research/can-you-prove-it.md) and [worked commitment teardown](docs/research/commitment-teardown.md).
+- **Want to understand the current scope?** Read [Recon: now and destination](docs/research/recon-now-and-destination.md).
+- **Want to check what is proven versus still a hypothesis?** Read [Commercial Validation](docs/VALIDATION.md) and [Validation Status](docs/status/VALIDATION_STATUS.md).
+
+## The problem we are investigating
+
+Commercial commitments connect work to consequences:
+
+**delivery → acceptance → payment, handover, release, or another obligation**
+
+But evidence about those states is often spread across contracts, emails, project records, test results, acceptance certificates, operational systems, invoices, and payment records. A status report may say “complete” while the evidence needed for acceptance or payment remains disputed or missing.
+
+The question is not merely whether a milestone is marked complete. It is:
+
+> **What state is the commitment actually in, what does the available evidence establish, what remains unresolved, and what must happen for the next consequential state to change?**
+
+This can matter in enterprise software implementation, go-live acceptance, project recovery, milestone disputes, and other situations where a decision depends on reconstructing a changing real-world state. These are candidate applications, not claims that one product already solves all of them.
+
+## How we work
+
+For one bounded situation, we reconstruct:
+
+**Required outcome → observed state → evidence-supported gap → unresolved questions → decision and authority → action → verified state change → economic consequence**
+
+We keep separate:
+- what a source says and what is independently established;
+- allegations, findings, observations, and interpretations;
+- what was knowable at the time and what became clear later;
+- technical completion, acceptance, entitlement, enforceability, and actual realization;
+- a possible intervention and a demonstrated economic benefit.
+
+Missing or conflicting evidence remains visible. We do not turn uncertainty into a confident answer, or treat a later outcome as proof that an earlier intervention was possible.
+
+**The work is manual today.** Recon is being developed to make evidence collection, chronology, comparison, state-change tracking, and disciplined reporting more repeatable. It is not yet an autonomous investigator, prospect-ranking engine, predictor, or proven commercial product.
+
+## What the names mean
+
+| Name | Role |
 |---|---|
-| Recon evolution | [Recon v0.2](docs/research/recon-v0-2.md) |
-| Recon Now vs Destination | [Recon — Now and Destination](docs/research/recon-now-and-destination.md) |
-| How we visualize company progress | [Company State Visuals](docs/COMPANY_STATE_VISUALS.md) |
+| **Syzygy Dynamics** | The company building and validating this capability. |
+| **Can You Prove It?** | The public research and private commitment-audit entry point. |
+| **Recon** | The reconstruction capability: source records → observations → states → changes → investigation. |
+| **Evidence OS** | The underlying discipline for provenance, temporal history, and the boundary between observation and established fact. |
+| **AUM** | The long-term thesis for infrastructure around bounded commitments—not a validated product claim today. |
+| **Guarantees** | One possible economic application, initially explored around defined enterprise implementation milestones—not the entire company identity. |
 
-| If you want to... | Read |
-|---|---|
-| **Audit one real commitment** | [Can You Prove It? — Commercial Commitment Audit](docs/research/can-you-prove-it.md) |
-| Understand the problem | [Problem](docs/PROBLEM.md) |
-| See the method on a concrete example | [Commitment Teardown](docs/research/commitment-teardown.md) |
-| Explore the implementation wedge | [Enterprise Software Implementation](examples/enterprise-software-implementation.md) |
-| See current research | [Research Topics](docs/research/README.md) |
-| See what is and is not validated | [Commercial Validation](docs/VALIDATION.md) |
+## Current research wedge
 
-## The problem
+We are beginning with enterprise software implementation and acceptance because these situations can connect operational evidence to consequential commercial states.
 
-Commercial milestones often connect work to an economic consequence:
-
-**delivery → acceptance → payment / handover / release / other obligation**
-
-The difficulty is not always knowing what was supposed to happen. It is establishing **what state the transaction is actually in, what prevents the next state, and what evidence and authority are required to change it**.
-
-Evidence may be distributed across contracts, project records, test results, acceptance certificates, correspondence, operational systems, invoices, and payment records.
-
-When those records do not line up, the commercial state becomes difficult to determine or recognize.
-
-So we investigate:
-
-> **When a consequential commercial commitment reaches a potential state transition, can the parties reconstruct the condition, evidence, recognition boundary, accountable actor, and consequence clearly enough to act?**
-
-This is a research question, not a claim that the problem has already been solved.
-
-## The method
-
-For one real commercial situation, we reconstruct:
-
-**Reality → Evidence → Reconstruction → Decision → Action → Recognition → State change → Economic consequence**
-
-Then we preserve:
-
-- what is established;
-- what is uncertain or conflicting;
-- what evidence is missing;
-- who or what has authority to recognize the condition;
-- who can actually perform the state-changing action;
-- what economic state should follow;
-- whether the state actually changed;
-- whether the determination can later be reconstructed.
-
-The method is manual today. Software comes later only if repeated work creates measurable value.
-
-## Current research surface
-
-The first commercial research wedge is **enterprise software implementation and acceptance**.
-
-We are studying situations involving:
-
-- implementation milestones;
-- UAT and acceptance;
+We are examining:
+- implementation milestones, UAT, and acceptance;
 - production deployment and go-live;
-- payment triggers;
-- disputed completion;
-- distributed evidence;
-- dependencies that delay recognition or payment;
-- actors whose evidence, authority, or intervention can move the transaction into its next state.
+- payment triggers and disputed completion;
+- evidence that is fragmented, contradictory, or difficult to reconcile;
+- who has authority to recognize a condition and who can take the next action.
 
-The wedge is an investigation surface, **not the definition of the whole company**.
+This is the first validation environment, not the boundary of the underlying reconstruction capability.
 
-## Bring a real case
+## Read the research
 
-The strongest evidence is not another hypothetical discussion.
+- [Research index](docs/research/README.md)
+- [NTRO Evidence Audit 001: when implementation, testing, acceptance, and payment diverge](docs/research/ntro-evidence-audit-001.md)
+- [Commercial Commitment Audit method](docs/research/can-you-prove-it.md)
+- [Worked commitment teardown](docs/research/commitment-teardown.md)
+- [ERP implementation acceptance](docs/research/erp-implementation-acceptance.md)
+- [Go-live acceptance](docs/research/go-live-acceptance.md)
+- [Milestone payment disputes](docs/research/milestone-payment-disputes.md)
+- [Enterprise software implementation reference case](examples/enterprise-software-implementation.md)
 
-It is a real commitment and a real state transition.
+## Bring one real case
 
-If you have:
+We are looking for a practitioner and one **real, current situation** where a commitment, acceptance condition, readiness state, or payment remains unresolved and a consequential decision is still open.
 
-- a disputed milestone;
-- an important commitment currently being executed; or
-- an upcoming milestone whose completion needs to be unambiguous,
+A suitable first case should let us establish:
+1. the required outcome and the evidence available now;
+2. the gap, if any, that can actually be supported;
+3. what remains unknown or contested;
+4. who can make the relevant decision and what options are feasible;
+5. whether the reconstruction changes or confirms a consequential decision.
 
-you can request a **private manual Commercial Commitment Audit**.
+Start with the [private Commercial Commitment Audit method](docs/research/can-you-prove-it.md). We will assess suitability and agree scope and any fee before reviewing substantive evidence. **Do not post confidential contracts, customer data, credentials, personal data, or sensitive operational records in a public issue or discussion.** A short, redacted description is enough to start; submitting one does not guarantee acceptance into the research.
 
-Do not publish confidential commitment text in a public GitHub discussion.
+## What is established—and what is not
 
-[Request a pilot audit →](docs/research/can-you-prove-it.md)
-
-## What we visualize
-
-We track company change through two things:
-
-### 1. Economic reality
-
-What money, obligation, entitlement, exposure, or control is actually moving?
-
-We do **not** turn third-party transaction values into company revenue, TAM, or “success.” A documented project value is evidence about the economic environment, not our revenue.
-
-### 2. Evidence of company progress
-
-What have we actually established, and have we caused a real state transition?
-
-**Observed problem → real situation → reconstruction → intervention → state change → paid work → measurable outcome → repetition**
-
-This prevents GitHub activity, documentation volume, or architecture from being mistaken for commercial progress.
-
-[See the current visual state →](docs/COMPANY_STATE_VISUALS.md)
-
-## Current validation boundary
-
-**The problem and recurring mechanism are increasingly evidenced. The economic mechanism and repeatable intervention are not yet proven.**
-
-| Signal | Status |
+| Signal | Current status |
 |---|---|
-| Recurring commercial mechanism observed | **Yes — research evidence** |
-| Real-world implementation/acceptance cases reconstructed | **Yes** |
-| Public commercial audit surface | **Live** |
-| Live implementation operators contacted | **In progress** |
-| Paid pilot | **Not yet established** |
-| Pricing validated | **No** |
-| Guarantee issued | **No** |
-| Repeatable acquisition | **No** |
-| Product-market fit | **No** |
+| Public research and audit method | Published |
+| Historical cases examined from public records | Yes; manual research, not proof of product effectiveness |
+| NTRO Evidence Audit 001 | Published; based primarily on judicial records, with underlying primary records still missing |
+| Private intake test | Passed by the founder; not proof of recurring inbound demand |
+| Practitioner contribution to a live case | Not yet secured |
+| First paid pilot | Not yet secured |
+| Pricing and repeatable acquisition | Not validated |
+| Commercial guarantee issued | No |
+| Demonstrated, attributable economic benefit from Recon | Not yet established |
+| Product-market fit | Not established |
 
-The project will not treat more documentation or engineering as a substitute for market evidence or an observed state change.
+A historical reconstruction is not the same as a live case. A published report is not a customer. A changed or confirmed decision is not automatically economic benefit. Third-party contract values are not company revenue.
 
-## What we do not claim
+Our progress standard is:
 
-- We have not established product-market fit.
-- We have not validated pricing.
-- We have not issued a commercial guarantee.
-- Third-party project values are not Syzygy revenue.
-- A reconstructed dispute does not prove that a customer would have bought our mechanism before the dispute.
-- A technically demonstrated lifecycle is not evidence of market demand.
-- An inferred commercial state is not the same as an authorized recognition event.
+**Observed problem → real situation → reconstruction → consequential decision → measurable outcome → paid work → repetition**
 
-The useful question remains:
+We will not treat more documentation, repository activity, or architecture as a substitute for market evidence.
 
-> **What real-world commercial state can our intervention help a customer change more safely, more quickly, or with less unresolved exposure?**
+## Our governing principle
+
+> **Reality first. Evidence before claims. Economics before expansion. Technology only where repeated work earns it.**
+
+The central question remains:
+
+> **Can an independent reconstruction establish what is happening, what the evidence supports, what remains unresolved, and whether that changes a consequential decision?**
+
+---
 
 ## Repository boundary
 
-The public repository documents the problem, research, commercial validation, examples, and current company state.
-
-Implementation continues in separate engineering repositories.
-
-> **Build evidence before expansion.**
-
----
+This public repository contains company direction, research, examples, and commercial validation. Implementation work continues in separate engineering repositories.
 
 ## License
 
