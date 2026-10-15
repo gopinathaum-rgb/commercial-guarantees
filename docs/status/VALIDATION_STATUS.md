@@ -4,62 +4,70 @@
 
 **Phase 2 — Commercial validation**
 
-Commercial Guarantees is testing whether organizations value bounded commitments for specific high-consequence commercial milestones, beginning with enterprise software production deployments.
+Syzygy Dynamics is testing whether evidence-based reconstruction of consequential situations can improve or confirm real decisions. The first economic hypothesis is a narrower bounded guarantee around a clearly defined enterprise software deployment milestone.
 
-## Current Wedge
+The reconstruction capability, the manual audit service, and the guarantee mechanism are related but distinct hypotheses. They must be validated separately.
 
-The first concrete research case is **enterprise software production deployment**:
+## Current Research Wedge
+
+The first commercial research environment is **enterprise software implementation and production deployment**, especially where completion, acceptance, and payment depend on evidence.
+
+The first guarantee hypothesis is:
 
 > A vendor commits to completing a defined production deployment by a fixed deadline, with objectively specified acceptance tests and evidence conditions.
 
-The guarantee is intentionally narrower than full project completion.
+This is a bounded experiment, not the definition of the whole company or proof that a guarantee is commercially viable.
 
 See the [enterprise software implementation reference case](../../examples/enterprise-software-implementation.md).
 
 ## Technical Status
 
-The reference lifecycle has been exercised through:
+The separate reference implementation has exercised a lifecycle through:
 
-- obligation
-- underwriting / assessment
-- commitment
-- issued guarantee
-- structured evidence
-- trigger evaluation
-- claim
-- settlement
-- final verification
-- replay rejection
+- obligation;
+- underwriting / assessment;
+- commitment;
+- issued guarantee;
+- structured evidence;
+- trigger evaluation;
+- claim;
+- settlement;
+- final verification;
+- replay rejection.
 
-The public repository documents the commercial model. The implementation remains in the separate engineering repository.
+This is technical evidence about a reference implementation. It is not evidence of a live customer deployment, customer demand, or economic benefit.
 
-## Commercial Status
+## Research and Service Status
 
-**Validation is in progress.**
+- Public research and manual audit method: **published**.
+- Historical public-record reconstructions: **completed as research**.
+- Private intake form test: **passed by the founder**.
+- Suitable live case with an open consequential decision: **not yet secured**.
+- Practitioner independent replay: **not yet completed by a second operator**.
+- Decision impact attributable to reconstruction: **not yet established**.
+- Measurable economic benefit: **not yet established**.
 
-Current outreach is focused on enterprise software implementation vendors and commercial owners responsible for production/go-live milestones.
+## Guarantee and Commercial Status
 
-No commercial guarantee has been issued.
-
-No pricing has been validated.
-
-No paid pilot has been secured.
+- No commercial guarantee has been issued.
+- No paid pilot has been secured.
+- Pricing has not been validated.
+- Repeatable acquisition has not been established.
+- Product-market fit has not been established.
 
 ## What We Need to Learn
 
-- Is delayed or disputed go-live completion a recurring commercial problem?
-- Who bears the economic consequence?
-- How is completion evidenced today?
-- Can the evidence be collected in a real deployment and independently reconstructed under agreed verification rules?
-- Would a bounded guarantee change a real transaction?
-- Who would pay for it?
-- What fee and settlement mechanism would be acceptable?
-- Can a named real deployment serve as a pilot?
+- Is delayed or disputed go-live completion a recurring and material problem?
+- Who bears the economic consequence and who controls the budget?
+- How is completion evidenced and recognized today?
+- Can the evidence be collected and independently reconstructed?
+- Does the reconstruction change or confirm a consequential decision?
+- Does that decision lead to a verified state change?
+- Can any economic benefit be measured and reasonably attributed?
+- Would a bounded guarantee change a real transaction, and who would pay for it?
 
 ## Guiding Principle
 
-**Build evidence before expansion.**
+**Reality first. Evidence before claims. Economics before expansion.**
 
-Product development is driven by observed customer needs rather than speculative feature accumulation.
-
-Technical rigor supports the commercial hypothesis; it does not substitute for customer validation.
+Technical rigor supports the hypotheses; it does not substitute for a live case, customer validation, or measurable economic outcome.
