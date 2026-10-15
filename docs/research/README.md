@@ -48,6 +48,16 @@ This repository is currently testing a commercial entry point for Recon. That en
 
 [Read the worked teardown →](commitment-teardown.md)
 
+---
+
+### 6. NTRO Evidence Audit 001: implementation, testing, acceptance, and payment
+
+**Question:** What can the available court record establish about a disputed implementation commitment, and what remains unresolved?
+
+This bounded reconstruction distinguishes test execution, demonstration, verification, contractual acceptance, entitlement, enforcement, and verified realization. It explicitly does not claim that earlier intervention was proven feasible or that Recon would have changed the outcome.
+
+[Read NTRO Evidence Audit 001 →](ntro-evidence-audit-001.md)
+
 ## What we want from practitioners
 
 The most useful contribution is not another abstract opinion.
