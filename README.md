@@ -13,9 +13,9 @@ These names describe different layers of one effort—not four separate products
 
 ## Start here
 
-- **Have a real commitment to examine?** [Request a private Commercial Commitment Audit](docs/research/can-you-prove-it.md).
+- **Have a real commitment to examine?** [Open the private audit intake form](https://gopinathaum-rgb.github.io/commercial-guarantees/portal.html). Submit only a short, non-confidential description.
 - **Want to see the method applied to a real dispute?** Read [NTRO Evidence Audit 001](docs/research/ntro-evidence-audit-001.md).
-- **Want the concrete method and example?** Read the [Commitment Audit method](docs/research/can-you-prove-it.md) and [worked commitment teardown](docs/research/commitment-teardown.md).
+- **Want to understand the method before contacting us?** Read the [Commercial Commitment Audit method](docs/research/can-you-prove-it.md) and [worked commitment teardown](docs/research/commitment-teardown.md).
 - **Want to understand the current scope?** Read [Recon: now and destination](docs/research/recon-now-and-destination.md).
 - **Want to check what is proven versus still a hypothesis?** Read [Commercial Validation](docs/VALIDATION.md) and [Validation Status](docs/status/VALIDATION_STATUS.md).
 
