@@ -4,13 +4,13 @@
 
 **Phase 2 — Commercial validation**
 
-The technical guarantee lifecycle has been exercised as a reference implementation. The current objective is different: determine whether a real buyer values a bounded commercial commitment enough to use and pay for it.
+Syzygy Dynamics is testing whether evidence-based reconstruction of consequential commercial situations can change or confirm decisions in ways customers value. The first economic hypothesis is narrower: whether a bounded guarantee around a clearly defined enterprise software deployment milestone would be useful and worth paying for.
 
-## Current Hypothesis
+The broader reconstruction capability and the guarantee mechanism are separate hypotheses. Evidence for one does not automatically validate the other.
 
-The first research wedge is:
+## First Economic Hypothesis
 
-> A customer or implementation vendor may value bounded certainty that a specifically defined enterprise software production milestone will either be demonstrated against agreed evidence or fall within a predefined guarantee response.
+> A customer or implementation vendor may value bounded certainty that a specifically defined enterprise software production milestone will be demonstrated against agreed evidence or fall within a predefined guarantee response.
 
 The initial milestone is **production deployment by a fixed deadline with objectively defined acceptance tests**.
 
@@ -18,55 +18,61 @@ See the [enterprise software implementation reference case](../examples/enterpri
 
 ## What Has Been Technically Demonstrated
 
-The private implementation repository has exercised the lifecycle:
+The separate implementation repository has exercised a reference lifecycle:
 
 `Obligation → Assessment → Commitment → Issued Guarantee → Evidence → Trigger → Claim → Settlement → Final Verification → Replay rejection`
 
-The private implementation exercises structured deployment evidence, acceptance-test results, production verification, and provenance-aware realization. The public reference case describes these elements as a proposed commercial workflow, not as evidence from a live customer deployment.
+It exercises structured deployment evidence, acceptance-test results, production verification, and provenance-aware realization. The public reference case describes a proposed commercial workflow, not a live customer deployment.
 
-Technical validation is not commercial validation.
+**Technical validation is not commercial validation.** Neither the reference lifecycle nor a historical case reconstruction proves that customers will buy the mechanism.
 
 ## What Is Not Yet Proven
 
 The following remain open:
 
-- a real customer has an urgent recurring problem;
-- the problem is economically meaningful;
+- a real customer has an urgent, recurring problem;
+- the problem creates material economic consequences;
 - the customer prefers a guarantee to existing controls;
-- the required evidence can be collected in a real deployment;
-- an independent evidence/provenance model is acceptable to both parties;
+- required evidence can be collected in a real deployment;
+- both parties accept the evidence and provenance rules;
 - a buyer will pay a fee for the mechanism;
 - the proposed settlement process is acceptable;
-- a real project is suitable for a pilot.
+- a real project is suitable for a pilot;
+- the manual reconstruction service produces measurable decision or economic value.
 
 ## Customer Discovery
 
-Initial outreach is focused on enterprise software implementation vendors that appear to have recurring deployments and contractual milestones. This describes the current target population, not a validated market characteristic.
+Initial outreach is focused on enterprise software implementation vendors and commercial owners involved in deployments, acceptance, and milestone payment. This is a current target population, not a validated market characteristic.
 
-The interview sequence is:
+The discovery sequence is:
 
-1. **Problem** — What happens commercially when a production milestone slips?
-2. **Frequency** — How often does this occur?
-3. **Consequence** — What payment, dispute, escalation, or customer impact follows?
+1. **Problem** — What happens commercially when a production milestone slips or becomes disputed?
+2. **Frequency** — How often does it happen?
+3. **Consequence** — What payment, rework, delay, escalation, or customer impact follows?
 4. **Evidence** — How is completion established today?
-5. **Buyer** — Who owns the economic problem?
-6. **Value** — What would bounded certainty change?
-7. **Price** — Would the mechanism justify a fee?
-8. **Pilot** — Is there a named real project on which it could be tested?
+5. **Decision** — Which decision remains open, and who has authority?
+6. **Buyer** — Who owns the economic problem and budget?
+7. **Value** — What would better reconstruction or bounded certainty change?
+8. **Price** — Would the service or mechanism justify a fee?
+9. **Pilot** — Is there a real current situation on which the hypothesis can be tested?
 
-The interview process is deliberately non-promotional. A weak problem signal is evidence against the hypothesis, not a reason to broaden the product.
+A weak problem signal is evidence against the hypothesis, not a reason to broaden the product by assumption.
 
 ## Current Evidence
 
 | Signal | Status |
 |---|---|
-| Technical reference lifecycle | Demonstrated |
-| Public product definition | Documented |
+| Technical guarantee reference lifecycle | Exercised in a separate implementation repository |
+| Public research and manual audit method | Published |
+| Historical public-record reconstructions | Completed as research; not proof of product effectiveness |
+| Suitable live case with an open decision | Not yet secured |
+| Decision impact from Recon | Not yet established |
+| Attributable economic benefit | Not yet established |
 | Customer discovery | In progress |
-| Customer commitment | None yet |
 | Paid pilot | None |
-| Guarantee issued | None |
+| Guarantee issued commercially | None |
 | Pricing validated | No |
+| Repeatable acquisition | Not established |
 
 ## Decision Rule
 
@@ -74,14 +80,20 @@ No new guarantee category or major kernel abstraction should be added merely bec
 
 A proposed addition should answer:
 
-> **What real-world claim would this allow a customer to make more safely?**
+> **What real-world claim or decision would this allow a customer to handle more safely, and what evidence would show that it worked?**
 
-If customer conversations do not support the claim, the correct response is to revise or narrow the hypothesis rather than add features.
+If customer conversations and live cases do not support the claim, revise or narrow the hypothesis rather than adding features.
 
 ## Commercial Acceptance
 
-The target evidence for a pilot is:
+For the manual reconstruction service, the target evidence is:
+
+`real situation → evidence-based reconstruction → consequential decision changed or confirmed → verified state change → measurable outcome → willingness to pay → repetition`
+
+For the guarantee mechanism, the target evidence is:
 
 `real problem → bounded obligation → agreed evidence → meaningful economic consequence → identifiable buyer → value recognized → price discussion → real pilot`
 
-Until that chain is observed in the market, Commercial Guarantees remains in validation.
+These are related but distinct validation paths. Until the relevant chain is observed in the market, the mechanism remains a hypothesis.
+
+**Build evidence before expansion.**
