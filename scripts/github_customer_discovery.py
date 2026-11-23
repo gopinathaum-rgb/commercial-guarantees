@@ -106,15 +106,20 @@ def search_candidates():
         for term in SEARCH_TERMS:
             query = f'repo:{target} is:issue is:open updated:>={since} "{term}"'
             params = urllib.parse.urlencode({"q": query, "sort": "updated", "order": "desc", "per_page": 100})
-            for item in request("/search/issues?" + params).get("items", []):
-                if item.get("pull_request"):
-                    continue
-                author = (item.get("user") or {}).get("login", "")
-                if author.endswith("[bot]") or author in {"github-actions", "dependabot"}:
-                    continue
-                url = item.get("html_url")
-                if url:
-                    found[url] = item
+            for page in range(1, 11):
+                page_params = params + "&page=" + str(page)
+                batch = request("/search/issues?" + page_params).get("items", [])
+                for item in batch:
+                    if item.get("pull_request"):
+                        continue
+                    author = (item.get("user") or {}).get("login", "")
+                    if author.endswith("[bot]") or author in {"github-actions", "dependabot"}:
+                        continue
+                    url = item.get("html_url")
+                    if url:
+                        found[url] = item
+                if len(batch) < 100:
+                    break
     candidates = []
     for url, item in found.items():
         title, body = item.get("title") or "", item.get("body") or ""
