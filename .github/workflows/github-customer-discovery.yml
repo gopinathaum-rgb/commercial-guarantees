@@ -1,36 +1,50 @@
 name: GitHub Customer Discovery
 
 on:
+  pull_request:
   schedule:
     - cron: "30 2 * * 1-5"
   workflow_dispatch:
-
-permissions:
-  contents: read
-  issues: write
 
 concurrency:
   group: github-customer-discovery
   cancel-in-progress: false
 
 jobs:
-  discover:
+  test:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
+    permissions:
+      contents: read
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
-      - name: Test discovery classification and redaction
+      - name: Run discovery and broker-market tests
         env:
           GITHUB_TOKEN: test-token
-        run: python -m unittest discover -s tests -p 'test_github_customer_discovery.py' -v
+        run: |
+          python -m unittest discover -s tests -p 'test_github_customer_discovery.py' -v
+          python -m unittest discover -s tests -p 'test_broker_market.py' -v
 
+  discover:
+    if: github.event_name != 'pull_request'
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
       - name: Search public ERP implementation issue threads
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
