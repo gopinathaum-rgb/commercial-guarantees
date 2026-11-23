@@ -1,61 +1,40 @@
 # GitHub channel: customer discovery operations
 
 ## Purpose
+Use public ERP implementation discussions to find situations where evidence reconstruction may help a real commercial decision. This is one acquisition channel alongside written email outreach. It is not a buyer detector.
 
-Use public GitHub issue discussions as a second discovery channel alongside email. The aim is to find real, current ERP implementation situations and earn trust by contributing useful analysis—not to turn issue trackers into cold-outreach lists.
+## Automated discovery
+The weekday GitHub Action searches recently updated open issues in Frappe, ERPNext and Odoo. It searches implementation, migration, deployment and acceptance topics; reads bounded pages of issue comments; classifies text using lifecycle, context and explicit decision-language signals; redacts email addresses and common credential-like strings; and deduplicates against paginated queue history.
 
-## What the channel can establish
+Decision-language matches (acceptance tests, sign-off, milestone payment, invoice, holdback, scope dispute, production approval) are reading priorities only. They do not establish a contract, dispute, budget, buyer intent, authority or willingness to pay.
 
-- Public evidence that practitioners encounter implementation, migration, deployment, acceptance, cutover, integration, or handover problems.
-- The vocabulary practitioners use to describe those problems.
-- Whether a source thread contains an unresolved question where a careful, evidence-based contribution would help.
-- Whether an author independently asks for assistance or a relevant service.
-
-It cannot establish that an author controls a budget, has authority, wants to buy, or is a qualified prospect.
-
-## Automated workflow
-
-The scheduled GitHub Action searches open, recently updated issues in:
-- `frappe/erpnext`
-- `frappe/frappe`
-- `odoo/odoo`
-
-It filters for implementation-lifecycle language and appends only previously unseen source links and short, email-redacted excerpts to one durable issue: **GitHub channel — customer discovery queue**.
-
-Schedule: weekdays, 08:00 Asia/Kolkata (02:30 UTC), plus manual dispatch.
-
-## Human operating protocol
-
-For each new source:
-1. Read the complete issue and comments; do not rely on the excerpt.
-2. Classify it as (a) implementation lifecycle problem, (b) isolated product defect, (c) feature request, or (d) insufficient evidence.
-3. Identify the precise question the author needs answered.
-4. Draft a technically useful answer that stands on its own.
-5. Publish only when the answer is accurate, relevant, and genuinely helpful to the public thread.
-6. Do not add promotional links, solicit private records, or pitch the audit unless the author explicitly invites service recommendations or asks for help.
-7. If an author independently expresses interest, move the interaction to a private, consent-based channel and qualify the real situation, decision owner, authority, deadline, evidence access, and willingness to pay.
+## Reviewer protocol
+1. Read the full issue and discussion, including latest updates.
+2. Separate direct statements, reported claims, inference and unknowns.
+3. Identify the actual milestone, obligation, acceptance/payment decision and accountable owner only when supported by source evidence.
+4. Determine whether an evidence-reconstruction contribution would genuinely help.
+5. Draft a technically substantive response that stands alone.
+6. Do not publish to third-party repositories automatically. Public posting under the owner's identity requires approval.
+7. If the author independently asks about relevant services, continue privately only with consent; qualify current situation, authority, deadline, evidence access and willingness to pay.
 
 ## Commercial evidence ladder
+| Stage | Evidence required | Commercial status |
+|---|---|---|
+| Public issue discovered | Source URL and dated text | Problem context only |
+| Decision relevance reviewed | Actual milestone/decision supported by source | Research candidate |
+| Useful contribution | Accurate public answer actually posted | Contribution, not lead |
+| Author engagement | Author responds or asks follow-up | Engagement, not buyer |
+| Service inquiry | Author independently asks about service | Inbound interest |
+| Qualified opportunity | Current consequential situation, decision owner, authority, permission and willingness to pay evidenced | Potential opportunity |
+| Accepted engagement | Written scope, fee, timing and terms accepted | Contractual acceptance |
+| Paid engagement | Advance receipt independently verified | Customer rupee |
+| Earned revenue | Delivery and earned consideration evidenced | Earned rupee |
 
-| Signal | What it means | Count as buyer? |
-|---|---|---:|
-| Issue found | Publicly described problem context | No |
-| Useful answer published | Contribution and visibility | No |
-| Author replies or asks a follow-up | Engagement | No |
-| Author asks about the audit/service | Inbound service interest | Not yet |
-| Current consequential situation + decision owner identified | Potentially qualified opportunity | Not yet |
-| Scope and fee accepted in writing | Commercial acceptance | Yes, accepted engagement |
-| Advance payment independently evidenced | Paid engagement started | Yes, first customer rupee |
+## Safeguards
+No unsolicited DMs, mass mentions, promotional comments, requests for confidential records in public, inferred buying intent, or automated public posting under the owner's identity. Pricing, scope, contractual commitments and sensitive disclosures remain owner decisions.
 
-## Safety and integrity boundaries
-
-- No automated comments on third-party repositories.
-- No mass mentions, unsolicited DMs, scraping of private data, or inferred buying-intent scores.
-- No claims that a public issue is a customer, lead, loss, dispute, or active buying process without direct evidence.
-- Never ask people to post contracts, customer data, credentials, or sensitive records publicly.
-- Keep all public answers useful even if no commercial conversation follows.
-- Pricing, contractual scope, sensitive disclosures, and acceptance of an engagement remain owner decisions.
-
-## Success measure
-
-The channel succeeds only when it contributes to a real, consent-based commercial conversation and ultimately a paid engagement. Repository activity, stars, comments, issue volume, and traffic are not revenue.
+## Acceptance criteria
+Operational: scheduled run succeeds, source records are traceable, pagination and deduplication work, and unit tests pass.
+Useful: reviewed candidates repeatedly contain real implementation lifecycle situations.
+Commercially effective: channel contributes to consent-based qualified conversations and ultimately paid engagements.
+These are separate claims and must be reported separately. Queue size, issue count, comments, stars and views are not success metrics.
