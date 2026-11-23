@@ -4,13 +4,13 @@ from scripts.broker_market import buyer_status, match, agreement_status, deal_st
 class BrokerMarketTests(unittest.TestCase):
     def setUp(self):
         self.buyer = {"id":"b1","organisation":"Buyer","need":"ERP migration","service_categories":["ERP migration"],
-          "decision_owner":"Owner","authority_evidence":"ev1","current_need_evidence":"ev2","budget_status":"unknown",
+          "decision_owner":"Owner","authority_evidence":"ev1","current_need_evidence":"ev2","willingness_to_pay_evidence":"ev-pay","budget_status":"unknown",
           "timeline":"Q1","contact_permission":"yes"}
         self.provider = {"id":"p1","organisation":"Provider","service_categories":["ERP migration"],
           "capability_evidence":"ev3","references_checked":["ref1"],"availability":"confirmed","contact_permission":"yes"}
         self.agreement = {"id":"a1","provider_id":"p1","commission_basis":"fixed","commission_value":1000,
           "trigger":"provider receives payment","attribution_window_days":60,"accepted_by_provider":True,
-          "accepted_by_company":True,"buyer_disclosure_required":True}
+          "accepted_by_company":True,"buyer_disclosure_evidence_id":"ev-disclosure"}
 
     def test_buyer_requires_authority_and_permission(self):
         result = buyer_status({"organisation":"Buyer","need":"ERP"})
@@ -41,5 +41,22 @@ class BrokerMarketTests(unittest.TestCase):
         r = {"deal_id":"d1","amount":500,"currency":"INR","received_at":"2026-11-23"}
         self.assertEqual(cash_receipt_status(r)["status"], "unverified_receipt")
         self.assertIn("bank_reference", cash_receipt_status(r)["missing"])
+
+    def test_complete_receipt_still_requires_bank_reconciliation(self):
+        r = {"deal_id":"d1","amount":500,"currency":"INR","received_at":"2026-11-23",
+             "bank_reference":"txn-1","evidence_id":"ev1"}
+        self.assertEqual(cash_receipt_status(r)["status"], "receipt_evidence_complete_pending_reconciliation")
+
+    def test_only_reconciled_receipt_counts_as_collected_cash(self):
+        r = {"deal_id":"d1","amount":500,"currency":"INR","received_at":"2026-11-23",
+             "bank_reference":"txn-1","evidence_id":"ev1","bank_reconciled":True,
+             "bank_statement_evidence_id":"statement-line-1"}
+        self.assertEqual(cash_receipt_status(r)["status"], "reconciled_cash_received")
+
+    def test_deal_must_match_commission_agreement_provider(self):
+        d = {"buyer_id":"b1","provider_id":"different-provider","buyer_contracted":True,
+             "provider_delivered":True,"trigger_evidence_id":"trigger-1","commission_agreement_id":"a1"}
+        self.assertIn("commission agreement provider must match deal provider",
+                      deal_status(d, [self.agreement])["missing"])
 
 if __name__ == "__main__": unittest.main()
