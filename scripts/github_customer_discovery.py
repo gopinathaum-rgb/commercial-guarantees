@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""Find public ERP implementation lifecycle signals and append them to one review queue.
+"""Collect public ERP implementation threads and rank their commercial relevance.
 
-This job does not infer buying intent, contact issue authors, or comment on third-party
-repositories. It only collects public issue links and short, redacted excerpts for review.
+This is a discovery aid, not a buyer detector. It never contacts issue authors,
+posts to third-party repositories, or treats technical activity as buying intent.
 """
 from __future__ import annotations
-
 import datetime as dt
 import json
 import os
@@ -16,37 +15,39 @@ import urllib.parse
 import urllib.request
 
 API = "https://api.github.com"
-OWNER = os.environ.get("GITHUB_REPOSITORY", "gopinathaum-rgb/commercial-guarantees").split("/")[0]
-REPO = os.environ.get("GITHUB_REPOSITORY", "gopinathaum-rgb/commercial-guarantees").split("/")[1]
+REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "gopinathaum-rgb/commercial-guarantees")
+OWNER, REPO = REPOSITORY.split("/", 1)
 TOKEN = os.environ["GITHUB_TOKEN"]
 QUEUE_TITLE = "GitHub channel — customer discovery queue"
 TARGET_REPOS = ("frappe/erpnext", "frappe/frappe", "odoo/odoo")
-SIGNAL_TERMS = (
-    "implementation", "migration", "go live", "go-live", "cutover",
-    "acceptance", "uat", "rollout", "deployment", "production",
-    "customer", "client", "project", "integration", "data import",
-    "delayed", "delay", "blocked", "failed", "handover", "training",
-)
+SEARCH_TERMS = ("implementation", "migration", "deployment", "acceptance")
 LIFECYCLE_TERMS = (
     "implementation", "migration", "go live", "go-live", "cutover",
     "acceptance", "uat", "rollout", "deployment", "handover",
+    "data migration", "production launch",
 )
-
+CONTEXT_TERMS = (
+    "customer", "client", "project", "integration", "data import",
+    "delayed", "delay", "blocked", "failed", "handover", "training",
+    "vendor", "consultant", "partner",
+)
+DECISION_TERMS = (
+    "sign-off", "signoff", "acceptance test", "user acceptance",
+    "milestone payment", "payment withheld", "invoice", "holdback",
+    "go-live approval", "production approval", "handover accepted",
+    "customer approval", "rejected delivery", "delivery acceptance",
+    "contract", "statement of work", "scope dispute",
+)
 
 def request(path: str, method: str = "GET", payload=None):
     data = None if payload is None else json.dumps(payload).encode("utf-8")
-    req = urllib.request.Request(
-        API + path,
-        data=data,
-        method=method,
-        headers={
-            "Accept": "application/vnd.github+json",
-            "Authorization": f"Bearer {TOKEN}",
-            "X-GitHub-Api-Version": "2022-11-28",
-            "User-Agent": "commercial-guarantees-github-discovery",
-            "Content-Type": "application/json",
-        },
-    )
+    req = urllib.request.Request(API + path, data=data, method=method, headers={
+        "Accept": "application/vnd.github+json",
+        "Authorization": f"Bearer {TOKEN}",
+        "X-GitHub-Api-Version": "2022-11-28",
+        "User-Agent": "commercial-guarantees-github-discovery",
+        "Content-Type": "application/json",
+    })
     try:
         with urllib.request.urlopen(req, timeout=25) as response:
             raw = response.read()
@@ -55,118 +56,149 @@ def request(path: str, method: str = "GET", payload=None):
         detail = exc.read().decode("utf-8", "replace")[:1200]
         raise RuntimeError(f"GitHub API {exc.code} for {path}: {detail}") from exc
 
+def paginated(path: str, max_pages: int = 10):
+    rows = []
+    for page in range(1, max_pages + 1):
+        separator = "&" if "?" in path else "?"
+        batch = request(f"{path}{separator}per_page=100&page={page}")
+        if not isinstance(batch, list):
+            raise RuntimeError(f"Expected list response while paging {path}")
+        rows.extend(batch)
+        if len(batch) < 100:
+            break
+    return rows
 
-def redact(text: str) -> str:
+def redact(text: str, limit: int = 650) -> str:
     text = re.sub(r"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}", "[email redacted]", text, flags=re.I)
+    text = re.sub(r"(?i)(token|password|secret|api[_ -]?key)\s*[:=]\s*[^\s,;]+", r"\1=[redacted]", text)
     text = re.sub(r"https?://[^\s)]+", lambda m: m.group(0)[:180], text)
     text = re.sub(r"\s+", " ", text).strip()
-    return text[:850]
+    return text[:limit]
 
+def analyse_text(title: str, body: str, comments: list[dict] | None = None):
+    comments = comments or []
+    comment_text = " ".join((c.get("body") or "") for c in comments)
+    corpus = f"{title} {body} {comment_text}".lower()
+    lifecycle = [term for term in LIFECYCLE_TERMS if term in corpus]
+    context = [term for term in CONTEXT_TERMS if term in corpus]
+    decision = [term for term in DECISION_TERMS if term in corpus]
+    if decision and lifecycle:
+        classification = "decision_evidence_review"
+    elif lifecycle and context:
+        classification = "implementation_lifecycle_context"
+    elif lifecycle:
+        classification = "lifecycle_signal_only"
+    else:
+        classification = "insufficient_lifecycle_evidence"
+    return {
+        "classification": classification,
+        "lifecycle_signals": lifecycle[:8],
+        "context_signals": context[:8],
+        "decision_signals": decision[:8],
+        "comment_count_read": len(comments),
+        "discussion_excerpt": redact(comment_text, 500) if comment_text else "[no comments]",
+    }
 
 def search_candidates():
     since = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=45)).date().isoformat()
     found = {}
-    search_terms = ("implementation", "migration", "deployment", "acceptance")
     for target in TARGET_REPOS:
-      for term in search_terms:
-        query = f'repo:{target} is:issue is:open updated:>={since} "{term}"'
-        params = urllib.parse.urlencode({"q": query, "sort": "updated", "order": "desc", "per_page": 50})
-        result = request("/search/issues?" + params)
-        for item in result.get("items", []):
-            if item.get("pull_request"):
-                continue
-            author = (item.get("user") or {}).get("login", "")
-            if author.endswith("[bot]") or author in {"github-actions", "dependabot"}:
-                continue
-            title = item.get("title") or ""
-            body = item.get("body") or ""
-            corpus = (title + " " + body).lower()
-            score = sum(1 for term in SIGNAL_TERMS if term in corpus)
-            lifecycle = [term for term in LIFECYCLE_TERMS if term in corpus]
-            if score < 3 or not lifecycle:
-                continue
-            url = item.get("html_url")
-            if not url:
-                continue
-            found[url] = {
-                "url": url,
-                "repo": target,
-                "title": title,
-                "updated": item.get("updated_at", ""),
-                "comments": item.get("comments", 0),
-                "score": score,
-                "signals": lifecycle[:5],
-                "excerpt": redact(body or title),
-            }
-    return sorted(found.values(), key=lambda x: (x["score"], x["updated"]), reverse=True)[:12]
-
+        for term in SEARCH_TERMS:
+            query = f'repo:{target} is:issue is:open updated:>={since} "{term}"'
+            params = urllib.parse.urlencode({"q": query, "sort": "updated", "order": "desc", "per_page": 100})
+            for page in range(1, 11):
+                page_params = params + "&page=" + str(page)
+                batch = request("/search/issues?" + page_params).get("items", [])
+                for item in batch:
+                    if item.get("pull_request"):
+                        continue
+                    author = (item.get("user") or {}).get("login", "")
+                    if author.endswith("[bot]") or author in {"github-actions", "dependabot"}:
+                        continue
+                    url = item.get("html_url")
+                    if url:
+                        found[url] = item
+                if len(batch) < 100:
+                    break
+    candidates = []
+    for url, item in found.items():
+        title, body = item.get("title") or "", item.get("body") or ""
+        repo_path = item.get("repository_url", "").split("/repos/")[-1]
+        comments = paginated(
+            f"/repos/{repo_path}/issues/{item['number']}/comments", max_pages=5
+        ) if item.get("comments", 0) else []
+        analysis = analyse_text(title, body, comments)
+        if not analysis["lifecycle_signals"]:
+            continue
+        score = (4 * len(analysis["decision_signals"])
+                 + 2 * len(analysis["lifecycle_signals"])
+                 + len(analysis["context_signals"])
+                 + min(len(comments), 5))
+        candidates.append({
+            "url": url, "repo": repo_path, "number": item.get("number"),
+            "title": title, "updated": item.get("updated_at", ""),
+            "author": (item.get("user") or {}).get("login", "[unknown]"),
+            "score": score, "analysis": analysis, "excerpt": redact(body or title),
+        })
+    return sorted(candidates, key=lambda x: (x["score"], x["updated"]), reverse=True)[:15]
 
 def get_or_create_queue():
-    issues = request(f"/repos/{OWNER}/{REPO}/issues?state=open&per_page=100")
+    issues = paginated(f"/repos/{OWNER}/{REPO}/issues?state=open", max_pages=5)
     for issue in issues:
         if not issue.get("pull_request") and issue.get("title") == QUEUE_TITLE:
             return issue["number"]
     body = (
-        "## Purpose\n"
-        "A durable review queue for public GitHub issue threads that describe ERP implementation, "
-        "migration, deployment, acceptance, cutover, or handover problems.\n\n"
+        "## Purpose\nA durable review queue for public ERP implementation discussions.\n\n"
         "## Evidence boundary\n"
-        "- A public technical or operational problem is **not** evidence of buying intent, budget, or authority.\n"
-        "- This queue is for human review of whether we can contribute a genuinely useful, technically accurate answer.\n"
+        "- A technical problem is not proof of buying intent, budget, authority, or a customer.\n"
+        "- Decision-language matches are prioritization signals only; read the source thread before interpreting them.\n"
         "- The automation does not contact authors, infer private intent, post promotional comments, or request confidential records.\n"
-        "- Any public contribution must stand on its own and must not be a disguised sales pitch.\n"
-        "- A prospect becomes qualified only after a real decision owner, current consequential situation, permission, scope, and willingness to pay are established separately.\n\n"
-        "New source threads are appended as comments only when first discovered."
+        "- Only a separately evidenced decision owner, current consequential situation, permission, scope, and willingness to pay can qualify an opportunity."
     )
     created = request(f"/repos/{OWNER}/{REPO}/issues", "POST", {"title": QUEUE_TITLE, "body": body})
     return created["number"]
 
-
 def main():
     candidates = search_candidates()
     queue_number = get_or_create_queue()
-    comments = request(f"/repos/{OWNER}/{REPO}/issues/{queue_number}/comments?per_page=100")
-    already_seen = set()
-    for comment in comments:
-        already_seen.update(re.findall(r"https://github\.com/[^\s)]+/issues/\d+", comment.get("body") or ""))
-    fresh = [item for item in candidates if item["url"] not in already_seen]
-
-    print(f"Scanned {len(TARGET_REPOS)} public ERP repositories; {len(candidates)} candidates passed the text filter; {len(fresh)} are new.")
+    prior_comments = paginated(
+        f"/repos/{OWNER}/{REPO}/issues/{queue_number}/comments", max_pages=20
+    )
+    seen = set()
+    for comment in prior_comments:
+        seen.update(re.findall(r"https://github\.com/[^\s)]+/issues/\d+", comment.get("body") or ""))
+    fresh = [item for item in candidates if item["url"] not in seen]
+    print(f"Repositories={len(TARGET_REPOS)} unique_threads={len(candidates)} new_threads={len(fresh)}; no buying-intent inference is performed.")
     if not fresh:
-        print("No new candidate links. No GitHub comment created.")
+        print("No new source threads. No queue comment created.")
         return
-
     today = dt.datetime.now(dt.timezone.utc).date().isoformat()
-    lines = [
-        f"## New public ERP implementation signals — {today}",
-        "",
-        f"New links: **{len(fresh)}**. These are problem-context signals only, not buyer leads or buying intent.",
-        "",
-    ]
+    lines = [f"## Candidate review batch — {today}", "",
+             f"New source threads: **{len(fresh)}**. Rank is a reading priority, not a lead score.", ""]
     for item in fresh:
+        a = item["analysis"]
         lines.extend([
-            f"### [{item['repo']}] {item['title']}",
+            f"### [{item['repo']}#{item['number']}] {item['title']}",
             f"- Source: {item['url']}",
-            f"- Last updated: {item['updated'] or 'unknown'} · Existing comments: {item['comments']}",
-            f"- Text signals: {', '.join(item['signals'])}",
-            f"- Public excerpt: {item['excerpt'] or '[no description]'}",
-            "",
+            f"- Author: {item['author']} · Updated: {item['updated']}",
+            f"- Review priority: {item['score']} · Classification: **{a['classification']}**",
+            f"- Lifecycle signals: {', '.join(a['lifecycle_signals']) or 'none'}",
+            f"- Decision-language signals: {', '.join(a['decision_signals']) or 'none detected'}",
+            f"- Discussion comments read: {a['comment_count_read']}",
+            f"- Issue excerpt: {item['excerpt'] or '[no description]'}",
+            f"- Discussion excerpt: {a['discussion_excerpt']}",
+            "- Buyer status: **unverified — do not count as a prospect**", "",
         ])
     lines.extend([
-        "## Review protocol",
-        "1. Open the source and read the full issue plus discussion before forming a view.",
-        "2. Decide whether it describes a real implementation lifecycle problem rather than an isolated product bug.",
-        "3. If useful, prepare a technically substantive answer that helps the author even if they never become a customer.",
-        "4. Do not add a promotional link or offer unless the author explicitly invites relevant services or asks for help.",
-        "5. Record any actual inbound interest separately; do not count views, comments, stars, or issue authors as qualified buyers.",
+        "## Required reviewer actions",
+        "1. Open each source and verify the complete thread and current status.",
+        "2. Record facts, reported claims, inferences, and unknowns separately.",
+        "3. Identify whether a named commercial milestone/acceptance/payment decision is actually evidenced.",
+        "4. If useful, prepare a technically accurate public contribution; do not post automatically.",
+        "5. Record any unsolicited service inquiry separately and qualify authority, timing, permission, scope, and willingness to pay.",
     ])
-    request(
-        f"/repos/{OWNER}/{REPO}/issues/{queue_number}/comments",
-        "POST",
-        {"body": "\n".join(lines)},
-    )
-    print(f"Appended {len(fresh)} new source links to {OWNER}/{REPO}#{queue_number}.")
-
+    request(f"/repos/{OWNER}/{REPO}/issues/{queue_number}/comments", "POST", {"body": "\n".join(lines)})
+    print(f"Appended {len(fresh)} candidates to {OWNER}/{REPO}#{queue_number}.")
 
 if __name__ == "__main__":
     try:
