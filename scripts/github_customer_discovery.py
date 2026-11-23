@@ -66,12 +66,10 @@ def redact(text: str) -> str:
 def search_candidates():
     since = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=45)).date().isoformat()
     found = {}
+    search_terms = ("implementation", "migration", "deployment", "acceptance")
     for target in TARGET_REPOS:
-        query = (
-            f'repo:{target} is:issue is:open updated:>={since} '
-            '(implementation OR migration OR "go live" OR "go-live" OR UAT '
-            'OR acceptance OR rollout OR deployment OR cutover)'
-        )
+      for term in search_terms:
+        query = f'repo:{target} is:issue is:open updated:>={since} "{term}"'
         params = urllib.parse.urlencode({"q": query, "sort": "updated", "order": "desc", "per_page": 50})
         result = request("/search/issues?" + params)
         for item in result.get("items", []):
