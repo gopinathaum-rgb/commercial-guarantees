@@ -93,8 +93,10 @@ def main():
         comments.extend(batch)
         if len(batch)<100: break
     seen=set()
+    issue=api(f"/repos/{OWNER}/{REPO}/issues/{number}")
+    seen.update(re.findall(r"https://frappe\\.io/partners/india/[^\\s)]+",issue.get("body") or ""))
     for c in comments:
-        seen.update(re.findall(r"https://frappe\.io/partners/india/[^\s)]+",c.get("body") or ""))
+        seen.update(re.findall(r"https://frappe\\.io/partners/india/[^\\s)]+",c.get("body") or ""))
     fresh=[x for x in candidates if x["profile_url"] not in seen]
     print(f"directory_candidates={len(candidates)} new_candidates={len(fresh)}; no contact or quality inference.")
     if not fresh: return
