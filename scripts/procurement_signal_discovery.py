@@ -32,8 +32,6 @@ SOURCE_PAGES = (
         "url": "https://www.iimk.ac.in/tender/",
         "source_kind": "official_buyer_tender_page",
     },
-    {
-    },
 )
 RELEVANT = re.compile(
     r"\b(ERP|SAP|enterprise resource planning|system integrator|"
