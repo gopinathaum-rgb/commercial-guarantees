@@ -107,26 +107,28 @@ class PageLinks(HTMLParser):
 def extract_procurement_signals(html: str, source: dict) -> list[dict]:
     parser = PageLinks()
     parser.feed(html)
-    page_text = re.sub(r"\\s+", " ", " ".join(parser.text_parts)).strip()
+    page_text = re.sub(r"\s+", " ", " ".join(parser.text_parts)).strip()
     if not RELEVANT.search(page_text) or not PROCUREMENT.search(page_text[:20000]):
         return []
 
     found = {}
+    relevant_external_link = False
     source_host = urllib.parse.urlparse(source["url"]).hostname
     for href, label in parser.links:
-        title = re.sub(r"\\s+", " ", label).strip()
+        title = re.sub(r"\s+", " ", label).strip()
         if not RELEVANT.search(title):
             continue
         url = urllib.parse.urljoin(source["url"], href)
         parsed = urllib.parse.urlparse(url)
         if parsed.scheme != "https" or parsed.hostname != source_host:
+            relevant_external_link = True
             continue
         found[url] = title
 
     # Institutional tender pages often show the notice title in a heading and
     # label the linked PDF simply "Download". In that case retain the official
     # page itself as the source record rather than guessing which PDF link fits.
-    if not found:
+    if not found and not relevant_external_link:
         match = RELEVANT.search(page_text)
         left = max(0, match.start() - 180)
         right = min(len(page_text), match.end() + 260)
