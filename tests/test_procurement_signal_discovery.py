@@ -22,6 +22,19 @@ class ProcurementSignalTests(unittest.TestCase):
         self.assertEqual(rows[0]["procurement_route_status"],
                          "blocked_pending_document_and_legal_review")
 
+    def test_captures_page_when_notice_link_is_labelled_download(self):
+        html = """
+        <html><body><h1>Tenders</h1>
+        <h2>Tender for Implementation and Support of Enterprise Resource Planning (ERP) Solution</h2>
+        <p>Notice inviting tender. Closing date and bid submission information.</p>
+        <a href="/files/notice.pdf">Download</a>
+        </body></html>
+        """
+        rows = extract_procurement_signals(html, SOURCE)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["notice_url"], SOURCE["url"])
+        self.assertIn("Implementation and Support", rows[0]["title"])
+
     def test_ignores_unrelated_tender(self):
         html = '<a href="/laptop.pdf">Procurement of laptops (Tender)</a>'
         self.assertEqual(extract_procurement_signals(html, SOURCE), [])
