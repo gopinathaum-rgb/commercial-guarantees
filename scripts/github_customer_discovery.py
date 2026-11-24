@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Collect public ERP implementation threads and rank their commercial relevance.
+"""Collect public ERP implementation threads as ecosystem/problem research only.
 
-This is a discovery aid, not a buyer detector. It never contacts issue authors,
-posts to third-party repositories, or treats technical activity as buying intent.
+These discussions are not commercial demand or buyer leads. This collector is
+secondary to official procurement discovery and never contacts issue authors.
 """
 from __future__ import annotations
 import datetime as dt
@@ -148,8 +148,8 @@ def get_or_create_queue():
         if not issue.get("pull_request") and issue.get("title") == QUEUE_TITLE:
             return issue["number"]
     body = (
-        "## Purpose\nA durable review queue for public ERP implementation discussions.\n\n"
-        "## Evidence boundary\n"
+        "## Purpose\nA low-priority research queue for public ERP implementation discussions. This is not a buyer or demand queue.\n\n"
+        "## Evidence boundary — research only\n"
         "- A technical problem is not proof of buying intent, budget, authority, or a customer.\n"
         "- Decision-language matches are prioritization signals only; read the source thread before interpreting them.\n"
         "- The automation does not contact authors, infer private intent, post promotional comments, or request confidential records.\n"
@@ -187,7 +187,7 @@ def main():
             f"- Discussion comments read: {a['comment_count_read']}",
             f"- Issue excerpt: {item['excerpt'] or '[no description]'}",
             f"- Discussion excerpt: {a['discussion_excerpt']}",
-            "- Buyer status: **unverified — do not count as a prospect**", "",
+            "- Commercial demand status: **not evidenced — do not count as a buyer, prospect or lead**", "",
         ])
     lines.extend([
         "## Required reviewer actions",
