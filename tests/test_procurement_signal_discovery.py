@@ -20,7 +20,7 @@ class ProcurementSignalTests(unittest.TestCase):
         self.assertEqual(rows[0]["signal_type"], "formal_procurement_signal_unqualified")
         self.assertEqual(rows[0]["buyer_status"], "not_qualified")
         self.assertEqual(rows[0]["procurement_route_status"],
-                         "manual_eligibility_and_intermediary_rules_check_required")
+                         "blocked_pending_document_and_legal_review")
 
     def test_ignores_unrelated_tender(self):
         html = '<a href="/laptop.pdf">Procurement of laptops (Tender)</a>'
