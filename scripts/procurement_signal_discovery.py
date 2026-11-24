@@ -127,7 +127,7 @@ def extract_procurement_signals(html: str, source: dict) -> list[dict]:
             "signal_type": "formal_procurement_signal_unqualified",
             "buyer_status": "not_qualified",
             "deadline_status": "manual_check_required",
-            "procurement_route_status": "manual_eligibility_and_intermediary_rules_check_required",
+            "procurement_route_status": "blocked_pending_document_and_legal_review",
             "provider_side_route": "possible_only_after_provider_consent_and_written_terms",
             "captured_page_excerpt": page_text[:700],
         }
