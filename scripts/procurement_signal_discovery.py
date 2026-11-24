@@ -39,7 +39,7 @@ RELEVANT = re.compile(
     r"software implementation|business application implementation)\b",
     re.I,
 )
-PROCUREMENT = re.compile(r"\b(tender|RFP|NIT|bid|procurement|EOI|request for proposal)\b", re.I)
+PROCUREMENT = re.compile(r"\b(tenders?|RFP|NIT|bids?|procurement|EOI|request for proposal|invitation for bids|deadline for submission)\b", re.I)
 MAX_PAGE_BYTES = 3_000_000
 
 
