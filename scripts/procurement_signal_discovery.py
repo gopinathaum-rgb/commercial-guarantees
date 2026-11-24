@@ -28,9 +28,11 @@ SOURCE_PAGES = (
         "source_kind": "official_buyer_tender_page",
     },
     {
-        "organisation": "MOIL Limited",
-        "url": "https://www.moil.nic.in/tender-archive?nop=109",
-        "source_kind": "official_buyer_tender_archive",
+        "organisation": "Indian Institute of Management Kozhikode (IIMK)",
+        "url": "https://www.iimk.ac.in/tender/",
+        "source_kind": "official_buyer_tender_page",
+    },
+    {
     },
 )
 RELEVANT = re.compile(
@@ -65,7 +67,7 @@ def request(url: str, method: str = "GET", payload=None):
 
 def fetch_page(url: str) -> str:
     host = urllib.parse.urlparse(url).hostname or ""
-    if host not in {"www.fsid-iisc.in", "fsid-iisc.in", "www.moil.nic.in", "moil.nic.in"}:
+    if host not in {"www.fsid-iisc.in", "fsid-iisc.in", "www.iimk.ac.in", "iimk.ac.in"}:
         raise ValueError(f"Source host is not allowlisted: {host}")
     req = urllib.request.Request(url, headers={
         "User-Agent": "Mozilla/5.0 (compatible; CommercialProcurementResearch/1.0)",
