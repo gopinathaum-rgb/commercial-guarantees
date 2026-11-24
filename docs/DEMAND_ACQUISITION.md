@@ -24,6 +24,10 @@ The current source set is deliberately narrow. CPPP/eProcure advanced search pre
 - Records deadline and intermediary eligibility as manual checks.
 - Does not contact buyers, providers or tender authorities; does not submit bids or make introductions.
 
+## Public procurement safety default
+
+Public procurement notices are captured as market intelligence, not as automatic commission opportunities. The default route is **blocked pending document review and independent legal/compliance review**. Do not contact procuring officials, lobby, influence selection, submit bids, or arrange bidder coordination. Proceed with any provider-side commercial arrangement only where the tender terms and applicable rules clearly permit it, the provider consents in writing, conflicts are disclosed, and the owner approves the exact terms. A success fee linked to influencing an award is prohibited.
+
 ## Intervention workflow
 
 For every candidate:
