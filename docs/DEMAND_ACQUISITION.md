@@ -9,7 +9,7 @@ The acquisition engine now prioritises formal ERP implementation and transformat
 ## Current automated source allowlist
 
 - FSID / IISc official tenders page: https://www.fsid-iisc.in/tenders/
-- MOIL official tender archive: https://www.moil.nic.in/tender-archive?nop=109
+- IIM Kozhikode official tender page: https://www.iimk.ac.in/tender/
 
 The current source set is deliberately narrow. CPPP/eProcure advanced search presents a CAPTCHA gate; the automation must not bypass it. Add new official sources only after verifying their ownership, terms, stable page structure and current tender coverage.
 
