@@ -3,7 +3,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from recon.acquisition import SourceAcquirer
+from recon.acquisition import SourceAcquirer, _AllowedHostRedirectHandler
 
 
 class AcquisitionTests(unittest.TestCase):
@@ -51,6 +51,29 @@ class AcquisitionTests(unittest.TestCase):
         urls = {item[0] for item in parser.links}
         self.assertIn("/files/terms.pdf", urls)
         self.assertIn("/files/atc.docx", urls)
+
+    def test_redirect_handler_rejects_hosts_outside_allowlist(self):
+        from io import BytesIO
+        from urllib.error import HTTPError
+        from urllib.request import Request
+        handler = _AllowedHostRedirectHandler(lambda url: url.startswith("https://icmai.in/"))
+        request = Request("https://icmai.in/tender")
+        headers = Message()
+        with self.assertRaises(HTTPError):
+            handler.redirect_request(request, BytesIO(b""), 302, "Found", headers, "https://evil.example/file.pdf")
+
+    def test_redirect_handler_allows_explicitly_allowed_host(self):
+        from io import BytesIO
+        from urllib.request import Request
+        handler = _AllowedHostRedirectHandler(
+            lambda url: url.startswith("https://icmai.in/") or url.startswith("https://files.icmai.in/")
+        )
+        request = Request("https://icmai.in/tender")
+        headers = Message()
+        redirected = handler.redirect_request(
+            request, BytesIO(b""), 302, "Found", headers, "https://files.icmai.in/rfp.pdf"
+        )
+        self.assertEqual(redirected.full_url, "https://files.icmai.in/rfp.pdf")
 
     def test_allowlist_adds_hosts_without_excluding_seed_host(self):
         with TemporaryDirectory() as tmp:
