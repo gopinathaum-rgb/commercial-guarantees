@@ -16,6 +16,6 @@ jobs:
       - name: Install test runner
         run: python -m pip install pytest pypdf python-docx openpyxl reportlab
       - name: Run Recon tests
-        run: python -m pytest tests/test_recon.py tests/test_situation.py tests/test_acquisition.py tests/test_extraction.py -q
+        run: python -m pytest tests/test_recon.py tests/test_situation.py tests/test_acquisition.py tests/test_extraction.py tests/test_icmai_acceptance.py -q
       - name: Smoke test
         run: python -m recon scan --input recon/sources/demo.jsonl --subject DemoCo
