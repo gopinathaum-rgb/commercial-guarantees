@@ -19,6 +19,7 @@ import time
 from urllib.error import HTTPError, URLError
 from urllib.request import HTTPRedirectHandler, build_opener
 from urllib.parse import urldefrag, urljoin, urlparse
+from urllib.robotparser import RobotFileParser
 from urllib.request import Request
 
 
@@ -131,6 +132,7 @@ class SourceAcquirer:
         self.delay_seconds = delay_seconds
         self.user_agent = user_agent
         self.allowed_hosts = {h.lower() for h in allowed_hosts} if allowed_hosts else None
+        self._robots_cache: dict[str, RobotFileParser | bool] = {}
 
     def _allowed(self, url: str, seed_host: str) -> bool:
         parsed = urlparse(url)
@@ -140,6 +142,32 @@ class SourceAcquirer:
         if self.allowed_hosts is not None:
             return host == seed_host or host in self.allowed_hosts
         return host == seed_host
+
+    def _robots_allowed(self, url: str, seed_host: str) -> bool:
+        """Fail closed when robots policy cannot be established; cache per origin."""
+        parsed = urlparse(url)
+        origin = f"{parsed.scheme}://{parsed.netloc}"
+        if origin not in self._robots_cache:
+            robots_url = f"{origin}/robots.txt"
+            try:
+                _status, _headers, _final_url, body = self._get(robots_url, seed_host)
+                parser = RobotFileParser()
+                parser.set_url(robots_url)
+                parser.parse(body.decode("utf-8", errors="replace").splitlines())
+                self._robots_cache[origin] = parser
+            except HTTPError as exc:
+                if exc.code in {404, 410}:
+                    self._robots_cache[origin] = True
+                else:
+                    self._robots_cache[origin] = False
+            except Exception:
+                self._robots_cache[origin] = False
+        policy = self._robots_cache[origin]
+        if policy is True:
+            return True
+        if policy is False:
+            return False
+        return bool(policy.can_fetch(self.user_agent, url))
 
     def _get(self, url: str, seed_host: str | None = None):
         request = Request(url, headers={"User-Agent": self.user_agent, "Accept": "*/*"})
@@ -182,6 +210,9 @@ class SourceAcquirer:
             page_url = urldefrag(queue.pop(0))[0]
             if page_url in seen_pages or not self._allowed(page_url, seed_host):
                 continue
+            if not self._robots_allowed(page_url, seed_host):
+                errors.append(f"robots.txt disallows or could not authorize page: {page_url}")
+                continue
             seen_pages.add(page_url)
             try:
                 status, headers, final_url, body = self._get(page_url, seed_host)
@@ -194,6 +225,9 @@ class SourceAcquirer:
                 for raw_link, download_attr in parser.links:
                     candidate = urldefrag(urljoin(final_url, raw_link))[0]
                     if not self._allowed(candidate, seed_host):
+                        continue
+                    if not self._robots_allowed(candidate, seed_host):
+                        errors.append(f"robots.txt disallows or could not authorize URL: {candidate}")
                         continue
                     if _is_document(candidate, download_attr):
                         if candidate not in seen_docs and len(documents) < self.max_documents:
