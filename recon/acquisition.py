@@ -17,6 +17,7 @@ from pathlib import Path
 import re
 import time
 from urllib.error import HTTPError, URLError
+from urllib.request import HTTPRedirectHandler, build_opener
 from urllib.parse import urldefrag, urljoin, urlparse
 from urllib.request import Request, urlopen
 
@@ -93,6 +94,20 @@ def _safe_name(url: str, content_type: str | None) -> str:
     return name or "download.bin"
 
 
+class _AllowedHostRedirectHandler(HTTPRedirectHandler):
+    """Reject redirects outside the same host/explicit allowlist boundary."""
+
+    def __init__(self, allowed) -> None:
+        super().__init__()
+        self.allowed = allowed
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        target = urljoin(req.full_url, newurl)
+        if not self.allowed(target):
+            raise HTTPError(req.full_url, code, "redirect target host is not allowed", headers, fp)
+        return super().redirect_request(req, fp, code, msg, headers, target)
+
+
 class SourceAcquirer:
     def __init__(
         self,
@@ -126,12 +141,16 @@ class SourceAcquirer:
             return host == seed_host or host in self.allowed_hosts
         return host == seed_host
 
-    def _get(self, url: str):
+    def _get(self, url: str, seed_host: str | None = None):
         request = Request(url, headers={"User-Agent": self.user_agent, "Accept": "*/*"})
+        boundary_host = seed_host or (urlparse(url).hostname or "").lower()
+        opener = build_opener(_AllowedHostRedirectHandler(
+            lambda target: self._allowed(target, boundary_host)
+        ))
         last_error = None
         for attempt in range(self.retries + 1):
             try:
-                with urlopen(request, timeout=self.timeout) as response:
+                with opener.open(request, timeout=self.timeout) as response:
                     body = response.read(self.max_bytes + 1)
                     if len(body) > self.max_bytes:
                         raise ValueError(f"response exceeds max_bytes ({self.max_bytes})")
@@ -165,7 +184,7 @@ class SourceAcquirer:
                 continue
             seen_pages.add(page_url)
             try:
-                status, headers, final_url, body = self._get(page_url)
+                status, headers, final_url, body = self._get(page_url, seed_host)
                 content_type = headers.get("Content-Type", "").lower()
                 if "html" not in content_type and not body.lstrip().startswith((b"<!doctype html", b"<html")):
                     self._save_document(page_url, final_url, status, content_type, body, documents)
@@ -180,7 +199,7 @@ class SourceAcquirer:
                         if candidate not in seen_docs and len(documents) < self.max_documents:
                             seen_docs.add(candidate)
                             try:
-                                d_status, d_headers, d_final, d_body = self._get(candidate)
+                                d_status, d_headers, d_final, d_body = self._get(candidate, seed_host)
                                 self._save_document(candidate, d_final, d_status, d_headers.get("Content-Type", "").lower(), d_body, documents)
                             except Exception as exc:
                                 documents.append(AcquiredDocument(candidate, candidate, datetime.now(timezone.utc).isoformat(), "failed", None, None, None, None, 0, None, str(exc)))
