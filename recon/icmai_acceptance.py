@@ -133,6 +133,7 @@ def run_acceptance(profile_path: Path, output_dir: Path, allowed_hosts: set[str]
         "retrieval_failure_count": sum(item.get("status") == "failed" for item in acquisition_payload.get("documents", [])),
         "expected_document_count": len(expected),
         "expected_missing_count": sum(item["acquisition_state"] == "missing" for item in expected),
+        "expected_blocked_by_policy_count": sum(item["acquisition_state"] == "blocked_by_policy" for item in expected),
         "expected_retrieval_failed_count": sum(item["acquisition_state"] == "retrieval_failed" for item in expected),
         "extracted_document_count": extraction["summary"]["extracted_count"],
         "extraction_failure_count": extraction["summary"]["extraction_failed_count"],
