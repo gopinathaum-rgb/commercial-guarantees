@@ -85,3 +85,17 @@ The runner reads the official listing URL and the exact publisher-linked documen
 The workflow intentionally does not fetch third-party mirrors or authenticate to GeM. Expected GeM-only attachments remain missing until an official, publicly accessible source is independently identified. A run can complete successfully while the acceptance criteria remain unmet; inspect `acceptance_passed` rather than treating process exit code zero as a pass.
 
 A manually triggered GitHub Actions workflow is available at `.github/workflows/icmai-acceptance.yml`. Open Actions → ICMAI ERP Source Acceptance → Run workflow. The resulting acquisition and extraction evidence is uploaded as a 30-day artifact. GitHub-hosted network reachability is not guaranteed; a blocked source is recorded rather than bypassed.
+
+### When a publisher-linked CDN blocks automated retrieval
+
+The live ICMAI run found the four ERP PDFs linked from the official listing on `cdn.icmai.in`, but that host returned HTTP 403 for `/robots.txt`. Recon therefore failed closed and did not request those PDFs. This is recorded as a policy-retrieval failure, not as proof that the files are missing or that the host explicitly disallows them.
+
+If the files are accessible in an ordinary browser, download them manually into one folder using the exact filenames in the profile, then run:
+
+```bash
+python -m recon.icmai_acceptance \
+  --local-source-dir ./icmai-downloads \
+  --out ./artifacts/icmai-erp-acceptance
+```
+
+Recon copies each matching file, computes SHA-256, and extracts it with page/paragraph/table/sheet/cell locators. The manifest labels these records `operator_supplied`, retains any known official source URL, and leaves publisher verification pending. They are **not** silently reclassified as crawler-retrieved or counted as a strict official-source acceptance pass. GeM-only attachments remain missing unless supplied and independently verified.
