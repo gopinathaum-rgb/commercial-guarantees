@@ -18,7 +18,7 @@ The manifest records source and final URLs, retrieval time, HTTP status, content
 
 ## Safety and current limits
 
-- Only HTTP(S) resources are fetched. No login, CAPTCHA, paywall, or access-control bypass. This version does not yet automatically retrieve and enforce `robots.txt`; operators must confirm that the target permits automated access before running it.
+- Only HTTP(S) resources are fetched. No login, CAPTCHA, paywall, or access-control bypass. Before fetching a page or document, Recon retrieves and enforces that origin's `robots.txt`. A 404/410 means no published policy; a 401/403 or other retrieval failure fails closed. Policy decisions are cached per origin for the run.
 - Exact-host restriction is the default; external hosts require explicit allowlisting. The same boundary is enforced on every HTTP redirect.
 - Page count, document count, response size, timeout, retries, and request pacing are bounded.
 - This first slice enumerates ordinary HTML links and common document suffixes. It does not execute JavaScript, solve portal workflows, parse documents, or infer that a missing link means a document does not exist.
@@ -67,3 +67,21 @@ python -m recon.extraction \
 ```
 
 This writes one provenance sidecar per extracted file plus `extraction-manifest.json`. The report distinguishes expected files that are missing, retrieval failures, successful extraction, and extraction failures. It does not treat third-party-hosted files as official publisher evidence; source and publisher verification remain separate review steps.
+
+## ICMAI live acceptance runner
+
+Run the official-source-only acquisition and extraction workflow:
+
+```bash
+python -m recon.icmai_acceptance --out ./artifacts/icmai-erp-acceptance
+```
+
+The runner reads the official listing URL from `recon/tenders/icmai_erp_2026.json`, enforces robots policy, acquires only documents linked from that listing, extracts every retrieved supported file, and writes:
+
+- `acquired/acquisition-manifest.json` — source/final URL, retrieval time, HTTP status, content type, size and SHA-256.
+- `extracted/extraction-manifest.json` — extracted units, locators and expected-document coverage.
+- `acceptance-summary.json` — explicit missing/retrieval-failed/extraction-failed states and a strict pass flag.
+
+The workflow intentionally does not fetch third-party mirrors or authenticate to GeM. Expected GeM-only attachments remain missing until an official, publicly accessible source is independently identified. A run can complete successfully while the acceptance criteria remain unmet; inspect `acceptance_passed` rather than treating process exit code zero as a pass.
+
+A manually triggered GitHub Actions workflow is available at `.github/workflows/icmai-acceptance.yml`. Open Actions → ICMAI ERP Source Acceptance → Run workflow. The resulting acquisition and extraction evidence is uploaded as a 30-day artifact. GitHub-hosted network reachability is not guaranteed; a blocked source is recorded rather than bypassed.
