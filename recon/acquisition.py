@@ -53,6 +53,7 @@ class AcquisitionResult:
     pages_visited: int
     documents: tuple[AcquiredDocument, ...]
     errors: tuple[str, ...]
+    page_snapshots: tuple[dict, ...] = ()
 
     def to_dict(self) -> dict:
         return {
@@ -60,6 +61,7 @@ class AcquisitionResult:
             "started_at": self.started_at,
             "completed_at": self.completed_at,
             "pages_visited": self.pages_visited,
+            "page_snapshots": list(self.page_snapshots),
             "documents": [asdict(item) for item in self.documents],
             "errors": list(self.errors),
         }
@@ -205,6 +207,7 @@ class SourceAcquirer:
         seen_docs: set[str] = set()
         documents: list[AcquiredDocument] = []
         errors: list[str] = []
+        page_snapshots: list[dict] = []
 
         while queue and len(seen_pages) < self.max_pages and len(documents) < self.max_documents:
             page_url = urldefrag(queue.pop(0))[0]
@@ -218,10 +221,25 @@ class SourceAcquirer:
                 status, headers, final_url, body = self._get(page_url, seed_host)
                 content_type = headers.get("Content-Type", "").lower()
                 if "html" not in content_type and not body.lstrip().startswith((b"<!doctype html", b"<html")):
-                    self._save_document(page_url, final_url, status, content_type, body, documents)
+                    if _is_document(page_url):
+                        self._save_document(page_url, final_url, status, content_type, body, documents)
                     continue
+                html_text = body.decode(headers.get_content_charset() or "utf-8", errors="replace")
+                page_digest = hashlib.sha256(body).hexdigest()
+                page_name = f"{page_digest[:12]}-page-snapshot.html"
+                (self.output_dir / page_name).write_bytes(body)
+                page_snapshots.append({
+                    "source_url": page_url,
+                    "final_url": final_url,
+                    "retrieved_at": datetime.now(timezone.utc).isoformat(),
+                    "http_status": status,
+                    "content_type": content_type or None,
+                    "sha256": page_digest,
+                    "size_bytes": len(body),
+                    "path": page_name,
+                })
                 parser = _Links()
-                parser.feed(body.decode(headers.get_content_charset() or "utf-8", errors="replace"))
+                parser.feed(html_text)
                 for raw_link, download_attr in parser.links:
                     candidate = urldefrag(urljoin(final_url, raw_link))[0]
                     if not self._allowed(candidate, seed_host):
@@ -238,13 +256,18 @@ class SourceAcquirer:
                             except Exception as exc:
                                 documents.append(AcquiredDocument(candidate, candidate, datetime.now(timezone.utc).isoformat(), "failed", None, None, None, None, 0, None, str(exc)))
                     elif candidate not in seen_pages and len(queue) + len(seen_pages) < self.max_pages:
-                        queue.append(candidate)
+                        suffix = Path(urlparse(candidate).path).suffix.lower()
+                        if suffix in {"", ".html", ".htm", ".php", ".aspx"}:
+                            queue.append(candidate)
             except Exception as exc:
                 errors.append(f"{page_url}: {type(exc).__name__}: {exc}")
             if self.delay_seconds:
                 time.sleep(self.delay_seconds)
 
-        result = AcquisitionResult(seed_url, started, datetime.now(timezone.utc).isoformat(), len(seen_pages), tuple(documents), tuple(errors))
+        result = AcquisitionResult(
+            seed_url, started, datetime.now(timezone.utc).isoformat(),
+            len(seen_pages), tuple(documents), tuple(errors), tuple(page_snapshots),
+        )
         (self.output_dir / "acquisition-manifest.json").write_text(json.dumps(result.to_dict(), indent=2), encoding="utf-8")
         return result
 
