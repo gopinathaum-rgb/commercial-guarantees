@@ -53,5 +53,8 @@
     "Extract PDF, DOCX and XLSX content with page/sheet/cell provenance.",
     "Reconcile pre-bid minutes and corrigenda against the original bid and buyer ATC.",
     "Report unresolved or conflicting clauses without silently choosing a version."
+  ],
+  "official_document_hosts": [
+    "cdn.icmai.in"
   ]
 }
