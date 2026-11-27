@@ -20,6 +20,17 @@ class IcmAIAcceptanceTests(unittest.TestCase):
                 "official_document_hosts": ["cdn.icmai.example"],
                 "expected_documents": [{"role": "main_bid", "filename": "main.pdf", "publisher": "ICMAI"}],
             }))
+            acquisition_dir = root / "out" / "acquired"
+            acquisition_dir.mkdir(parents=True)
+            (acquisition_dir / "acquisition-manifest.json").write_text(json.dumps({
+                "seed_url": "https://icmai.example/tenders",
+                "started_at": "2026-11-27T00:00:00+00:00",
+                "completed_at": "2026-11-27T00:00:01+00:00",
+                "pages_visited": 0,
+                "page_snapshots": [],
+                "documents": [],
+                "errors": [],
+            }))
             fake_result = SimpleNamespace(
                 started_at="2026-11-27T00:00:00+00:00",
                 completed_at="2026-11-27T00:00:01+00:00",
