@@ -19,7 +19,7 @@ import time
 from urllib.error import HTTPError, URLError
 from urllib.request import HTTPRedirectHandler, build_opener
 from urllib.parse import urldefrag, urljoin, urlparse
-from urllib.request import Request, urlopen
+from urllib.request import Request
 
 
 DOCUMENT_SUFFIXES = {
