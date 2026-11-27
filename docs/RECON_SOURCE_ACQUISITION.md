@@ -54,3 +54,16 @@ The expected next increment is to make portal-specific link discovery robust for
 ## ICMAI ERP acceptance profile
 
 The known ICMAI ERP document inventory and unresolved retrieval questions are captured in `recon/tenders/icmai_erp_2026.json`. It is an acceptance-test manifest, not evidence that the files have already been downloaded. The profile deliberately labels the Tenderkart page as a third-party discovery/recovery source and preserves the GeM closing-time discrepancy as unresolved until the live bid record is checked.
+
+## Batch acquisition-to-extraction workflow
+
+After acquisition, process every retrieved document and compare the inventory against the ICMAI acceptance profile:
+
+```bash
+python -m recon.extraction \
+  --manifest ./acquisitions/icmai/acquisition-manifest.json \
+  --profile recon/tenders/icmai_erp_2026.json \
+  --out-dir ./acquisitions/icmai/extracted
+```
+
+This writes one provenance sidecar per extracted file plus `extraction-manifest.json`. The report distinguishes expected files that are missing, retrieval failures, successful extraction, and extraction failures. It does not treat third-party-hosted files as official publisher evidence; source and publisher verification remain separate review steps.
