@@ -69,7 +69,7 @@ def extract_document(path: Path) -> ExtractionResult:
                     units.append(_unit(path, digest, "docx", f"paragraph:{index}", "paragraph", paragraph.text))
             for t_index, table in enumerate(doc.tables, start=1):
                 for r_index, row in enumerate(table.rows, start=1):
-                    cells = [cell.text.replace("\\n", " ").strip() for cell in row.cells]
+                    cells = [cell.text.replace("\n", " ").strip() for cell in row.cells]
                     units.append(_unit(path, digest, "docx", f"table:{t_index}/row:{r_index}", "table_row", " | ".join(cells)))
         elif suffix == ".xlsx":
             from openpyxl import load_workbook
