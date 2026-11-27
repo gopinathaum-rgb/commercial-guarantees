@@ -76,7 +76,7 @@ Run the official-source-only acquisition and extraction workflow:
 python -m recon.icmai_acceptance --out ./artifacts/icmai-erp-acceptance
 ```
 
-The runner reads the official listing URL from `recon/tenders/icmai_erp_2026.json`, enforces robots policy, acquires only documents linked from that listing, extracts every retrieved supported file, and writes:
+The runner reads the official listing URL and the exact publisher-linked document CDN host (`cdn.icmai.in`) from `recon/tenders/icmai_erp_2026.json`, enforces robots policy independently on both origins, acquires only documents linked from that listing, extracts every retrieved supported file, and writes:
 
 - `acquired/acquisition-manifest.json` — source/final URL, retrieval time, HTTP status, content type, size and SHA-256.
 - `extracted/extraction-manifest.json` — extracted units, locators and expected-document coverage.
