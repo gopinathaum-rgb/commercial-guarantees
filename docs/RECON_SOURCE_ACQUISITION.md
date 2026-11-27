@@ -30,3 +30,8 @@ The manifest records source and final URLs, retrieval time, HTTP status, content
 Seed: `https://icmai.in/ClntAbout/Tender?page=-1`
 
 The expected next increment is to make portal-specific link discovery robust for the ICMAI tender entry and GeM-linked document endpoints, then extract and compare the retrieved files. Do not treat this generic crawler as having already passed that tender-specific acceptance test.
+
+
+## ICMAI ERP acceptance profile
+
+The known ICMAI ERP document inventory and unresolved retrieval questions are captured in `recon/tenders/icmai_erp_2026.json`. It is an acceptance-test manifest, not evidence that the files have already been downloaded. The profile deliberately labels the Tenderkart page as a third-party discovery/recovery source and preserves the GeM closing-time discrepancy as unresolved until the live bid record is checked.
