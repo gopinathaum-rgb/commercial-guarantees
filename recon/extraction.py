@@ -139,11 +139,15 @@ def extract_acquisition_manifest(
         if record is None:
             state = "missing"
             extraction_status = None
-        elif record.get("status") != "retrieved" or not record.get("path"):
-            state = "retrieval_failed"
+        elif record.get("status") not in {"retrieved", "operator_supplied"} or not record.get("path"):
+            state = "retrieval_failed" if record.get("status") == "failed" else "missing"
             extraction_status = None
         else:
-            state = "acquired_pending_extraction"
+            state = (
+                "operator_supplied_pending_extraction"
+                if record.get("status") == "operator_supplied"
+                else "acquired_pending_extraction"
+            )
             extraction_status = None
         expected_report.append({
             "role": item.get("role"),
@@ -158,7 +162,7 @@ def extract_acquisition_manifest(
 
     extracted_documents = []
     for record in acquired:
-        if record.get("status") != "retrieved" or not record.get("path"):
+        if record.get("status") not in {"retrieved", "operator_supplied"} or not record.get("path"):
             continue
         source_path = (manifest_path.parent / record["path"]).resolve()
         try:
@@ -180,6 +184,8 @@ def extract_acquisition_manifest(
         extracted_documents.append({
             "source_path": record["path"],
             "source_url": record.get("source_url"),
+            "acquisition_method": record.get("acquisition_method", "public_source_retrieval"),
+            "publisher_verification": record.get("publisher_verification", "source_url_and_publisher_review_required"),
             "sha256": result.source_sha256,
             "format": result.format,
             "status": result.status,
@@ -195,9 +201,20 @@ def extract_acquisition_manifest(
         extracted = extraction_by_name.get(Path(item["acquired_path"] or "").name)
         if extracted:
             item["extraction_status"] = extracted["status"]
-            item["acquisition_state"] = (
-                "extracted" if extracted["status"] == "extracted" else "extraction_failed"
-            )
+            supplied = next(
+                (record for record in acquired if Path(record.get("path") or "").name == Path(item["acquired_path"] or "").name),
+                {},
+            ).get("status") == "operator_supplied"
+            if supplied:
+                item["acquisition_state"] = (
+                    "operator_supplied_extracted"
+                    if extracted["status"] == "extracted"
+                    else "operator_supplied_extraction_failed"
+                )
+            else:
+                item["acquisition_state"] = (
+                    "extracted" if extracted["status"] == "extracted" else "extraction_failed"
+                )
 
     report = {
         "acquisition_manifest": str(manifest_path),
@@ -210,6 +227,8 @@ def extract_acquisition_manifest(
             "expected_count": len(expected_report),
             "expected_missing_count": sum(x["acquisition_state"] == "missing" for x in expected_report),
             "expected_retrieval_failed_count": sum(x["acquisition_state"] == "retrieval_failed" for x in expected_report),
+            "operator_supplied_count": sum(item.get("status") == "operator_supplied" for item in acquired),
+            "operator_supplied_extracted_count": sum(x["acquisition_state"] == "operator_supplied_extracted" for x in expected_report),
             "extracted_count": sum(x["status"] == "extracted" for x in extracted_documents),
             "extraction_failed_count": sum(x["status"] == "failed" for x in extracted_documents),
         },
