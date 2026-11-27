@@ -17,7 +17,7 @@ class AcquisitionTests(unittest.TestCase):
         xlsx = b"PK fake spreadsheet"
         with TemporaryDirectory() as tmp:
             acquirer = SourceAcquirer(Path(tmp), delay_seconds=0)
-            def fake_get(url):
+            def fake_get(url, seed_host=None):
                 headers = Message()
                 if url.endswith("/tender"):
                     headers["Content-Type"] = "text/html; charset=utf-8"
