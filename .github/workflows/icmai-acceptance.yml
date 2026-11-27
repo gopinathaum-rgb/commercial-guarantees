@@ -2,6 +2,12 @@ name: ICMAI ERP Source Acceptance
 
 on:
   workflow_dispatch:
+  push:
+    branches: [feat/recon-source-acquisition]
+    paths:
+      - "recon/**"
+      - "docs/RECON_SOURCE_ACQUISITION.md"
+      - ".github/workflows/icmai-acceptance.yml"
 
 permissions:
   contents: read
