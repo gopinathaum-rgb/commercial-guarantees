@@ -229,7 +229,8 @@ class SourceAcquirer:
             if page_url in seen_pages or not self._allowed(page_url, seed_host):
                 continue
             if not self._robots_allowed(page_url, seed_host):
-                errors.append(f"robots check blocked page {page_url}: {self._robots_reason.get(f'{urlparse(page_url).scheme}://{urlparse(page_url).netloc}', 'unknown reason')}")
+                origin = urlparse(page_url).scheme + "://" + urlparse(page_url).netloc
+                errors.append(f"robots check blocked page {page_url}: {self._robots_reason.get(origin, 'unknown reason')}")
                 continue
             seen_pages.add(page_url)
             try:
@@ -260,7 +261,8 @@ class SourceAcquirer:
                     if not self._allowed(candidate, seed_host):
                         continue
                     if not self._robots_allowed(candidate, seed_host):
-                        errors.append(f"robots check blocked URL {candidate}: {self._robots_reason.get(f'{urlparse(candidate).scheme}://{urlparse(candidate).netloc}', 'unknown reason')}")
+                        origin = urlparse(candidate).scheme + "://" + urlparse(candidate).netloc
+                        errors.append(f"robots check blocked URL {candidate}: {self._robots_reason.get(origin, 'unknown reason')}")
                         continue
                     if _is_document(candidate, download_attr):
                         if candidate not in seen_docs and len(documents) < self.max_documents:
