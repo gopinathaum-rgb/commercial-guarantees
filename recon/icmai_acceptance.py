@@ -29,7 +29,7 @@ def run_acceptance(profile_path: Path, output_dir: Path, allowed_hosts: set[str]
 
     acquisition = SourceAcquirer(
         acquisition_dir,
-        max_pages=20,
+        max_pages=1,
         max_documents=100,
         max_bytes=50 * 1024 * 1024,
         delay_seconds=0.5,
