@@ -16,6 +16,6 @@ jobs:
       - name: Install test runner
         run: python -m pip install pytest
       - name: Run Recon tests
-        run: python -m pytest tests/test_recon.py tests/test_situation.py -q
+        run: python -m pytest tests/test_recon.py tests/test_situation.py tests/test_acquisition.py -q
       - name: Smoke test
         run: python -m recon scan --input recon/sources/demo.jsonl --subject DemoCo
