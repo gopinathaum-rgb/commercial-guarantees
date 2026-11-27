@@ -18,10 +18,11 @@ The manifest records source and final URLs, retrieval time, HTTP status, content
 
 ## Safety and current limits
 
-- Only public HTTP(S) resources are fetched. No login, CAPTCHA, paywall, robots, or access-control bypass.
-- Exact-host restriction is the default; external hosts require explicit allowlisting.
+- Only HTTP(S) resources are fetched. No login, CAPTCHA, paywall, or access-control bypass. This version does not yet automatically retrieve and enforce `robots.txt`; operators must confirm that the target permits automated access before running it.
+- Exact-host restriction is the default; external hosts require explicit allowlisting. The same boundary is enforced on every HTTP redirect.
 - Page count, document count, response size, timeout, retries, and request pacing are bounded.
 - This first slice enumerates ordinary HTML links and common document suffixes. It does not execute JavaScript, solve portal workflows, parse documents, or infer that a missing link means a document does not exist.
+- This is an operator-directed research tool, not yet a hardened service for arbitrary untrusted URLs; private-network/DNS-rebinding protections and automated robots-policy enforcement remain future hardening work.
 - Retrieval failures are recorded. A retrieved file is not thereby authenticated as an official or current tender version; publisher and version checks remain investigation steps.
 - The module uses Python's standard library and does not require a paid search or scraping API.
 
