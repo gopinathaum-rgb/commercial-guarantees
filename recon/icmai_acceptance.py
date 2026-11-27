@@ -10,6 +10,7 @@ import argparse
 from datetime import datetime, timezone
 import json
 from pathlib import Path
+from urllib.parse import urlparse
 
 from recon.acquisition import SourceAcquirer
 from recon.extraction import extract_acquisition_manifest
@@ -19,7 +20,7 @@ def run_acceptance(profile_path: Path, output_dir: Path, allowed_hosts: set[str]
     profile_path = Path(profile_path)
     profile = json.loads(profile_path.read_text(encoding="utf-8"))
     seed_url = profile["official_listing_url"]
-    seed_host = __import__("urllib.parse", fromlist=["urlparse"]).urlparse(seed_url).hostname
+    seed_host = urlparse(seed_url).hostname
     if not seed_host:
         raise ValueError("official_listing_url must contain a hostname")
     output_dir = Path(output_dir)
