@@ -70,9 +70,13 @@ class _Links(HTMLParser):
 
     def handle_starttag(self, tag: str, attrs) -> None:
         values = dict(attrs)
-        target = values.get("href") or values.get("src")
+        target = values.get("href") or values.get("src") or values.get("data-url") or values.get("data-href") or values.get("data-file")
         if target and tag in {"a", "iframe", "embed", "object", "link"}:
             self.links.append((target.strip(), values.get("download", "")))
+        # Some public tender portals place attachment URLs in inline onclick handlers.
+        onclick = values.get("onclick", "")
+        for match in re.findall(r"[\"']((?:https?://|/)[^\"']+)[\"']", onclick):
+            self.links.append((match.strip(), values.get("download", "")))
 
 
 def _is_document(url: str, download_attr: str = "") -> bool:
@@ -119,7 +123,7 @@ class SourceAcquirer:
             return False
         host = (parsed.hostname or "").lower()
         if self.allowed_hosts is not None:
-            return host in self.allowed_hosts
+            return host == seed_host or host in self.allowed_hosts
         return host == seed_host
 
     def _get(self, url: str):
