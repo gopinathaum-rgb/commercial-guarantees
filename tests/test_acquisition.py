@@ -59,6 +59,14 @@ class AcquisitionTests(unittest.TestCase):
             self.assertTrue(acquirer._allowed("https://files.icmai.in/rfp.pdf", "icmai.in"))
             self.assertFalse(acquirer._allowed("https://evil.example/rfp.pdf", "icmai.in"))
 
+    def test_icmai_profile_names_expected_documents_and_preserves_unknowns(self):
+        import json
+        profile = json.loads(Path("recon/tenders/icmai_erp_2026.json").read_text())
+        roles = {item["role"] for item in profile["expected_documents"]}
+        self.assertTrue({"main_bid", "pre_bid_minutes", "corrigendum_2", "corrigendum_3", "buyer_added_atc", "financial_bid"} <= roles)
+        self.assertTrue(any("closing time conflict" in item.lower() for item in profile["known_unknowns"]))
+        self.assertIn("Do not mark a third-party mirror as official publisher evidence.", profile["acceptance_criteria"])
+
 
 if __name__ == "__main__":
     unittest.main()
