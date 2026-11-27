@@ -1,0 +1,57 @@
+{
+  "profile_id": "icmai-erp-gem-2026",
+  "title": "ICMAI customized ERP solution tender",
+  "bid_number": "GEM/2026/B/8263375",
+  "gem_bid_id": "10153564",
+  "publisher": "The Institute of Cost Accountants of India",
+  "official_listing_url": "https://icmai.in/ClntAbout/Tender?page=-1",
+  "official_procurement_host": "bidplus.gem.gov.in",
+  "third_party_discovery_url": "https://tenderkart.in/tender/cc53cbaf-2763-4bbf-8260-f8e6b4faa129",
+  "third_party_use": "Discovery and recovery only; verify every recovered document against official publisher evidence before relying on it.",
+  "expected_documents": [
+    {
+      "role": "main_bid",
+      "filename": "GeM-Bidding-10153564_20261112171439521.pdf",
+      "publisher": "ICMAI"
+    },
+    {
+      "role": "pre_bid_minutes",
+      "filename": "PRE-BID-meeting-details_20261117165959131.pdf",
+      "publisher": "ICMAI"
+    },
+    {
+      "role": "corrigendum_2",
+      "filename": "GeM-Bidding-Corr-10153564-2_20261117162600874.pdf",
+      "publisher": "ICMAI"
+    },
+    {
+      "role": "corrigendum_3",
+      "filename": "GeM-Bidding-Corr-10153564-3_20261120141706978.pdf",
+      "publisher": "ICMAI"
+    },
+    {
+      "role": "buyer_added_atc",
+      "filename": "Tender_574e916c-0929-42ef-94a81794482718901_rashmi.gupta.docx",
+      "publisher": "GeM buyer attachment; verify relation to C3"
+    },
+    {
+      "role": "financial_bid",
+      "filename": "1794481741.xlsx",
+      "publisher": "GeM"
+    }
+  ],
+  "known_unknowns": [
+    "Direct public download URLs for each file have not yet been verified.",
+    "The buyer-added ATC attachment must be confirmed as the currently effective file.",
+    "A separate spreadsheet/BOQ is listed by third-party tender index; confirm it is the current GeM financial bid file.",
+    "GeM closing time conflict: user-provided bid text says 17:00; multiple secondary listings say 18:00. Verify on live GeM."
+  ],
+  "acceptance_criteria": [
+    "Acquire all expected documents or record a specific retrieval failure for each.",
+    "Preserve source URL, final URL, retrieval timestamp, HTTP status, content type, byte size and SHA-256 for every acquired file.",
+    "Do not mark a third-party mirror as official publisher evidence.",
+    "Extract PDF, DOCX and XLSX content with page/sheet/cell provenance.",
+    "Reconcile pre-bid minutes and corrigenda against the original bid and buyer ATC.",
+    "Report unresolved or conflicting clauses without silently choosing a version."
+  ]
+}
