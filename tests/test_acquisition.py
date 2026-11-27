@@ -44,6 +44,21 @@ class AcquisitionTests(unittest.TestCase):
             self.assertTrue(acquirer._allowed("https://icmai.in/doc.pdf", "icmai.in"))
             self.assertFalse(acquirer._allowed("https://evil.icmai.in/doc.pdf", "icmai.in"))
 
+    def test_finds_data_attributes_and_onclick_attachment_urls(self):
+        from recon.acquisition import _Links
+        parser = _Links()
+        parser.feed('<a data-url="/files/terms.pdf">Terms</a><button onclick="download(\'/files/atc.docx\')">ATC</button>')
+        urls = {item[0] for item in parser.links}
+        self.assertIn("/files/terms.pdf", urls)
+        self.assertIn("/files/atc.docx", urls)
+
+    def test_allowlist_adds_hosts_without_excluding_seed_host(self):
+        with TemporaryDirectory() as tmp:
+            acquirer = SourceAcquirer(Path(tmp), allowed_hosts={"files.icmai.in"})
+            self.assertTrue(acquirer._allowed("https://icmai.in/tender", "icmai.in"))
+            self.assertTrue(acquirer._allowed("https://files.icmai.in/rfp.pdf", "icmai.in"))
+            self.assertFalse(acquirer._allowed("https://evil.example/rfp.pdf", "icmai.in"))
+
 
 if __name__ == "__main__":
     unittest.main()
