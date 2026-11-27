@@ -127,7 +127,14 @@ def extract_acquisition_manifest(
     expected_report = []
     for item in expected:
         name = Path(item["filename"]).name
-        record = by_name.get(name)
+        record = next((
+            candidate for candidate in acquired
+            if any(
+                Path(str(candidate.get(field) or "").split("?", 1)[0]).name == name
+                or Path(str(candidate.get(field) or "")).name.endswith("-" + name)
+                for field in ("path", "filename", "source_url", "final_url")
+            )
+        ), None)
         if record is None:
             state = "missing"
             extraction_status = None
@@ -140,6 +147,7 @@ def extract_acquisition_manifest(
         expected_report.append({
             "role": item.get("role"),
             "filename": name,
+            "acquired_path": record.get("path") if record else None,
             "publisher_claim": item.get("publisher"),
             "acquisition_state": state,
             "extraction_status": extraction_status,
@@ -183,7 +191,7 @@ def extract_acquisition_manifest(
         Path(item["source_path"]).name: item for item in extracted_documents
     }
     for item in expected_report:
-        extracted = extraction_by_name.get(item["filename"])
+        extracted = extraction_by_name.get(Path(item["acquired_path"] or "").name)
         if extracted:
             item["extraction_status"] = extracted["status"]
             item["acquisition_state"] = (
