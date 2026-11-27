@@ -98,4 +98,4 @@ python -m recon.icmai_acceptance \
   --out ./artifacts/icmai-erp-acceptance
 ```
 
-Recon copies each matching file, computes SHA-256, and extracts it with page/paragraph/table/sheet/cell locators. The manifest labels these records `operator_supplied`, retains any known official source URL, and leaves publisher verification pending. They are **not** silently reclassified as crawler-retrieved or counted as a strict official-source acceptance pass. GeM-only attachments remain missing unless supplied and independently verified.
+Recon copies each matching file, computes SHA-256, and extracts it with page/paragraph/table/sheet/cell locators. The manifest labels these records `operator_supplied`, retains any known official source URL, and leaves publisher verification pending. They are **not** silently reclassified as crawler-retrieved or counted as a strict official-source acceptance pass. GeM-only attachments remain missing unless supplied and independently verified. For network runs, expected files whose official URLs were blocked by a robots-policy fetch failure are reported as `blocked_by_policy`, not `missing`.
