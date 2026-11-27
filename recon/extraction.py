@@ -137,7 +137,11 @@ def extract_acquisition_manifest(
             )
         ), None)
         if record is None:
-            state = "missing"
+            blocked = any(
+                item.get("source_url") and item["source_url"] in error and error.startswith("robots check blocked URL")
+                for error in acquisition.get("errors", [])
+            )
+            state = "blocked_by_policy" if blocked else "missing"
             extraction_status = None
         elif record.get("status") not in {"retrieved", "operator_supplied"} or not record.get("path"):
             state = "retrieval_failed" if record.get("status") == "failed" else "missing"
@@ -156,7 +160,7 @@ def extract_acquisition_manifest(
             "publisher_claim": item.get("publisher"),
             "acquisition_state": state,
             "extraction_status": extraction_status,
-            "source_url": record.get("source_url") if record else None,
+            "source_url": (record.get("source_url") if record else item.get("source_url")),
             "acquisition_method": record.get("acquisition_method", "public_source_retrieval") if record else None,
             "publisher_verification": record.get("publisher_verification", "source_url_and_publisher_review_required") if record else None,
             "sha256": record.get("sha256") if record else None,
@@ -228,6 +232,7 @@ def extract_acquisition_manifest(
         "summary": {
             "expected_count": len(expected_report),
             "expected_missing_count": sum(x["acquisition_state"] == "missing" for x in expected_report),
+            "expected_blocked_by_policy_count": sum(x["acquisition_state"] == "blocked_by_policy" for x in expected_report),
             "expected_retrieval_failed_count": sum(x["acquisition_state"] == "retrieval_failed" for x in expected_report),
             "operator_supplied_count": sum(item.get("status") == "operator_supplied" for item in acquired),
             "operator_supplied_extracted_count": sum(x["acquisition_state"] == "operator_supplied_extracted" for x in expected_report),
