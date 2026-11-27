@@ -1,0 +1,29 @@
+name: ICMAI ERP Source Acceptance
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acquire-and-extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install extraction dependencies
+        run: python -m pip install pypdf python-docx openpyxl
+      - name: Run official-source acceptance test
+        run: python -m recon.icmai_acceptance --out artifacts/icmai-erp-acceptance
+      - name: Upload acquisition and extraction evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: icmai-erp-source-acceptance
+          path: artifacts/icmai-erp-acceptance/
+          if-no-files-found: warn
+          retention-days: 30
