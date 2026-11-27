@@ -142,6 +142,7 @@ class SourceAcquirer:
         self.user_agent = user_agent
         self.allowed_hosts = {h.lower() for h in allowed_hosts} if allowed_hosts else None
         self._robots_cache: dict[str, RobotFileParser | bool] = {}
+        self._robots_reason: dict[str, str] = {}
 
     def _allowed(self, url: str, seed_host: str) -> bool:
         parsed = urlparse(url)
@@ -164,19 +165,26 @@ class SourceAcquirer:
                 parser.set_url(robots_url)
                 parser.parse(body.decode("utf-8", errors="replace").splitlines())
                 self._robots_cache[origin] = parser
+                self._robots_reason[origin] = f"robots.txt retrieved with HTTP {_status}"
             except HTTPError as exc:
                 if exc.code in {404, 410}:
                     self._robots_cache[origin] = True
+                    self._robots_reason[origin] = f"robots.txt returned HTTP {exc.code}; no policy published"
                 else:
                     self._robots_cache[origin] = False
-            except Exception:
+                    self._robots_reason[origin] = f"robots.txt retrieval failed with HTTP {exc.code}"
+            except Exception as exc:
                 self._robots_cache[origin] = False
+                self._robots_reason[origin] = f"robots.txt retrieval failed: {type(exc).__name__}: {exc}"
         policy = self._robots_cache[origin]
         if policy is True:
             return True
         if policy is False:
             return False
-        return bool(policy.can_fetch(self.user_agent, url))
+        allowed = bool(policy.can_fetch(self.user_agent, url))
+        if not allowed:
+            self._robots_reason[origin] = "robots.txt explicitly disallows this URL"
+        return allowed
 
     def _get(self, url: str, seed_host: str | None = None):
         request = Request(url, headers={"User-Agent": self.user_agent, "Accept": "*/*"})
@@ -221,7 +229,7 @@ class SourceAcquirer:
             if page_url in seen_pages or not self._allowed(page_url, seed_host):
                 continue
             if not self._robots_allowed(page_url, seed_host):
-                errors.append(f"robots.txt disallows or could not authorize page: {page_url}")
+                errors.append(f"robots check blocked page {page_url}: {self._robots_reason.get(f'{urlparse(page_url).scheme}://{urlparse(page_url).netloc}', 'unknown reason')}")
                 continue
             seen_pages.add(page_url)
             try:
@@ -252,7 +260,7 @@ class SourceAcquirer:
                     if not self._allowed(candidate, seed_host):
                         continue
                     if not self._robots_allowed(candidate, seed_host):
-                        errors.append(f"robots.txt disallows or could not authorize URL: {candidate}")
+                        errors.append(f"robots check blocked URL {candidate}: {self._robots_reason.get(f'{urlparse(candidate).scheme}://{urlparse(candidate).netloc}', 'unknown reason')}")
                         continue
                     if _is_document(candidate, download_attr):
                         if candidate not in seen_docs and len(documents) < self.max_documents:
