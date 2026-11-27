@@ -26,6 +26,24 @@ The manifest records source and final URLs, retrieval time, HTTP status, content
 - Retrieval failures are recorded. A retrieved file is not thereby authenticated as an official or current tender version; publisher and version checks remain investigation steps.
 - The module uses Python's standard library and does not require a paid search or scraping API.
 
+## Provenance-aware extraction
+
+Run extraction on an acquired file without modifying the original:
+
+```bash
+python -m recon.extraction ./acquisitions/tender/<file>.pdf --out ./acquisitions/tender/<file>.extraction.json
+```
+
+Supported in this increment:
+
+- PDF: one text unit per page (`page:N`).
+- DOCX: non-empty paragraphs and table rows (`paragraph:N`, `table:N/row:N`).
+- XLSX: non-empty cells with sheet and cell coordinates (`sheet:NAME/cell:A1`). Formulas are preserved as formulas; cached formula results are not substituted.
+- CSV: one unit per row (`row:N`).
+- TXT: one unit per line (`line:N`).
+
+Each extracted unit carries the original file path and SHA-256. Extraction failures and unsupported formats are explicit. A successful extraction does not validate the document's authenticity, completeness, legal effect, or current status. Legacy DOC/XLS, scanned-image OCR, PPT, ODT/ODS, ZIP expansion, and layout-perfect table reconstruction are not supported in this increment.
+
 ## ICMAI acceptance test
 
 Seed: `https://icmai.in/ClntAbout/Tender?page=-1`
