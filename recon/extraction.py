@@ -157,6 +157,8 @@ def extract_acquisition_manifest(
             "acquisition_state": state,
             "extraction_status": extraction_status,
             "source_url": record.get("source_url") if record else None,
+            "acquisition_method": record.get("acquisition_method", "public_source_retrieval") if record else None,
+            "publisher_verification": record.get("publisher_verification", "source_url_and_publisher_review_required") if record else None,
             "sha256": record.get("sha256") if record else None,
         })
 
