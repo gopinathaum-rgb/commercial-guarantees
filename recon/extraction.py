@@ -9,6 +9,7 @@ never changes the original acquired file; output is a JSON sidecar.
 import argparse
 import csv
 from dataclasses import asdict, dataclass
+from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
