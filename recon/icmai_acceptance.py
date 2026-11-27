@@ -27,13 +27,15 @@ def run_acceptance(profile_path: Path, output_dir: Path, allowed_hosts: set[str]
     acquisition_dir = output_dir / "acquired"
     extraction_dir = output_dir / "extracted"
 
+    approved_hosts = set(profile.get("official_document_hosts", []))
+    approved_hosts.update(allowed_hosts or set())
     acquisition = SourceAcquirer(
         acquisition_dir,
         max_pages=1,
         max_documents=100,
         max_bytes=50 * 1024 * 1024,
         delay_seconds=0.5,
-        allowed_hosts=allowed_hosts,
+        allowed_hosts=approved_hosts or None,
     ).acquire(seed_url)
     acquisition_manifest = acquisition_dir / "acquisition-manifest.json"
     extraction = extract_acquisition_manifest(
