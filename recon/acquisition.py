@@ -75,12 +75,19 @@ class _Links(HTMLParser):
     def handle_starttag(self, tag: str, attrs) -> None:
         values = dict(attrs)
         target = values.get("href") or values.get("src") or values.get("data-url") or values.get("data-href") or values.get("data-file")
-        if target and tag in {"a", "iframe", "embed", "object", "link"}:
+        if target and tag in {"a", "iframe", "embed", "object"}:
             self.links.append((target.strip(), values.get("download", "")))
-        # Some public tender portals place attachment URLs in inline onclick handlers.
+        # Tender portals often store relative attachment paths in JavaScript arguments.
         onclick = values.get("onclick", "")
-        for match in re.findall(r"[\"']((?:https?://|/)[^\"']+)[\"']", onclick):
+        pattern = r"""['"]([^'"]+\.(?:pdf|docx?|xlsx?|csv|odt|ods|pptx?|zip|rtf|txt)(?:\?[^'"]*)?)['"]"""
+        for match in re.findall(pattern, onclick, flags=re.IGNORECASE):
             self.links.append((match.strip(), values.get("download", "")))
+
+    def handle_data(self, data: str) -> None:
+        # Inspect literal document paths embedded in inline JavaScript data.
+        pattern = r"""['"]([^'"]+\.(?:pdf|docx?|xlsx?|csv|odt|ods|pptx?|zip|rtf|txt)(?:\?[^'"]*)?)['"]"""
+        for match in re.findall(pattern, data, flags=re.IGNORECASE):
+            self.links.append((match.strip(), ""))
 
 
 def _is_document(url: str, download_attr: str = "") -> bool:
