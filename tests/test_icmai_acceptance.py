@@ -17,6 +17,7 @@ class IcmAIAcceptanceTests(unittest.TestCase):
                 "profile_id": "test",
                 "bid_number": "GEM/2026/B/8263375",
                 "official_listing_url": "https://icmai.example/tenders",
+                "official_document_hosts": ["cdn.icmai.example"],
                 "expected_documents": [{"role": "main_bid", "filename": "main.pdf", "publisher": "ICMAI"}],
             }))
             fake_result = SimpleNamespace(
@@ -40,6 +41,7 @@ class IcmAIAcceptanceTests(unittest.TestCase):
             ):
                 acquirer.return_value.acquire.return_value = fake_result
                 summary = run_acceptance(profile, root / "out")
+                self.assertEqual(acquirer.call_args.kwargs["allowed_hosts"], {"cdn.icmai.example"})
             self.assertFalse(summary["acceptance_passed"])
             self.assertEqual(summary["expected_missing_count"], 1)
             self.assertFalse(summary["third_party_sources_fetched"])
