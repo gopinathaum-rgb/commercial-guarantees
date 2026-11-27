@@ -6,7 +6,7 @@ from openpyxl import Workbook
 from docx import Document
 from reportlab.pdfgen import canvas
 
-from recon.extraction import extract_document
+from recon.extraction import extract_document, extract_acquisition_manifest
 
 
 class ExtractionTests(unittest.TestCase):
