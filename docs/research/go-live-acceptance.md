@@ -67,18 +67,9 @@ Those records may include:
 
 The research question is whether a consequential milestone can instead be made sufficiently observable and reconstructable **before** the milestone occurs.
 
-## A real example is more useful than a hypothetical
+## Research scope
 
-If you have experienced a disputed go-live, the interesting question is:
-
-> **What finally settled the argument?**
-
-If you have a redacted milestone or acceptance clause, the current project can audit it privately against:
-
-**Commitment → Completion condition → Evidence → Verification → Consequence**
-
-[Submit a redacted commitment for a private audit](../../?submitted=0#request)
-
+This note examines what records can establish about a go-live milestone. It does not evaluate a particular customer's project or accept case submissions. A case-specific conclusion depends on the records and decision rules available for that case.
 ---
 
-This is a research artifact, not a claim of validated market demand.
+The conclusions are bounded by the cited material and project-specific evidence.

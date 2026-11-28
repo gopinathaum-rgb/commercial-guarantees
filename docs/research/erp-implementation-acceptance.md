@@ -44,22 +44,11 @@ This is deliberately narrower than guaranteeing that an entire ERP project will 
 - Does a milestone payment depend on the determination?
 - Can the decision be reconstructed later from the records that existed at the time?
 
-These questions are the subject of the current Commercial Guarantees research.
+These questions guide the research described here.
 
-## Can You Prove It?
+## Research boundary
 
-If you have a real implementation milestone that became difficult to establish, the useful artifact is not a hypothetical example.
-
-A **redacted real commitment or acceptance clause** is much more informative.
-
-The current research workflow is a private, manual one-page audit:
-
-**Commitment → Completion condition → Evidence → Verification → Commercial consequence → Reconstruction**
-
-No confidential customer information is required.
-
-[Submit a redacted commitment for a private audit](../../?submitted=0#request)
-
+This note presents a framework for analyzing public material about implementation acceptance. It does not accept case submissions or provide a private audit service. Findings about any particular project require evidence from that project.
 ---
 
-This page documents a research question and reference model. It is not a claim that the problem is already commercially validated.
+This page documents a research question and analytical framework. Its examples do not establish that the same evidence patterns apply to every project.

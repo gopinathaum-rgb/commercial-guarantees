@@ -59,16 +59,9 @@ If you have seen this happen, the useful questions are:
 
 The last question matters because the workaround itself reveals the economic cost of ambiguity.
 
-## Can You Prove It?
+## Research scope
 
-A real, redacted commitment is the best test.
-
-The current workflow is a private manual audit of one commitment:
-
-**Commitment → Completion condition → Evidence → Verification → Commercial consequence → Reconstruction**
-
-[Submit a redacted commitment for a private audit](../../?submitted=0#request)
-
+This note outlines questions for analyzing public information about milestone disputes. It does not provide a private audit service or accept submissions. Conclusions depend on the records available for each case.
 ---
 
-This page describes a research hypothesis and reference workflow. It does not claim that the mechanism has been commercially validated.
+This page describes a research question and analytical framework. Its examples do not establish that the same evidence patterns apply to every transaction.
